@@ -384,16 +384,17 @@ const getSections = (city) => [
 const DataCard = ({ section, sc, isOpen, onToggle }) => (
   <div style={{ background: "#111", borderRadius: 6, border: "1px solid #1f1f1f", overflow: "hidden" }}>
     <div onClick={onToggle} style={{
-      padding: "10px 14px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between"
+      padding: "12px 14px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between",
+      borderBottom: isOpen ? "1px solid #1f1f1f" : "none"
     }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-        <span style={{ fontSize: 11, opacity: 0.5 }}>{section.icon}</span>
-        <span style={{ color: "#d1d5db", fontSize: 12, fontWeight: 600 }}>{section.title}</span>
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <span style={{ fontSize: 13, opacity: 0.5 }}>{section.icon}</span>
+        <span style={{ color: "#e5e7eb", fontSize: 14, fontWeight: 600 }}>{section.title}</span>
       </div>
-      <span style={{ color: "#4b5563", fontSize: 14, transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>⌄</span>
+      <span style={{ color: "#4b5563", fontSize: 16, transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>⌄</span>
     </div>
     {isOpen && (
-      <div style={{ padding: "0 14px 12px" }}>
+      <div style={{ padding: "12px 14px" }}>
         <div style={{ display: "flex", gap: 16 }}>
           {section.highlights.map((h, i) => (
             <div key={i} style={{ flex: 1, minWidth: 0 }}>
