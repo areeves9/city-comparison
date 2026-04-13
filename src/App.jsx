@@ -161,6 +161,138 @@ const cities = [
       "Growing AI and cloud adoption in enterprise sector",
       "Strong diversified economy reduces single-sector risk"
     ]
+  },
+  {
+    name: "San Francisco, CA",
+    score: 5,
+    status: "CONTRACTING",
+    unemployment: "3.7%",
+    jobGrowth: "-0.5%",
+    jobsChanged: "-4,400 in 2025; -12,400 in Q1 2026",
+    swOpenings: "~7,500-9,000",
+    applicantsPerJob: "~50-70 est.",
+    totalTech: "~8,500-9,000",
+    techPct: "20.8%",
+    majorEmployers: "Meta (cutting), Google (cutting), Amazon (cutting), Salesforce (cutting), Apple, Broadcom (cutting)",
+    techTrend: "AI hiring surging (+24% YoY); all other tech contracting sharply",
+    avgTechSalary: "$175-231K",
+    stateTax: "13.3%",
+    colIndex: "~189",
+    rent1br: "$3,500-3,790",
+    salaryCol: "Poor — extreme COL erodes even top-tier comp",
+    officeVacancy: "32.8% (improving from 35.8%)",
+    popTrend: "Stagnant; +0.05% growth (effectively flat)",
+    capitalRank: "#1 globally for AI/tech talent concentration",
+    biggestRisk: "AI startup shakeout + Big Tech layoffs; dual contraction risk",
+    findings: [
+      "Bay Area lost 4,400 jobs in 2025; information sector down 4.5% — Q1 2026 added 12,400 more cuts",
+      "33% of all open AI roles in the US are in the Bay Area — 3x higher than New York",
+      "1BR rent hit all-time high of $3,790 (Zumper Q1 2026, +18.4% YoY)",
+      "Office vacancy improving: down to 32.8% from 35.8% — AI companies leased 1M+ sq ft",
+      "13.3% state income tax on top of extreme COL makes take-home purchasing power poor",
+      "Population growth stalled to near-zero: only 4,000 people added in 2024-2025 vs 50,000 prior year",
+      "VCs warning of AI startup 'weeding out' in 2026 — could reverse leasing and hiring gains",
+      "Software engineer avg salary $231K (Glassdoor) is 55% above national — but COL is 89% above"
+    ]
+  },
+  {
+    name: "Los Angeles, CA",
+    score: 4,
+    status: "CONTRACTING",
+    unemployment: "5.4-5.6%",
+    jobGrowth: "-0.4%",
+    jobsChanged: "-53,934 residents lost; tech restructuring ongoing",
+    swOpenings: "~2,500-3,000",
+    applicantsPerJob: "~50-60 est.",
+    totalTech: "~13,000",
+    techPct: "~12%",
+    majorEmployers: "Netflix (hiring), SpaceX (hiring), Riot Games (hiring), Snap (cutting), Amazon (cutting)",
+    techTrend: "Shifting from general SWE to AI/ML and cloud; entry-level collapsing",
+    avgTechSalary: "$115-140K",
+    stateTax: "13.3%",
+    colIndex: "~166",
+    rent1br: "$2,100-2,400",
+    salaryCol: "Poor — 66% above-national COL with average-tier salaries",
+    officeVacancy: "16-33.3% (downtown 33.3%)",
+    popTrend: "Losing; LA County lost 53,934 residents (largest US county decline)",
+    capitalRank: "Top 4 in US for VC deployment",
+    biggestRisk: "Population exodus + entry-level job collapse from AI displacement",
+    findings: [
+      "LA County saw largest single-year population decline of any US county — 53,934 residents lost (2024-2025)",
+      "Downtown LA office vacancy reached 33.3% as of Q3 2025 with negative absorption",
+      "Tech salaries ($115-117K avg) have not kept pace with 66% above-national cost of living",
+      "Entry-level tech market collapsing — graduates struggling to land junior roles as AI eliminates positions",
+      "Ranks 4th in US for venture capital deployment; strong in AI, fintech, and creator economy",
+      "55% of US hiring managers expect 2026 layoffs; 44% cite AI as primary driver",
+      "Netflix, Riot Games, SpaceX actively hiring while Snap and Amazon cutting significantly",
+      "13.3% CA income tax + high COL makes LA less competitive vs remote/distributed roles"
+    ]
+  },
+  {
+    name: "San Diego, CA",
+    score: 5,
+    status: "STAGNANT",
+    unemployment: "4.7%",
+    jobGrowth: "+1.4%",
+    jobsChanged: "+5,800 through Nov 2025; but pro services -2.3%",
+    swOpenings: "~1,500-2,000",
+    applicantsPerJob: "~40-50 est.",
+    totalTech: "~5,000+",
+    techPct: "~12%",
+    majorEmployers: "Qualcomm (stable), Illumina, ServiceNow, Brain Corp, Cubic Corp",
+    techTrend: "Defense tech growing; mainstream tech flat; life sciences VC down 47%",
+    avgTechSalary: "$130-143K",
+    stateTax: "13.3%",
+    colIndex: "~145",
+    rent1br: "$2,100-2,200",
+    salaryCol: "Moderate — decent salaries offset by high COL and CA tax",
+    officeVacancy: "14.1-21.1%",
+    popTrend: "Losing; county lost 5,300 residents (first decline since 2021)",
+    capitalRank: "Strong VC ($3B+ Q1 2026); heavily defense/life sciences",
+    biggestRisk: "Military-industrial dependence; innovation cluster stagnation",
+    findings: [
+      "San Diego County lost 5,300 residents in 2025 — first population decline since 2021, largest in 15 years",
+      "Professional/business services declined 2.3% in Q4 2025; technical services down 3.3%",
+      "Life sciences VC funding plummeted 47% from 2024; NIH-funded projects fell from 402 to 336",
+      "Q1 2026 saw $3B+ in VC funding — but heavily skewed to defense tech (Shield AI $2B round)",
+      "14,201 fewer tech jobs entered the market (2022-2024) than tech degrees awarded — oversupply of talent",
+      "Median 1BR rent declined 5.6% YoY with 15% surge in available listings — rare affordability signal",
+      "Qualcomm anchors market with 49,000 global employees; FY2025 revenue $44B (+13% YoY)",
+      "Military supports 357,000 jobs and $61.3B economic output — single-sector risk"
+    ]
+  },
+  {
+    name: "Sacramento, CA",
+    score: 3,
+    status: "CONTRACTING",
+    unemployment: "5.0%",
+    jobGrowth: "-0.1%",
+    jobsChanged: "-800 (Nov-Dec 2025)",
+    swOpenings: "~290-650",
+    applicantsPerJob: "~50-60 est.",
+    totalTech: "~1,400",
+    techPct: "~5%",
+    majorEmployers: "Intel (cutting 15,000+), HPE (cutting 2,500), Apple, Bosch (investing), Accenture",
+    techTrend: "Anchor employers contracting; Bosch semiconductor investment is bright spot",
+    avgTechSalary: "$130-151K",
+    stateTax: "13.3%",
+    colIndex: "~124",
+    rent1br: "$1,400-1,700",
+    salaryCol: "Moderate — lower rent than other CA cities but 13.3% tax still bites",
+    officeVacancy: "21.9% (record high)",
+    popTrend: "Modest growth (+0.47% city, +1.16% metro)",
+    capitalRank: "Bosch $1.9B semiconductor investment; otherwise limited",
+    biggestRisk: "Intel + HPE cutting simultaneously; concentrated employer risk",
+    findings: [
+      "Intel cutting 15,000+ jobs globally (14% of workforce) with next round July 2026; HPE cutting 2,500",
+      "Office vacancy hit record 21.9% in Q1 2025 — driven by state government move-outs",
+      "Only 289-651 software engineer openings across Indeed and LinkedIn — smallest CA market",
+      "Entry-level SWE salary ($112K) is 11% below national average despite 13.3% CA income tax",
+      "Bosch investing $1.9B in semiconductor facility — largest private investment in region",
+      "Tech sector contributed $12B annually and employs ~50,000 — but heavily concentrated in few employers",
+      "50% cheaper than SF Bay Area for housing — best affordability among CA tech markets",
+      "Recent monthly job decline (-800 in Dec 2025) indicates softening momentum heading into 2026"
+    ]
   }
 ];
 
@@ -297,20 +429,23 @@ const CityCard = ({ city, isExpanded, onToggle }) => {
 const SummaryStats = ({ cities }) => {
   const growing = cities.filter(c => c.status === "GROWING").length;
   const contracting = cities.filter(c => c.status === "CONTRACTING").length;
-  const avgScore = (cities.reduce((s, c) => s + c.score, 0) / cities.length).toFixed(1);
+  const stagnant = cities.filter(c => c.status === "STAGNANT").length;
   const bestCity = [...cities].sort((a, b) => b.score - a.score)[0];
+
+  const stats = [
+    { label: "CITIES TRACKED", value: cities.length, color: "#88aaff" },
+    { label: "GROWING", value: growing, color: "#44ff44" },
+    { label: "CONTRACTING", value: contracting, color: "#ff4444" },
+  ];
+  if (stagnant > 0) stats.push({ label: "STAGNANT", value: stagnant, color: "#ffff44" });
+  stats.push({ label: "TOP RATED", value: bestCity.name.split(",")[0], color: scoreColor(bestCity.score) });
 
   return (
     <div style={{
-      display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12,
+      display: "grid", gridTemplateColumns: `repeat(${stats.length}, 1fr)`, gap: 12,
       marginBottom: 24
     }}>
-      {[
-        { label: "CITIES TRACKED", value: cities.length, color: "#88aaff" },
-        { label: "GROWING", value: growing, color: "#44ff44" },
-        { label: "CONTRACTING", value: contracting, color: "#ff4444" },
-        { label: "TOP RATED", value: bestCity.name.split(",")[0], color: scoreColor(bestCity.score) },
-      ].map(({ label, value, color }) => (
+      {stats.map(({ label, value, color }) => (
         <div key={label} style={{
           background: "#0a0a0a", borderRadius: 6, padding: "14px 16px",
           border: "1px solid #1a1a1a", textAlign: "center"
