@@ -297,44 +297,43 @@ const cities = [
 ];
 
 const statusColor = (s) => {
-  if (s === "CONTRACTING") return { bg: "#1a0000", text: "#ff4444", border: "#4a0000", glow: "rgba(255,68,68,0.08)" };
-  if (s === "GROWING") return { bg: "#001a00", text: "#44ff44", border: "#004a00", glow: "rgba(68,255,68,0.08)" };
-  return { bg: "#1a1a00", text: "#ffff44", border: "#4a4a00", glow: "rgba(255,255,68,0.08)" };
+  if (s === "CONTRACTING") return { bg: "#1a0000", text: "#ff4444", border: "#3a0000", glow: "rgba(255,68,68,0.06)" };
+  if (s === "GROWING") return { bg: "#0a1a0a", text: "#4ade80", border: "#0a3a0a", glow: "rgba(74,222,128,0.06)" };
+  return { bg: "#1a1a00", text: "#facc15", border: "#3a3a00", glow: "rgba(250,204,21,0.06)" };
 };
 
 const scoreColor = (s) => {
-  if (s <= 3) return "#ff4444";
-  if (s <= 5) return "#ffaa44";
-  if (s <= 7) return "#44dd44";
-  return "#44ffaa";
+  if (s <= 3) return "#ef4444";
+  if (s <= 5) return "#f59e0b";
+  if (s <= 7) return "#4ade80";
+  return "#34d399";
 };
 
 const topRatedCity = [...cities].sort((a, b) => b.score - a.score)[0];
 
 const ScoreBar = ({ score }) => (
-  <div style={{ display: "flex", gap: 3, alignItems: "center" }}>
+  <div style={{ display: "flex", gap: 2, alignItems: "center" }}>
     {Array.from({ length: 10 }, (_, i) => (
       <div key={i} style={{
-        width: 14, height: 22, borderRadius: 2,
-        background: i < score ? scoreColor(score) : "#1a1a1a",
-        border: `1px solid ${i < score ? scoreColor(score) + "88" : "#333"}`,
-        opacity: i < score ? 1 : 0.3,
-        boxShadow: i < score ? `0 0 6px ${scoreColor(score)}33` : "none"
+        width: 12, height: 18, borderRadius: 2,
+        background: i < score ? scoreColor(score) : "#161616",
+        border: `1px solid ${i < score ? scoreColor(score) + "66" : "#222"}`,
+        opacity: i < score ? 1 : 0.3
       }} />
     ))}
-    <span style={{ marginLeft: 8, fontSize: 20, fontWeight: 800, color: scoreColor(score), fontFamily: "'JetBrains Mono', monospace", textShadow: `0 0 12px ${scoreColor(score)}44` }}>{score}/10</span>
+    <span style={{ marginLeft: 8, fontSize: 16, fontWeight: 700, color: scoreColor(score), fontFamily: "'JetBrains Mono', monospace" }}>{score}/10</span>
   </div>
 );
 
 const MetricRow = ({ label, value, highlight }) => (
   <div style={{
     display: "flex", justifyContent: "space-between", alignItems: "flex-start",
-    padding: "7px 0", borderBottom: "1px solid #141414"
+    padding: "5px 0", borderBottom: "1px solid #1a1a1a"
   }}>
-    <span style={{ color: "#666", fontSize: 11, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase", letterSpacing: 0.5, flex: "0 0 40%" }}>{label}</span>
+    <span style={{ color: "#555", fontSize: 10, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase", letterSpacing: 0.3, flex: "0 0 42%" }}>{label}</span>
     <span style={{
-      color: highlight === "bad" ? "#ff6666" : highlight === "good" ? "#66ff66" : highlight === "warn" ? "#ffaa44" : "#bbb",
-      fontSize: 12, fontWeight: highlight ? 600 : 400, textAlign: "right", flex: "0 0 58%",
+      color: highlight === "bad" ? "#ef4444" : highlight === "good" ? "#4ade80" : highlight === "warn" ? "#f59e0b" : "#9ca3af",
+      fontSize: 10, fontWeight: highlight ? 600 : 400, textAlign: "right", flex: "0 0 56%",
       fontFamily: "'JetBrains Mono', monospace"
     }}>{value}</span>
   </div>
@@ -381,6 +380,12 @@ const getSections = (city) => [
   }
 ];
 
+const findingColor = (f) => {
+  if (f.includes("BUT") || f.includes("worst") || f.includes("CONTRACTING") || f.includes("SECOND WORST") || f.includes("cutting") || f.includes("lost") || f.includes("dropped") || f.includes("fell") || f.includes("plummeted") || f.includes("collapsing") || f.includes("decline") || f.includes("collapsed")) return "#ef4444";
+  if (f.includes("STRONG") || f.includes("Best") || f.includes("lowest") || f.includes("No state income tax") || f.includes("Healthy") || f.includes("investing")) return "#4ade80";
+  return "#444";
+};
+
 export default function App() {
   const [selected, setSelected] = useState(() => topRatedCity.name);
   const [sortBy, setSortBy] = useState("score");
@@ -397,97 +402,99 @@ export default function App() {
   const sections = getSections(city);
 
   return (
-    <div style={{ background: "#050505", minHeight: "100vh", fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}>
-      <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <div style={{ background: "#0c0c0c", minHeight: "100vh", fontFamily: "'Inter', -apple-system, sans-serif", color: "#e5e7eb" }}>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
       {/* Header */}
-      <div style={{ borderBottom: "1px solid #1a1a1a", padding: "18px 28px", display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
-          <span style={{ color: "#44ff44", fontSize: 14 }}>$</span>
-          <h1 style={{ color: "#eee", fontSize: 22, margin: 0, fontFamily: "'Space Mono', monospace", fontWeight: 700 }}>
-            Job Market Intelligence
-          </h1>
+      <div style={{ borderBottom: "1px solid #1f1f1f", padding: "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", background: "#0c0c0c" }}>
+        <div>
+          <h1 style={{ color: "#e5e7eb", fontSize: 16, margin: 0, fontWeight: 600, letterSpacing: -0.3 }}>Job Market Intelligence</h1>
+          <p style={{ color: "#4b5563", fontSize: 10, margin: "2px 0 0", fontFamily: "'JetBrains Mono', monospace" }}>US TECH MARKETS · APRIL 2026 · BLS, INDEED, LINKEDIN, COLLIERS</p>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontSize: 10, color: "#555", letterSpacing: 1 }}>TOP RATED</span>
-          <span style={{ fontSize: 13, fontWeight: 700, color: scoreColor(topRatedCity.score) }}>{topRatedCity.name.split(",")[0]}</span>
-          <span style={{ fontSize: 18, fontWeight: 800, color: scoreColor(topRatedCity.score), textShadow: `0 0 10px ${scoreColor(topRatedCity.score)}33` }}>{topRatedCity.score}/10</span>
+          <span style={{ fontSize: 10, color: "#4b5563", fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5 }}>TOP RATED</span>
+          <span style={{ fontSize: 12, fontWeight: 600, color: scoreColor(topRatedCity.score) }}>{topRatedCity.name.split(",")[0]}</span>
+          <div style={{ background: "#111", borderRadius: 4, padding: "2px 8px", border: "1px solid #222" }}>
+            <span style={{ fontSize: 14, fontWeight: 700, color: scoreColor(topRatedCity.score), fontFamily: "'JetBrains Mono', monospace" }}>{topRatedCity.score}</span>
+          </div>
         </div>
       </div>
 
-      <div style={{ display: "flex", minHeight: "calc(100vh - 62px)" }}>
+      <div style={{ display: "flex", height: "calc(100vh - 52px)" }}>
         {/* Sidebar */}
-        <div style={{ width: 220, background: "#0a0a0a", borderRight: "1px solid #1a1a1a", overflowY: "auto", flexShrink: 0 }}>
-          <div style={{ padding: "16px 14px 12px" }}>
-            <div style={{ color: "#444", fontSize: 9, letterSpacing: 1.5, marginBottom: 8 }}>SORT</div>
+        <div style={{ width: 200, background: "#0f0f0f", borderRight: "1px solid #1f1f1f", overflowY: "auto", flexShrink: 0, display: "flex", flexDirection: "column" }}>
+          <div style={{ padding: "12px 12px 8px" }}>
             <div style={{ display: "flex", gap: 4 }}>
-              {[["score", "Score"], ["unemployment", "Unemp."], ["name", "Name"]].map(([key, label]) => (
+              {[["score", "Score"], ["unemployment", "Unemp."], ["name", "A-Z"]].map(([key, label]) => (
                 <button key={key} onClick={() => setSortBy(key)} style={{
-                  background: sortBy === key ? "#1a1a2a" : "transparent",
-                  border: `1px solid ${sortBy === key ? "#444" : "#1a1a1a"}`,
-                  color: sortBy === key ? "#ddd" : "#555",
-                  padding: "3px 8px", borderRadius: 3, cursor: "pointer",
-                  fontSize: 9, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5
+                  background: sortBy === key ? "#1a1a1a" : "transparent",
+                  border: `1px solid ${sortBy === key ? "#333" : "#1a1a1a"}`,
+                  color: sortBy === key ? "#d1d5db" : "#4b5563",
+                  padding: "3px 7px", borderRadius: 3, cursor: "pointer",
+                  fontSize: 9, fontFamily: "'JetBrains Mono', monospace"
                 }}>{label}</button>
               ))}
             </div>
           </div>
 
-          {sorted.map(c => {
-            const csc = statusColor(c.status);
-            const isSel = selected === c.name;
-            return (
-              <div key={c.name} onClick={() => setSelected(c.name)} style={{
-                padding: "10px 14px", cursor: "pointer", display: "flex", alignItems: "center", gap: 10,
-                background: isSel ? "#111" : "transparent",
-                borderLeft: isSel ? `3px solid ${csc.text}` : "3px solid transparent",
-                paddingLeft: isSel ? 11 : 14
-              }}>
-                <div style={{
-                  width: 26, height: 26, borderRadius: 4, background: scoreColor(c.score),
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 13, fontWeight: 800, color: "#050505", flexShrink: 0
-                }}>{c.score}</div>
-                <div style={{ minWidth: 0 }}>
-                  <div style={{ fontSize: 12, color: isSel ? "#fff" : "#bbb", fontWeight: isSel ? 700 : 500, fontFamily: "'Space Mono', monospace", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    {c.name.split(",")[0]}
+          <div style={{ flex: 1, overflowY: "auto" }}>
+            {sorted.map(c => {
+              const csc = statusColor(c.status);
+              const isSel = selected === c.name;
+              return (
+                <div key={c.name} onClick={() => setSelected(c.name)} style={{
+                  padding: "8px 12px", cursor: "pointer", display: "flex", alignItems: "center", gap: 8,
+                  background: isSel ? "#161616" : "transparent",
+                  borderLeft: isSel ? `2px solid ${csc.text}` : "2px solid transparent"
+                }}>
+                  <div style={{
+                    width: 8, height: 8, borderRadius: "50%", flexShrink: 0,
+                    background: csc.text, opacity: isSel ? 1 : 0.6
+                  }} />
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{
+                      fontSize: 11, color: isSel ? "#e5e7eb" : "#9ca3af", fontWeight: isSel ? 600 : 400,
+                      whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"
+                    }}>{c.name}</div>
                   </div>
-                  <div style={{ fontSize: 9, color: csc.text, letterSpacing: 0.5 }}>{c.status}</div>
+                  <div style={{
+                    fontSize: 11, fontWeight: 600, color: scoreColor(c.score),
+                    fontFamily: "'JetBrains Mono', monospace", flexShrink: 0
+                  }}>{c.score}</div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
         {/* Detail Panel */}
-        <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column" }}>
-          <div style={{ padding: "24px 32px", flex: 1 }}>
+        <div style={{ flex: 1, overflowY: "auto", background: "#0c0c0c" }}>
+          <div style={{ padding: "20px 24px" }}>
             {/* City header */}
-            <div style={{ marginBottom: 20 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
-                <h2 style={{ margin: 0, fontSize: 22, color: "#eee", fontFamily: "'Space Mono', monospace" }}>{city.name}</h2>
+            <div style={{ marginBottom: 16 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+                <h2 style={{ margin: 0, fontSize: 18, color: "#e5e7eb", fontWeight: 600 }}>{city.name}</h2>
                 <span style={{
-                  padding: "2px 10px", fontSize: 10, fontWeight: 700, borderRadius: 3,
+                  padding: "1px 8px", fontSize: 9, fontWeight: 600, borderRadius: 3,
                   background: sc.bg, color: sc.text, border: `1px solid ${sc.border}`,
-                  fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1,
-                  textShadow: `0 0 8px ${sc.text}44`
+                  fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5, textTransform: "uppercase"
                 }}>{city.status}</span>
               </div>
               <ScoreBar score={city.score} />
             </div>
 
-            {/* 2x2 Metric Sections */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+            {/* 2x2 Metric Cards */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
               {sections.map((section) => (
                 <div key={section.title} style={{
-                  background: "#0a0a0a", borderRadius: 6, padding: "16px 18px",
-                  border: "1px solid #1a1a1a"
+                  background: "#111", borderRadius: 6, padding: "12px 14px",
+                  border: "1px solid #1f1f1f"
                 }}>
                   <div style={{
-                    color: sc.text, fontSize: 10, fontWeight: 700, letterSpacing: 1.5,
-                    marginBottom: 12, fontFamily: "'JetBrains Mono', monospace",
-                    textShadow: `0 0 8px ${sc.text}33`
-                  }}>{section.title.toUpperCase()}</div>
+                    color: sc.text, fontSize: 9, fontWeight: 600, letterSpacing: 1,
+                    marginBottom: 8, fontFamily: "'JetBrains Mono', monospace",
+                    textTransform: "uppercase"
+                  }}>{section.title}</div>
                   {section.metrics.map((m, i) => (
                     <MetricRow key={i} label={m.label} value={m.value} highlight={m.highlight} />
                   ))}
@@ -496,28 +503,33 @@ export default function App() {
             </div>
 
             {/* Key Findings */}
-            <div style={{ marginTop: 28, padding: 18, background: "#080808", borderRadius: 6, border: "1px solid #1a1a1a" }}>
-              <div style={{ color: "#666", fontSize: 10, fontWeight: 700, letterSpacing: 2, marginBottom: 12, fontFamily: "'JetBrains Mono', monospace" }}>KEY FINDINGS</div>
+            <div style={{ marginTop: 16, padding: 14, background: "#0f0f0f", borderRadius: 6, border: "1px solid #1f1f1f" }}>
+              <div style={{ color: "#4b5563", fontSize: 9, fontWeight: 600, letterSpacing: 1.5, marginBottom: 8, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" }}>Key Findings</div>
               {city.findings.map((f, i) => (
                 <div key={i} style={{
-                  padding: "6px 0", fontSize: 12, color: "#999", lineHeight: 1.6,
-                  borderBottom: i < city.findings.length - 1 ? "1px solid #111" : "none",
+                  padding: "4px 0", fontSize: 10, color: "#9ca3af", lineHeight: 1.5,
+                  borderBottom: i < city.findings.length - 1 ? "1px solid #1a1a1a" : "none",
                   fontFamily: "'JetBrains Mono', monospace"
                 }}>
-                  <span style={{ color: f.includes("BUT") || f.includes("worst") || f.includes("CONTRACTING") || f.includes("SECOND WORST") || f.includes("cutting") || f.includes("lost") || f.includes("dropped") || f.includes("fell") || f.includes("plummeted") || f.includes("collapsing") || f.includes("decline") ? "#ff6666" : f.includes("STRONG") || f.includes("Best") || f.includes("lowest") || f.includes("No state income tax") || f.includes("Healthy") || f.includes("investing") ? "#66ff66" : "#555", marginRight: 8 }}>▸</span>
+                  <span style={{ color: findingColor(f), marginRight: 6 }}>▸</span>
                   {f}
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* Footer */}
-          <div style={{
-            padding: "14px 32px", background: "#0a0a0a", borderTop: "1px solid #141414",
-            display: "flex", justifyContent: "space-between", alignItems: "center"
-          }}>
-            <span style={{ color: "#333", fontSize: 10, letterSpacing: 1 }}>DATA AS OF APRIL 2026 · NOT FINANCIAL ADVICE</span>
-            <span style={{ color: "#333", fontSize: 10 }}>{cities.length} MARKETS</span>
+            {/* Score Summary Footer */}
+            <div style={{
+              marginTop: 16, padding: "12px 14px", background: "#111", borderRadius: 6,
+              border: "1px solid #1f1f1f", display: "flex", alignItems: "center", justifyContent: "space-between"
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <span style={{ color: "#4b5563", fontSize: 9, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1 }}>FIT SCORE</span>
+                <span style={{ fontSize: 20, fontWeight: 700, color: scoreColor(city.score), fontFamily: "'JetBrains Mono', monospace" }}>{city.score}/10</span>
+              </div>
+              <div style={{ fontSize: 10, color: "#4b5563", fontFamily: "'JetBrains Mono', monospace" }}>
+                {cities.length} MARKETS · DATA AS OF APRIL 2026
+              </div>
+            </div>
           </div>
         </div>
       </div>
