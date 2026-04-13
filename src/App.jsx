@@ -382,7 +382,7 @@ const getSections = (city) => [
 ];
 
 const DataCard = ({ section, sc, isOpen, onToggle }) => (
-  <div style={{ background: "#111", borderRadius: 6, border: "1px solid #1f1f1f", overflow: "hidden" }}>
+  <div style={{ background: "#1e1e1e", borderRadius: 6, border: "1px solid #2a2a2a", overflow: "hidden" }}>
     <div onClick={onToggle} style={{
       padding: "12px 14px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between",
       borderBottom: isOpen ? "1px solid #1f1f1f" : "none"
@@ -464,7 +464,7 @@ export default function App() {
   const sections = getSections(city);
 
   return (
-    <div style={{ background: "#0c0c0c", minHeight: "100vh", fontFamily: "'Inter', -apple-system, sans-serif", color: "#e5e7eb" }}>
+    <div style={{ background: "#1a1a1a", minHeight: "100vh", fontFamily: "'Inter', -apple-system, sans-serif", color: "#e5e7eb" }}>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
       {/* Header */}
@@ -477,7 +477,7 @@ export default function App() {
         const statLabel = { fontSize: 9, color: "#4b5563", letterSpacing: 1.5, marginTop: 2, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" };
         const divider = { width: 1, height: 36, background: "#1f1f1f", flexShrink: 0 };
         return (
-          <div style={{ borderBottom: "1px solid #1f1f1f", padding: "16px 24px", display: "flex", alignItems: "center", background: "#0c0c0c" }}>
+          <div style={{ borderBottom: "1px solid #2a2a2a", padding: "16px 24px", display: "flex", alignItems: "center", background: "#1a1a1a" }}>
             <div style={{ marginRight: "auto" }}>
               <h1 style={{ color: "#e5e7eb", fontSize: 18, margin: 0, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>Job Market Intelligence</h1>
               <p style={{ color: "#4b5563", fontSize: 10, margin: "3px 0 0", fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5 }}>US TECH MARKET COMPARISON · APRIL 2026</p>
@@ -527,7 +527,7 @@ export default function App() {
 
       <div style={{ display: "flex", height: "calc(100vh - 52px)" }}>
         {/* Sidebar */}
-        <div style={{ width: 240, background: "#0f0f0f", borderRight: "1px solid #1f1f1f", overflowY: "auto", flexShrink: 0, display: "flex", flexDirection: "column" }}>
+        <div style={{ width: 240, background: "#222", borderRight: "1px solid #2a2a2a", overflowY: "auto", flexShrink: 0, display: "flex", flexDirection: "column" }}>
           <div style={{ padding: "10px 14px 6px", display: "flex", justifyContent: "flex-end" }}>
             <span style={{ color: "#4b5563", fontSize: 14, cursor: "pointer" }} title="Filter">▽</span>
           </div>
@@ -575,7 +575,7 @@ export default function App() {
         </div>
 
         {/* Detail Panel */}
-        <div style={{ flex: 1, overflowY: "auto", background: "#0c0c0c" }}>
+        <div style={{ flex: 1, overflowY: "auto", background: "#1a1a1a" }}>
           <div style={{ padding: "20px 24px" }}>
             {/* City header */}
             <div style={{ marginBottom: 16, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -628,7 +628,7 @@ export default function App() {
             </div>
 
             {/* Full Key Finding Details (collapsible) */}
-            <div style={{ marginTop: 12, background: "#0f0f0f", borderRadius: 6, border: "1px solid #1f1f1f", overflow: "hidden" }}>
+            <div style={{ marginTop: 12, background: "#222", borderRadius: 6, border: "1px solid #2a2a2a", overflow: "hidden" }}>
               <div onClick={() => setFindingsOpen(!findingsOpen)} style={{
                 padding: "10px 14px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between"
               }}>
@@ -640,7 +640,7 @@ export default function App() {
                   {city.findings.map((f, i) => (
                     <div key={i} style={{
                       padding: "5px 0", fontSize: 11, color: "#9ca3af", lineHeight: 1.6,
-                      borderBottom: i < city.findings.length - 1 ? "1px solid #1a1a1a" : "none",
+                      borderBottom: i < city.findings.length - 1 ? "1px solid #2a2a2a" : "none",
                       fontFamily: "'JetBrains Mono', monospace"
                     }}>
                       <span style={{ color: findingColor(f), marginRight: 6 }}>▸</span>
