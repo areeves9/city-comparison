@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const cities = [
   {
@@ -32,7 +32,30 @@ const cities = [
       "9.9% state income tax + Metro + County + City surcharges",
       "IRS data: departing residents earn $32K/yr more than arriving ones",
       "Employment CONTRACTING while national economy EXPANDING — structural, not cyclical"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS Oregon Area Employment Statistics",
+        "Oregon Employment Dept — Monthly Labor Force Data",
+        "Colliers Portland Office Report Q4 2025",
+        "ULI/PwC Emerging Trends in Real Estate 2025 (#80 of 81)"
+      ],
+      techSalaries: [
+        "Glassdoor — Software Engineer Salaries, Portland OR",
+        "Indeed — Software Engineer Salary Portland",
+        "LinkedIn Job Postings — Portland Metro Area"
+      ],
+      costLiving: [
+        "Zumper Portland Rent Research 2025",
+        "BestPlaces — Portland OR Cost of Living (C2ER)",
+        "Oregon Dept. of Revenue — Tax Rates & Surcharges"
+      ],
+      populationInvestment: [
+        "IRS SOI Migration Data — Oregon Inflow/Outflow",
+        "Census Bureau — Portland Metro Population Estimates",
+        "Oregon Office of Economic Analysis — 2025 Forecast"
+      ]
+    }
   },
   {
     name: "Austin, TX",
@@ -64,7 +87,30 @@ const cities = [
       "Cost of living has risen sharply — rent doubled since 2015",
       "Oracle, Tesla, Apple layoff cycles flood local market with displaced workers",
       "Strong for W-2 roles; brutal competition for mid-level positions"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS Austin-Round Rock-Georgetown MSA Employment Statistics",
+        "Texas Workforce Commission — Austin Area Labor Market",
+        "Colliers Austin Office Market Report 2025",
+        "Austin Chamber of Commerce — Economic Indicators 2025"
+      ],
+      techSalaries: [
+        "Glassdoor — Software Engineer Salaries Austin TX",
+        "Indeed — Software Engineer Salary Austin TX",
+        "CompTIA — State of the Tech Workforce 2025"
+      ],
+      costLiving: [
+        "Zumper Austin Rent Research 2025",
+        "BestPlaces — Austin TX Cost of Living (C2ER)",
+        "Zillow — Austin Rental Market Overview"
+      ],
+      populationInvestment: [
+        "ULI/PwC Emerging Trends in Real Estate 2025 (Top 10)",
+        "Census Bureau — Austin Metro Population Estimates",
+        "Texas Demographic Center — Migration Analysis 2025"
+      ]
+    }
   },
   {
     name: "Raleigh-Durham, NC",
@@ -97,7 +143,30 @@ const cities = [
       "Architecture/Engineering has 5 jobs per seeker — extreme demand",
       "IT job postings dropped 14.38% YoY statewide (Oct 2024 to Oct 2025)",
       "Smaller market = fewer senior-level roles; mid-size companies are the play"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS Raleigh-Durham-Chapel Hill MSA Employment Statistics",
+        "NC Commerce Dept — Labor Market Statistics",
+        "Colliers Raleigh-Durham Office Report 2025",
+        "Research Triangle Regional Partnership — 2025 Report"
+      ],
+      techSalaries: [
+        "Glassdoor — Software Engineer Salaries Raleigh NC",
+        "Indeed — Software Engineer Salary Raleigh-Durham",
+        "CompTIA — Tech Town Index 2025"
+      ],
+      costLiving: [
+        "C2ER Cost of Living Index — Raleigh-Durham (95.4)",
+        "Zumper Raleigh Rent Research 2025",
+        "Zillow — Raleigh-Durham Rental Market Overview"
+      ],
+      populationInvestment: [
+        "ULI/PwC Emerging Trends 2025 (Top 15)",
+        "Census Bureau — Raleigh Metro Population Estimates",
+        "Milken Institute 2025 Best-Performing Cities"
+      ]
+    }
   },
   {
     name: "Seattle, WA",
@@ -129,7 +198,30 @@ const cities = [
       "Senior SW engineers reporting 2+ years, 1,000+ applications, 25% pay cuts",
       "No state income tax is real advantage — but JumpStart tax driving employer exits",
       "High salaries offset by extreme cost of living — especially housing"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS Seattle-Tacoma-Bellevue MSA Employment Statistics",
+        "Washington State ESD — Labor Market Information",
+        "Colliers Seattle Office Report 2025",
+        "JLL Seattle Market Dynamics Q4 2025"
+      ],
+      techSalaries: [
+        "Glassdoor — Software Engineer Salaries Seattle WA",
+        "Pragmatic Engineer — State of the Tech Market 2025",
+        "Levels.fyi — Seattle Total Compensation Data"
+      ],
+      costLiving: [
+        "Zumper Seattle Rent Research 2025",
+        "BestPlaces — Seattle WA Cost of Living (C2ER: 142)",
+        "C2ER COLI — Seattle Metro"
+      ],
+      populationInvestment: [
+        "ULI/PwC Emerging Trends in Real Estate 2025",
+        "King County — Population & Demographics Division",
+        "Washington State OFM — Population Estimates 2025"
+      ]
+    }
   },
   {
     name: "Dallas-Fort Worth, TX",
@@ -160,7 +252,30 @@ const cities = [
       "Lower competition than Austin for the same Texas no-tax advantage",
       "Growing AI and cloud adoption in enterprise sector",
       "Strong diversified economy reduces single-sector risk"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS Dallas-Fort Worth-Arlington MSA Employment Statistics",
+        "Texas Workforce Commission — DFW Area Labor Market",
+        "Colliers DFW Office Market Report 2025",
+        "DFW Chamber of Commerce — Economic Reports"
+      ],
+      techSalaries: [
+        "Glassdoor — Software Engineer Salaries Dallas TX",
+        "Indeed — Software Engineer Salary Dallas-Fort Worth",
+        "Robert Half Technology Salary Guide 2026"
+      ],
+      costLiving: [
+        "Zumper Dallas Rent Research 2025",
+        "BestPlaces — Dallas TX Cost of Living (C2ER: 97)",
+        "Zillow — Dallas-Fort Worth Rental Market"
+      ],
+      populationInvestment: [
+        "ULI/PwC Emerging Trends in Real Estate 2025 (Top 10)",
+        "Census Bureau — Dallas-Fort Worth Population Estimates",
+        "North Texas Commission — Economic Impact Reports"
+      ]
+    }
   },
   {
     name: "San Francisco, CA",
@@ -193,7 +308,30 @@ const cities = [
       "Population growth stalled to near-zero: only 4,000 people added in 2024-2025 vs 50,000 prior year",
       "VCs warning of AI startup 'weeding out' in 2026 — could reverse leasing and hiring gains",
       "Software engineer avg salary $231K (Glassdoor) is 55% above national — but COL is 89% above"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS San Francisco-Oakland-Hayward MSA Employment Statistics",
+        "CA EDD — Bay Area Labor Market Info 2025-2026",
+        "CBRE San Francisco Office Figures Q4 2025",
+        "Axios SF — Tech Layoff Tracker 2025-2026"
+      ],
+      techSalaries: [
+        "Glassdoor — Software Engineer Salaries San Francisco",
+        "Levels.fyi — Bay Area Total Compensation Data",
+        "Indeed — Software Engineer Salary San Francisco CA"
+      ],
+      costLiving: [
+        "Zumper Q1 2026 — San Francisco Rent Report (+18.4% YoY)",
+        "BestPlaces — San Francisco CA Cost of Living (C2ER: 189)",
+        "Zillow — SF Bay Area Rental Market Overview"
+      ],
+      populationInvestment: [
+        "ULI/PwC Emerging Trends 2025 (#1 AI/Tech Talent Concentration)",
+        "SF Planning Dept — Population Estimates 2025",
+        "NVCA MoneyTree Report — Bay Area VC Funding 2025"
+      ]
+    }
   },
   {
     name: "Los Angeles, CA",
@@ -226,7 +364,30 @@ const cities = [
       "55% of US hiring managers expect 2026 layoffs; 44% cite AI as primary driver",
       "Netflix, Riot Games, SpaceX actively hiring while Snap and Amazon cutting significantly",
       "13.3% CA income tax + high COL makes LA less competitive vs remote/distributed roles"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS Los Angeles-Long Beach-Anaheim MSA Employment Statistics",
+        "CA EDD — LA County Labor Market Statistics",
+        "CBRE Los Angeles Office Market Q3 2025",
+        "Los Angeles County — Economic Development Office"
+      ],
+      techSalaries: [
+        "Glassdoor — Software Engineer Salaries Los Angeles CA",
+        "Indeed — Software Engineer Salary Los Angeles",
+        "Hired — State of Software Engineers Report 2025"
+      ],
+      costLiving: [
+        "Zumper Los Angeles Rent Research 2025",
+        "BestPlaces — Los Angeles CA Cost of Living (C2ER: 166)",
+        "Apartments.com — LA Rental Market Trends"
+      ],
+      populationInvestment: [
+        "ULI/PwC Emerging Trends 2025 (Top 4 VC Deployment)",
+        "LA County Dept. of Regional Planning — Population Data",
+        "NVCA — Los Angeles VC Funding Data 2025"
+      ]
+    }
   },
   {
     name: "San Diego, CA",
@@ -259,7 +420,30 @@ const cities = [
       "Median 1BR rent declined 5.6% YoY with 15% surge in available listings — rare affordability signal",
       "Qualcomm anchors market with 49,000 global employees; FY2025 revenue $44B (+13% YoY)",
       "Military supports 357,000 jobs and $61.3B economic output — single-sector risk"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS San Diego-Chula Vista-Carlsbad MSA Employment Statistics",
+        "CA EDD — San Diego County Labor Market Info",
+        "CBRE San Diego Office Figures Q3 2025",
+        "San Diego Regional EDC — Economic Outlook 2025"
+      ],
+      techSalaries: [
+        "Glassdoor — Software Engineer Salaries San Diego CA",
+        "Indeed — Software Engineer Salary San Diego",
+        "Motion Recruitment — San Diego Salary Guide 2026"
+      ],
+      costLiving: [
+        "Zumper San Diego Rent Research 2025 (−5.6% YoY)",
+        "BestPlaces — San Diego CA Cost of Living (C2ER: 145)",
+        "Zillow — San Diego Rental Market Overview"
+      ],
+      populationInvestment: [
+        "Colliers — Greater San Diego Life Sciences Report 2025",
+        "Census Bureau — San Diego Population Estimates",
+        "Qualcomm FY2025 Annual Report; Shield AI $2B Funding Round"
+      ]
+    }
   },
   {
     name: "Boston, MA",
@@ -295,7 +479,30 @@ const cities = [
       "AI/infra consulting day rates $1,100–$1,700; 2,800+ AI job listings; institutional demand from pharma, financial services, and defense is real (NicolaLazzari.ai, Glassdoor)",
       "Oligonucleotide/HPLC background maps directly to active roles at Wave Life Sciences (Lexington), Eli Lilly (Cambridge), and CDMOs — near-unique niche fit in this market",
       "Population growth slowed to near-zero as international immigration fell by half in 2024-25; federal immigration headwinds could flip this growth driver negative (Boston.com Mar 2026)"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS Boston Area Employment, June 2025",
+        "Boston.gov Spring 2025 Labor Market Report",
+        "MassBio 2025 Industry Snapshot — Rare Job Decline",
+        "Colliers Greater Boston Office Report Q4 2025"
+      ],
+      techSalaries: [
+        "Glassdoor — Boston Software Engineer Salaries (Dec 2025, 25,571 submissions)",
+        "Indeed — Software Engineer Salary Boston MA",
+        "Salem News / BLS — Post-Pandemic Innovation Sector Job Data"
+      ],
+      costLiving: [
+        "Zumper Boston Rent Research 2025-2026",
+        "Salary.com / C2ER — Boston Cost of Living Index (~146-153)",
+        "Massachusetts Dept. of Revenue — Income Tax & Millionaires Surtax"
+      ],
+      populationInvestment: [
+        "ULI/PwC Emerging Trends in Real Estate 2025 (#8 overall)",
+        "Boston.com — Population Growth Data March 2026",
+        "Axios Boston — Lab Space Vacancy Amid NIH Cuts, May 2025"
+      ]
+    }
   },
   {
     name: "New York City, NY",
@@ -331,7 +538,32 @@ const cities = [
       "NYC Comptroller projects $10–13.6B budget gaps by FY2027–2029; tariff-driven recession models show 71,000–150,000 potential job losses (NYC Comptroller OSC)",
       "Manhattan office market genuinely recovering: 41.92M SF leased in 2025 (+27% YoY, highest since 2019); availability down for 7 consecutive quarters (CBRE Q4 2025)",
       "AI consulting rates $1,800–$2,400/day senior; $42.3B in VC/PE in 2025 with AI taking 22% — most viable independent consulting market outside SF for this profile"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS New York Area Employment, May 2025",
+        "NYC Comptroller — Annual State of the City's Economy 2025",
+        "NY DOL — Labor Statistics NYC Region",
+        "Colliers Manhattan Office Report Q4 2025 (13.9% availability)"
+      ],
+      techSalaries: [
+        "Glassdoor — NYC Software Engineer Salaries 2025",
+        "Indeed — Software Engineer Salary New York NY",
+        "ResumeTarget — NYC Job Market 2026 (62.2 applicants/job)",
+        "Levels.fyi — NYC Total Compensation Data"
+      ],
+      costLiving: [
+        "Zumper — NYC Rent Research 2026 ($4,500/mo median)",
+        "NY Tax.gov — 2025 Income Tax Tables",
+        "NerdWallet — New York State Income Tax Rates 2026"
+      ],
+      populationInvestment: [
+        "ULI/PwC Emerging Trends 2025 (Manhattan #11; Midtown #1 globally, EY/ULI)",
+        "NYC DCP — Population Estimates May 2025",
+        "NYCEDC — NYC AI Advantage 2025 Report",
+        "NYC Comptroller — Taking Trump's Tariffs Seriously (fiscal risk modeling)"
+      ]
+    }
   },
   {
     name: "Philadelphia, PA",
@@ -367,7 +599,30 @@ const cities = [
       "Combined PA state + Philadelphia city wage tax of 6.81% = ~$10,200/year more than a zero-income-tax state at $150K salary (City of Philadelphia, Alloy Silverstein)",
       "COL index ~104 with 1BR rents $1,500–1,650 (23% below national median) — strongest COL-to-salary ratio of any Northeast peer market",
       "800-1,000+ AI/ML postings exist but Philadelphia is not an AI infrastructure hub — enterprise and pharma-adjacent AI dominates; full-time AI infra roles are thin"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS Philadelphia Area Employment, March 2025",
+        "Center City District — Philadelphia Employment Report 2025",
+        "Economy League of Greater Philadelphia — 2024 Update",
+        "Colliers Philadelphia Regional Office Report Q1 2025"
+      ],
+      techSalaries: [
+        "Glassdoor — Philadelphia Software Engineer Salaries",
+        "Indeed — Software Engineer Salary Philadelphia PA",
+        "BLS Occupational Employment & Wages — Philadelphia MSA, May 2024"
+      ],
+      costLiving: [
+        "BestPlaces — Philadelphia PA Cost of Living (C2ER: ~104)",
+        "Zumper — Philadelphia Rent Research 2025 ($1,557/mo median)",
+        "City of Philadelphia — Wage Tax Rates (3.74% residents, July 2025)"
+      ],
+      populationInvestment: [
+        "Colliers — Greater Philadelphia Life Sciences Report 2025 (#4 US)",
+        "ULI/PwC Emerging Trends in Real Estate 2026",
+        "BioBuzz — Venture Capital Gap Pushes Philadelphia Down Rankings, Aug 2025"
+      ]
+    }
   },
   {
     name: "Pittsburgh, PA",
@@ -403,7 +658,30 @@ const cities = [
       "Biotech/pharma depth is thin: only 55-67 active biotech postings; oligonucleotide expertise is largely underutilized here vs. Boston, Philadelphia, or San Diego corridors",
       "COL index 91.8 and 1BR rents $1,375–$1,545 are genuine advantages; combined 6.07% state+local income tax partially offsets vs. Sun Belt but still competitive (BestPlaces, PA DCED)",
       "Duolingo's AI-first contractor cuts signal emerging displacement risk for independent consultants from Pittsburgh's most prominent native tech success (Technical.ly / CNBC Sep 2025)"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS Pittsburgh Economy at a Glance",
+        "PA DLI — Pittsburgh MSA Employment Press Release, Sep 2025",
+        "Allegheny Institute — Pittsburgh Employment Indicators (Long-Term & Post-Pandemic)",
+        "JLL Pittsburgh Office Market Dynamics Q4 2025"
+      ],
+      techSalaries: [
+        "Glassdoor — Pittsburgh Software Engineer Salaries",
+        "Technical.ly — 5 Stats to Explain Pittsburgh's Tech Economy",
+        "Built In Pittsburgh — Software Engineer Salaries"
+      ],
+      costLiving: [
+        "BestPlaces — Pittsburgh PA Cost of Living (C2ER: 91.8)",
+        "Zumper — Pittsburgh Rent Research March 2026 ($1,375/mo)",
+        "PA DCED — Local Earned Income Tax Rates (Pittsburgh: 3.0% city EIT)"
+      ],
+      populationInvestment: [
+        "Milken Institute 2025 Best-Performing Cities (#145 of 403 metros)",
+        "WESA — Pittsburgh Population & Immigration Slows, March 2026",
+        "Axios Pittsburgh — Metro Population Decline, March 2026"
+      ]
+    }
   },
   {
     name: "Chicago, IL",
@@ -439,7 +717,31 @@ const cities = [
       "City population has declined from 2.88M (2000) to ~2.75M (2025); domestic outmigration to Sun Belt ongoing; international immigration offset is now slowing under federal policy (CMAP, Census)",
       "4.95% flat state income tax with no city income tax — meaningfully better combined burden than NY (10-11%), MA (5%+), or MN (7.85-9.85%); property taxes for homeowners offset this at ~2.1% effective rate",
       "Tempus AI, Relativity, and CME Group represent enterprise AI opportunity; independent consulting is viable but procurement cycles lag SF/NYC by 6-18 months in this market"
-    ]
+    ],
+    sources: {
+      employment: [
+        "IDES — Chicago Metro Employment, December 2025 (18 consecutive months YoY growth)",
+        "BLS Chicago-Naperville-Schaumburg Metro Division Statistics",
+        "CBRE Chicago Downtown Office Figures Q4 2025 (26.6%)",
+        "Crain's Chicago Business — Office Vacancy 15th Consecutive Record, Q1 2026"
+      ],
+      techSalaries: [
+        "Glassdoor — Chicago Software Engineer Salaries",
+        "Built In Chicago — Software Engineer Salary Data",
+        "World Business Chicago — Tech Workforce Report 2024 ($39.3B output)"
+      ],
+      costLiving: [
+        "BestPlaces — Chicago IL Cost of Living (C2ER: 105.7)",
+        "Zumper — Chicago Rent Research April 2026 ($2,010/mo)",
+        "Tax Foundation — Illinois Tax Burden; LevyIO Chicago Property Tax Analysis"
+      ],
+      populationInvestment: [
+        "ULI/PwC Emerging Trends in Real Estate 2025",
+        "CMAP — Stagnant International Immigration Slows Chicago Region Growth",
+        "WTTW — Chicago $1.15B Budget Shortfall 2026",
+        "Civic Federation — FY2025 Chicago Budget Structural Imbalance Analysis"
+      ]
+    }
   },
   {
     name: "Minneapolis, MN",
@@ -475,7 +777,30 @@ const cities = [
       "AI/infra demand is shallow: only 393 AI/ML job listings across all of Greater MSP (LinkedIn April 2026); no hyperscaler engineering center; MCP/agentic infrastructure is niche-within-niche here",
       "Oligonucleotide-specific roles are sparse — Minneapolis is a medtech (devices) hub, not an oligonucleotide/RNA therapeutics hub; HPLC/LC-MS skills apply to devices context but with limited depth",
       "Minnesota domestic net migration turned positive in 2025 (+8,300; national rank improved from 41st to 17th) — a modest structural positive after years of outflow (Census / MN Patch)"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS Metropolitan Area Employment Summary, December 2025 (+1.6pp YoY spike)",
+        "MN DEED — State of Metro Labor Market, June 2025",
+        "Colliers Twin Cities Office Report Q3 2025 (30.8% Minneapolis; 39.5% St. Paul)",
+        "MPR News — Medtronic Layoffs Coon Rapids / Target Layoffs, 2025"
+      ],
+      techSalaries: [
+        "Glassdoor — Minneapolis Software Engineer Salaries",
+        "Built In Minneapolis — Software Engineer Salary Data",
+        "MN Chamber of Commerce — Tech Sector Chapter 2030 (12.4% of workforce)"
+      ],
+      costLiving: [
+        "BestPlaces — Minneapolis MN Cost of Living (C2ER: 107.2)",
+        "Zumper — Minneapolis Rent Research 2025 ($1,330/mo median)",
+        "MN Dept. of Revenue — 2025 Income Tax Brackets (9.85% top rate)"
+      ],
+      populationInvestment: [
+        "ULI/PwC Emerging Trends in Real Estate 2026 (downgraded to bottom half)",
+        "MN Patch / Census Bureau — Population & Migration Data 2025",
+        "Star Tribune — Boston Scientific Maple Grove $309M Campus Expansion"
+      ]
+    }
   },
   {
     name: "Sacramento, CA",
@@ -508,7 +833,30 @@ const cities = [
       "Tech sector contributed $12B annually and employs ~50,000 — but heavily concentrated in few employers",
       "50% cheaper than SF Bay Area for housing — best affordability among CA tech markets",
       "Recent monthly job decline (-800 in Dec 2025) indicates softening momentum heading into 2026"
-    ]
+    ],
+    sources: {
+      employment: [
+        "BLS Sacramento-Roseville-Folsom MSA Employment Statistics",
+        "CA EDD — Sacramento Area Labor Market Statistics",
+        "Colliers Sacramento Office Market Report Q1 2025",
+        "SACOG — Greater Sacramento Economic Outlook 2025"
+      ],
+      techSalaries: [
+        "Glassdoor — Software Engineer Salaries Sacramento CA",
+        "Indeed — Software Engineer Salary Sacramento",
+        "LinkedIn Job Postings — Sacramento Metro Area"
+      ],
+      costLiving: [
+        "Zumper Sacramento Rent Research 2025",
+        "BestPlaces — Sacramento CA Cost of Living (C2ER: 124)",
+        "Zillow — Sacramento Rental Market Overview"
+      ],
+      populationInvestment: [
+        "Bosch Press Release — Sacramento Semiconductor Facility Investment",
+        "Census Bureau — Sacramento Population Estimates 2025",
+        "Intel / HPE Restructuring Announcements 2025-2026"
+      ]
+    }
   }
 ];
 
@@ -668,6 +1016,12 @@ export default function App() {
 
   const [openCards, setOpenCards] = useState(new Set(["Employment & Economy", "Tech Ecosystem", "Cost & Compensation", "Market Dynamics & Outlook"]));
   const [findingsOpen, setFindingsOpen] = useState(false);
+  const [bibOpen, setBibOpen] = useState(false);
+
+  useEffect(() => {
+    setFindingsOpen(false);
+    setBibOpen(false);
+  }, [selected]);
 
   const toggleCard = (title) => {
     const next = new Set(openCards);
@@ -863,6 +1217,63 @@ export default function App() {
                       {f}
                     </div>
                   ))}
+                </div>
+              )}
+            </div>
+
+            {/* City-Specific Data Sources & Bibliography (collapsible) */}
+            <div style={{ marginTop: 12, background: "#1e1e1e", borderRadius: 6, border: "1px solid #2a2a2a", overflow: "hidden" }}>
+              <div onClick={() => setBibOpen(!bibOpen)} style={{
+                padding: "10px 14px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between",
+                borderBottom: bibOpen ? "1px solid #252525" : "none"
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ fontSize: 11, opacity: 0.4, fontFamily: "'JetBrains Mono', monospace" }}>▦</span>
+                  <span style={{ color: "#d1d5db", fontSize: 11, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, textTransform: "uppercase" }}>
+                    {city.name.split(",")[0]}-Specific Data Sources &amp; Bibliography
+                  </span>
+                </div>
+                <span style={{ color: "#4b5563", fontSize: 14, transform: bibOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>⌄</span>
+              </div>
+              {bibOpen && (
+                <div style={{ padding: "14px" }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 20, marginBottom: 12 }}>
+                    {[
+                      { key: "employment", label: "Employment & Office Market Data" },
+                      { key: "techSalaries", label: "Tech Ecosystem & Salaries" },
+                      { key: "costLiving", label: "Cost & Living Trends" },
+                      { key: "populationInvestment", label: "Population & Investment Dynamics" }
+                    ].map(({ key, label }) => (
+                      <div key={key}>
+                        <div style={{
+                          fontSize: 9, color: "#4b5563", fontWeight: 600, letterSpacing: 1.5,
+                          textTransform: "uppercase", fontFamily: "'JetBrains Mono', monospace", marginBottom: 8,
+                          borderBottom: "1px solid #252525", paddingBottom: 4
+                        }}>{label}</div>
+                        {(city.sources?.[key] || []).map((src, i) => (
+                          <div key={i} style={{
+                            fontSize: 10, color: "#6b7280", fontFamily: "'JetBrains Mono', monospace",
+                            lineHeight: 1.7, marginBottom: 3, display: "flex", gap: 5, alignItems: "flex-start"
+                          }}>
+                            <span style={{ color: "#374151", flexShrink: 0, marginTop: 1 }}>▸</span>
+                            <span>{src}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{
+                    padding: "8px 10px", background: "#161616", borderRadius: 4,
+                    border: "1px solid #252525"
+                  }}>
+                    <div style={{
+                      fontSize: 9, color: "#4b5563", fontWeight: 600, letterSpacing: 1.5,
+                      textTransform: "uppercase", fontFamily: "'JetBrains Mono', monospace", marginBottom: 4
+                    }}>Methodology Appendix</div>
+                    <div style={{ fontSize: 10, color: "#4b5563", fontFamily: "'JetBrains Mono', monospace", lineHeight: 1.7 }}>
+                      Each city is scored 1–10 across employment health, tech ecosystem, compensation vs. cost-of-living, structural indicators, and profile fit for an AI infrastructure + analytical chemistry / biotech background. Data sourced from 2025–2026 publications; figures older than 2024 are flagged inline within findings. Where sources conflict, ranges are reported and discrepancies noted.
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
