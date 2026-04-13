@@ -527,7 +527,7 @@ export default function App() {
 
       <div style={{ display: "flex", height: "calc(100vh - 52px)" }}>
         {/* Sidebar */}
-        <div style={{ width: 240, background: "#1e1e1e", borderRight: "1px solid #2a2a2a", overflowY: "auto", flexShrink: 0, display: "flex", flexDirection: "column" }}>
+        <div style={{ width: 240, background: "rgb(26, 26, 26)", borderRight: "1px solid #2a2a2a", overflowY: "auto", flexShrink: 0, display: "flex", flexDirection: "column" }}>
           <div style={{ padding: "10px 14px 6px", display: "flex", justifyContent: "flex-end" }}>
             <span style={{ color: "#4b5563", fontSize: 14, cursor: "pointer" }} title="Filter">▽</span>
           </div>
