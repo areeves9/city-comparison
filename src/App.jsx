@@ -309,6 +309,8 @@ const scoreColor = (s) => {
   return "#44ffaa";
 };
 
+const topRatedCity = [...cities].sort((a, b) => b.score - a.score)[0];
+
 const ScoreBar = ({ score }) => (
   <div style={{ display: "flex", gap: 3, alignItems: "center" }}>
     {Array.from({ length: 10 }, (_, i) => (
@@ -338,128 +340,49 @@ const MetricRow = ({ label, value, highlight }) => (
   </div>
 );
 
-const CityCard = ({ city, isExpanded, onToggle }) => {
-  const sc = statusColor(city.status);
-  return (
-    <div style={{
-      background: "#0d0d0d", border: `1px solid ${sc.border}`,
-      borderRadius: 6, overflow: "hidden", transition: "all 0.2s",
-      boxShadow: isExpanded ? `0 4px 24px ${sc.glow}, 0 0 1px ${sc.border}` : `0 1px 4px rgba(0,0,0,0.3)`
-    }}>
-      <div onClick={onToggle} style={{
-        padding: "18px 24px", cursor: "pointer",
-        borderBottom: isExpanded ? `1px solid ${sc.border}` : "none",
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        background: isExpanded ? `linear-gradient(135deg, ${sc.glow}, transparent 60%)` : "transparent",
-        transition: "background 0.2s"
-      }}>
-        <div>
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
-            <h2 style={{ margin: 0, fontSize: 20, color: "#eee", fontFamily: "'Space Mono', monospace" }}>{city.name}</h2>
-            <span style={{
-              padding: "2px 10px", fontSize: 10, fontWeight: 700, borderRadius: 3,
-              background: sc.bg, color: sc.text, border: `1px solid ${sc.border}`,
-              fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1,
-              textShadow: `0 0 8px ${sc.text}44`
-            }}>{city.status}</span>
-          </div>
-          <ScoreBar score={city.score} />
-        </div>
-        <div style={{
-          color: "#444", fontSize: 20, transform: isExpanded ? "rotate(180deg)" : "rotate(0)",
-          transition: "transform 0.25s ease", width: 32, height: 32, display: "flex",
-          alignItems: "center", justifyContent: "center", borderRadius: 4,
-          background: isExpanded ? "#1a1a1a" : "transparent"
-        }}>▾</div>
-      </div>
-
-      {isExpanded && (
-        <div style={{ padding: "20px 24px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }}>
-            <div>
-              <div style={{ color: sc.text, fontSize: 10, fontWeight: 700, letterSpacing: 2, marginBottom: 10, fontFamily: "'JetBrains Mono', monospace", textShadow: `0 0 8px ${sc.text}33` }}>EMPLOYMENT</div>
-              <MetricRow label="Unemployment" value={city.unemployment} highlight={parseFloat(city.unemployment) > 4.5 ? "bad" : "good"} />
-              <MetricRow label="Job Growth YoY" value={city.jobGrowth} highlight={city.jobGrowth.startsWith("-") ? "bad" : "good"} />
-              <MetricRow label="Jobs Changed" value={city.jobsChanged} highlight={city.jobsChanged.startsWith("-") ? "bad" : "good"} />
-              <MetricRow label="Office Vacancy" value={city.officeVacancy} />
-
-              <div style={{ color: sc.text, fontSize: 10, fontWeight: 700, letterSpacing: 2, marginBottom: 10, marginTop: 20, fontFamily: "'JetBrains Mono', monospace", textShadow: `0 0 8px ${sc.text}33` }}>TECH MARKET</div>
-              <MetricRow label="SW Eng Openings" value={city.swOpenings} />
-              <MetricRow label="Applicants/Job" value={city.applicantsPerJob} highlight={parseInt(city.applicantsPerJob) > 50 ? "bad" : parseInt(city.applicantsPerJob) < 40 ? "good" : "warn"} />
-              <MetricRow label="Total Tech Jobs" value={city.totalTech} />
-              <MetricRow label="Tech % of Economy" value={city.techPct} />
-              <MetricRow label="Major Employers" value={city.majorEmployers} />
-              <MetricRow label="Tech Trend" value={city.techTrend} highlight={city.techTrend.includes("Shrinking") || city.techTrend.includes("Past") ? "bad" : city.techTrend.includes("Growing") ? "good" : "warn"} />
-            </div>
-
-            <div>
-              <div style={{ color: sc.text, fontSize: 10, fontWeight: 700, letterSpacing: 2, marginBottom: 10, fontFamily: "'JetBrains Mono', monospace", textShadow: `0 0 8px ${sc.text}33` }}>COMPENSATION & COST</div>
-              <MetricRow label="Avg Tech Salary" value={city.avgTechSalary} />
-              <MetricRow label="State Income Tax" value={city.stateTax} highlight={city.stateTax === "0%" ? "good" : parseFloat(city.stateTax) > 5 ? "bad" : "warn"} />
-              <MetricRow label="COL Index" value={city.colIndex} />
-              <MetricRow label="1BR Rent" value={city.rent1br} />
-              <MetricRow label="Salary/COL Ratio" value={city.salaryCol} highlight={city.salaryCol.includes("Poor") ? "bad" : city.salaryCol.includes("Best") || city.salaryCol.includes("Good") ? "good" : "warn"} />
-
-              <div style={{ color: sc.text, fontSize: 10, fontWeight: 700, letterSpacing: 2, marginBottom: 10, marginTop: 20, fontFamily: "'JetBrains Mono', monospace", textShadow: `0 0 8px ${sc.text}33` }}>MARKET OUTLOOK</div>
-              <MetricRow label="Capital Investment" value={city.capitalRank} />
-              <MetricRow label="Population Trend" value={city.popTrend} highlight={city.popTrend.includes("Outmigration") || city.popTrend.includes("outflow") ? "bad" : "good"} />
-              <MetricRow label="Biggest Risk" value={city.biggestRisk} />
-            </div>
-          </div>
-
-          <div style={{ marginTop: 24, padding: 18, background: "#080808", borderRadius: 6, border: "1px solid #1a1a1a" }}>
-            <div style={{ color: "#666", fontSize: 10, fontWeight: 700, letterSpacing: 2, marginBottom: 12, fontFamily: "'JetBrains Mono', monospace" }}>KEY FINDINGS</div>
-            {city.findings.map((f, i) => (
-              <div key={i} style={{
-                padding: "6px 0", fontSize: 12, color: "#999", lineHeight: 1.6,
-                borderBottom: i < city.findings.length - 1 ? "1px solid #111" : "none",
-                fontFamily: "'JetBrains Mono', monospace"
-              }}>
-                <span style={{ color: f.includes("BUT") || f.includes("worst") || f.includes("CONTRACTING") || f.includes("SECOND WORST") || f.includes("cutting") || f.includes("lost") || f.includes("dropped") || f.includes("fell") ? "#ff6666" : f.includes("STRONG") || f.includes("Best") || f.includes("lowest") || f.includes("No state income tax") || f.includes("Healthy") ? "#66ff66" : "#555", marginRight: 8 }}>▸</span>
-                {f}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-const SummaryStats = ({ cities }) => {
-  const growing = cities.filter(c => c.status === "GROWING").length;
-  const contracting = cities.filter(c => c.status === "CONTRACTING").length;
-  const stagnant = cities.filter(c => c.status === "STAGNANT").length;
-  const bestCity = [...cities].sort((a, b) => b.score - a.score)[0];
-
-  const stats = [
-    { label: "CITIES TRACKED", value: cities.length, color: "#88aaff" },
-    { label: "GROWING", value: growing, color: "#44ff44" },
-    { label: "CONTRACTING", value: contracting, color: "#ff4444" },
-  ];
-  if (stagnant > 0) stats.push({ label: "STAGNANT", value: stagnant, color: "#ffff44" });
-  stats.push({ label: "TOP RATED", value: bestCity.name.split(",")[0], color: scoreColor(bestCity.score) });
-
-  return (
-    <div style={{
-      display: "grid", gridTemplateColumns: `repeat(${stats.length}, 1fr)`, gap: 12,
-      marginBottom: 24
-    }}>
-      {stats.map(({ label, value, color }) => (
-        <div key={label} style={{
-          background: "#0a0a0a", borderRadius: 6, padding: "14px 16px",
-          border: "1px solid #1a1a1a", textAlign: "center"
-        }}>
-          <div style={{ fontSize: 22, fontWeight: 800, color, fontFamily: "'JetBrains Mono', monospace", textShadow: `0 0 12px ${color}33` }}>{value}</div>
-          <div style={{ fontSize: 9, color: "#555", letterSpacing: 1.5, marginTop: 4, fontFamily: "'JetBrains Mono', monospace" }}>{label}</div>
-        </div>
-      ))}
-    </div>
-  );
-};
+const getSections = (city) => [
+  {
+    title: "Employment & Economy",
+    metrics: [
+      { label: "Unemployment", value: city.unemployment, highlight: parseFloat(city.unemployment) > 4.5 ? "bad" : "good" },
+      { label: "Job Growth YoY", value: city.jobGrowth, highlight: city.jobGrowth.startsWith("-") ? "bad" : "good" },
+      { label: "Jobs Changed", value: city.jobsChanged, highlight: city.jobsChanged.startsWith("-") ? "bad" : "good" },
+      { label: "Office Vacancy", value: city.officeVacancy }
+    ]
+  },
+  {
+    title: "Tech Ecosystem",
+    metrics: [
+      { label: "SW Eng Openings", value: city.swOpenings },
+      { label: "Applicants/Job", value: city.applicantsPerJob, highlight: parseInt(city.applicantsPerJob) > 50 ? "bad" : parseInt(city.applicantsPerJob) < 40 ? "good" : "warn" },
+      { label: "Total Tech Jobs", value: city.totalTech },
+      { label: "Tech % of Economy", value: city.techPct },
+      { label: "Major Employers", value: city.majorEmployers },
+      { label: "Tech Trend", value: city.techTrend, highlight: city.techTrend.includes("Shrinking") || city.techTrend.includes("Past") ? "bad" : city.techTrend.includes("Growing") ? "good" : "warn" }
+    ]
+  },
+  {
+    title: "Cost & Compensation",
+    metrics: [
+      { label: "Avg Tech Salary", value: city.avgTechSalary },
+      { label: "State Income Tax", value: city.stateTax, highlight: city.stateTax === "0%" ? "good" : parseFloat(city.stateTax) > 5 ? "bad" : "warn" },
+      { label: "COL Index", value: city.colIndex },
+      { label: "1BR Rent", value: city.rent1br },
+      { label: "Salary/COL Ratio", value: city.salaryCol, highlight: city.salaryCol.includes("Poor") ? "bad" : city.salaryCol.includes("Best") || city.salaryCol.includes("Good") ? "good" : "warn" }
+    ]
+  },
+  {
+    title: "Market Dynamics & Outlook",
+    metrics: [
+      { label: "Capital Investment", value: city.capitalRank },
+      { label: "Population Trend", value: city.popTrend, highlight: city.popTrend.includes("Outmigration") || city.popTrend.includes("outflow") || city.popTrend.includes("Losing") ? "bad" : city.popTrend.includes("Stagnant") || city.popTrend.includes("Slowing") ? "warn" : "good" },
+      { label: "Biggest Risk", value: city.biggestRisk }
+    ]
+  }
+];
 
 export default function App() {
-  const [expanded, setExpanded] = useState(new Set());
+  const [selected, setSelected] = useState(() => topRatedCity.name);
   const [sortBy, setSortBy] = useState("score");
 
   const sorted = [...cities].sort((a, b) => {
@@ -469,90 +392,133 @@ export default function App() {
     return 0;
   });
 
-  const toggle = (name) => {
-    const next = new Set(expanded);
-    next.has(name) ? next.delete(name) : next.add(name);
-    setExpanded(next);
-  };
+  const city = cities.find(c => c.name === selected) || cities[0];
+  const sc = statusColor(city.status);
+  const sections = getSections(city);
 
   return (
-    <div style={{ background: "#050505", minHeight: "100vh", padding: "32px 20px", fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}>
+    <div style={{ background: "#050505", minHeight: "100vh", fontFamily: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace" }}>
       <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-      <div style={{ maxWidth: 960, margin: "0 auto" }}>
-        <div style={{ marginBottom: 32, borderBottom: "1px solid #1a1a1a", paddingBottom: 24 }}>
-          <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 8 }}>
-            <span style={{ color: "#44ff44", fontSize: 14, fontFamily: "'JetBrains Mono', monospace" }}>$</span>
-            <h1 style={{ color: "#eee", fontSize: 24, margin: 0, fontFamily: "'Space Mono', monospace", fontWeight: 700 }}>
-              Job Market Intelligence
-            </h1>
+      {/* Header */}
+      <div style={{ borderBottom: "1px solid #1a1a1a", padding: "18px 28px", display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
+          <span style={{ color: "#44ff44", fontSize: 14 }}>$</span>
+          <h1 style={{ color: "#eee", fontSize: 22, margin: 0, fontFamily: "'Space Mono', monospace", fontWeight: 700 }}>
+            Job Market Intelligence
+          </h1>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span style={{ fontSize: 10, color: "#555", letterSpacing: 1 }}>TOP RATED</span>
+          <span style={{ fontSize: 13, fontWeight: 700, color: scoreColor(topRatedCity.score) }}>{topRatedCity.name.split(",")[0]}</span>
+          <span style={{ fontSize: 18, fontWeight: 800, color: scoreColor(topRatedCity.score), textShadow: `0 0 10px ${scoreColor(topRatedCity.score)}33` }}>{topRatedCity.score}/10</span>
+        </div>
+      </div>
+
+      <div style={{ display: "flex", minHeight: "calc(100vh - 62px)" }}>
+        {/* Sidebar */}
+        <div style={{ width: 220, background: "#0a0a0a", borderRight: "1px solid #1a1a1a", overflowY: "auto", flexShrink: 0 }}>
+          <div style={{ padding: "16px 14px 12px" }}>
+            <div style={{ color: "#444", fontSize: 9, letterSpacing: 1.5, marginBottom: 8 }}>SORT</div>
+            <div style={{ display: "flex", gap: 4 }}>
+              {[["score", "Score"], ["unemployment", "Unemp."], ["name", "Name"]].map(([key, label]) => (
+                <button key={key} onClick={() => setSortBy(key)} style={{
+                  background: sortBy === key ? "#1a1a2a" : "transparent",
+                  border: `1px solid ${sortBy === key ? "#444" : "#1a1a1a"}`,
+                  color: sortBy === key ? "#ddd" : "#555",
+                  padding: "3px 8px", borderRadius: 3, cursor: "pointer",
+                  fontSize: 9, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5
+                }}>{label}</button>
+              ))}
+            </div>
           </div>
-          <p style={{ color: "#444", fontSize: 11, margin: 0, letterSpacing: 1, fontFamily: "'JetBrains Mono', monospace" }}>
-            US TECH MARKET COMPARISON · APRIL 2026 · SOURCES: BLS, INDEED, LINKEDIN, COLLIERS, ULI
-          </p>
-        </div>
 
-        <SummaryStats cities={cities} />
-
-        <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap", alignItems: "center" }}>
-          <span style={{ color: "#444", fontSize: 10, letterSpacing: 1.5, marginRight: 4, fontFamily: "'JetBrains Mono', monospace" }}>SORT</span>
-          {[["score", "Score"], ["unemployment", "Unemployment"], ["name", "Name"]].map(([key, label]) => (
-            <button key={key} onClick={() => setSortBy(key)} style={{
-              background: sortBy === key ? "#1a1a2a" : "transparent",
-              border: `1px solid ${sortBy === key ? "#444" : "#1a1a1a"}`,
-              color: sortBy === key ? "#ddd" : "#555",
-              padding: "5px 14px", borderRadius: 4, cursor: "pointer",
-              fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5,
-              transition: "all 0.15s"
-            }}>{label}</button>
-          ))}
-          <button onClick={() => setExpanded(expanded.size === cities.length ? new Set() : new Set(cities.map(c => c.name)))} style={{
-            background: "transparent", border: "1px solid #1a1a1a", color: "#555",
-            padding: "5px 14px", borderRadius: 4, cursor: "pointer", marginLeft: "auto",
-            fontSize: 11, fontFamily: "'JetBrains Mono', monospace",
-            transition: "all 0.15s"
-          }}>{expanded.size === cities.length ? "Collapse All" : "Expand All"}</button>
-        </div>
-
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-          gap: 8,
-          marginBottom: 24, padding: 14, background: "#0a0a0a", borderRadius: 6, border: "1px solid #1a1a1a"
-        }}>
           {sorted.map(c => {
-            const sc = statusColor(c.status);
+            const csc = statusColor(c.status);
+            const isSel = selected === c.name;
             return (
-              <div key={c.name} onClick={() => toggle(c.name)} style={{
-                textAlign: "center", cursor: "pointer", padding: "10px 6px", borderRadius: 6,
-                background: expanded.has(c.name) ? "#111" : "transparent",
-                border: `1px solid ${expanded.has(c.name) ? sc.border : "transparent"}`,
-                transition: "all 0.15s"
+              <div key={c.name} onClick={() => setSelected(c.name)} style={{
+                padding: "10px 14px", cursor: "pointer", display: "flex", alignItems: "center", gap: 10,
+                background: isSel ? "#111" : "transparent",
+                borderLeft: isSel ? `3px solid ${csc.text}` : "3px solid transparent",
+                paddingLeft: isSel ? 11 : 14
               }}>
-                <div style={{ fontSize: 28, fontWeight: 800, color: scoreColor(c.score), textShadow: `0 0 16px ${scoreColor(c.score)}33` }}>{c.score}</div>
-                <div style={{ fontSize: 10, color: "#777", marginTop: 3, fontFamily: "'JetBrains Mono', monospace" }}>{c.name.split(",")[0]}</div>
-                <div style={{ fontSize: 9, color: sc.text, marginTop: 3, letterSpacing: 0.5 }}>{c.status}</div>
+                <div style={{
+                  width: 26, height: 26, borderRadius: 4, background: scoreColor(c.score),
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: 13, fontWeight: 800, color: "#050505", flexShrink: 0
+                }}>{c.score}</div>
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ fontSize: 12, color: isSel ? "#fff" : "#bbb", fontWeight: isSel ? 700 : 500, fontFamily: "'Space Mono', monospace", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {c.name.split(",")[0]}
+                  </div>
+                  <div style={{ fontSize: 9, color: csc.text, letterSpacing: 0.5 }}>{c.status}</div>
+                </div>
               </div>
             );
           })}
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          {sorted.map(city => (
-            <CityCard key={city.name} city={city} isExpanded={expanded.has(city.name)} onToggle={() => toggle(city.name)} />
-          ))}
-        </div>
+        {/* Detail Panel */}
+        <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column" }}>
+          <div style={{ padding: "24px 32px", flex: 1 }}>
+            {/* City header */}
+            <div style={{ marginBottom: 20 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+                <h2 style={{ margin: 0, fontSize: 22, color: "#eee", fontFamily: "'Space Mono', monospace" }}>{city.name}</h2>
+                <span style={{
+                  padding: "2px 10px", fontSize: 10, fontWeight: 700, borderRadius: 3,
+                  background: sc.bg, color: sc.text, border: `1px solid ${sc.border}`,
+                  fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1,
+                  textShadow: `0 0 8px ${sc.text}44`
+                }}>{city.status}</span>
+              </div>
+              <ScoreBar score={city.score} />
+            </div>
 
-        <div style={{
-          marginTop: 40, padding: "16px 20px", background: "#0a0a0a", borderRadius: 6,
-          border: "1px solid #141414", display: "flex", justifyContent: "space-between", alignItems: "center"
-        }}>
-          <span style={{ color: "#333", fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1 }}>
-            DATA AS OF APRIL 2026 · NOT FINANCIAL ADVICE
-          </span>
-          <span style={{ color: "#333", fontSize: 10, fontFamily: "'JetBrains Mono', monospace" }}>
-            {cities.length} MARKETS
-          </span>
+            {/* 2x2 Metric Sections */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+              {sections.map((section) => (
+                <div key={section.title} style={{
+                  background: "#0a0a0a", borderRadius: 6, padding: "16px 18px",
+                  border: "1px solid #1a1a1a"
+                }}>
+                  <div style={{
+                    color: sc.text, fontSize: 10, fontWeight: 700, letterSpacing: 1.5,
+                    marginBottom: 12, fontFamily: "'JetBrains Mono', monospace",
+                    textShadow: `0 0 8px ${sc.text}33`
+                  }}>{section.title.toUpperCase()}</div>
+                  {section.metrics.map((m, i) => (
+                    <MetricRow key={i} label={m.label} value={m.value} highlight={m.highlight} />
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            {/* Key Findings */}
+            <div style={{ marginTop: 28, padding: 18, background: "#080808", borderRadius: 6, border: "1px solid #1a1a1a" }}>
+              <div style={{ color: "#666", fontSize: 10, fontWeight: 700, letterSpacing: 2, marginBottom: 12, fontFamily: "'JetBrains Mono', monospace" }}>KEY FINDINGS</div>
+              {city.findings.map((f, i) => (
+                <div key={i} style={{
+                  padding: "6px 0", fontSize: 12, color: "#999", lineHeight: 1.6,
+                  borderBottom: i < city.findings.length - 1 ? "1px solid #111" : "none",
+                  fontFamily: "'JetBrains Mono', monospace"
+                }}>
+                  <span style={{ color: f.includes("BUT") || f.includes("worst") || f.includes("CONTRACTING") || f.includes("SECOND WORST") || f.includes("cutting") || f.includes("lost") || f.includes("dropped") || f.includes("fell") || f.includes("plummeted") || f.includes("collapsing") || f.includes("decline") ? "#ff6666" : f.includes("STRONG") || f.includes("Best") || f.includes("lowest") || f.includes("No state income tax") || f.includes("Healthy") || f.includes("investing") ? "#66ff66" : "#555", marginRight: 8 }}>▸</span>
+                  {f}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div style={{
+            padding: "14px 32px", background: "#0a0a0a", borderTop: "1px solid #141414",
+            display: "flex", justifyContent: "space-between", alignItems: "center"
+          }}>
+            <span style={{ color: "#333", fontSize: 10, letterSpacing: 1 }}>DATA AS OF APRIL 2026 · NOT FINANCIAL ADVICE</span>
+            <span style={{ color: "#333", fontSize: 10 }}>{cities.length} MARKETS</span>
+          </div>
         </div>
       </div>
     </div>
