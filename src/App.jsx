@@ -388,7 +388,7 @@ const DataCard = ({ section, sc, isOpen, onToggle }) => (
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
         <span style={{ fontSize: 11, opacity: 0.5 }}>{section.icon}</span>
-        <span style={{ color: "#d1d5db", fontSize: 11, fontWeight: 600 }}>{section.title}</span>
+        <span style={{ color: "#d1d5db", fontSize: 12, fontWeight: 600 }}>{section.title}</span>
       </div>
       <span style={{ color: "#4b5563", fontSize: 14, transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>⌄</span>
     </div>
@@ -397,8 +397,8 @@ const DataCard = ({ section, sc, isOpen, onToggle }) => (
         <div style={{ display: "flex", gap: 16 }}>
           {section.highlights.map((h, i) => (
             <div key={i} style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: 13, fontWeight: 600, color: "#e5e7eb", fontFamily: "'JetBrains Mono', monospace", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{h.value}</div>
-              <div style={{ fontSize: 9, color: "#4b5563", marginTop: 2, fontFamily: "'JetBrains Mono', monospace" }}>{h.label}</div>
+              <div style={{ fontSize: 14, fontWeight: 600, color: "#e5e7eb", fontFamily: "'JetBrains Mono', monospace", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{h.value}</div>
+              <div style={{ fontSize: 10, color: "#4b5563", marginTop: 2, fontFamily: "'JetBrains Mono', monospace" }}>{h.label}</div>
             </div>
           ))}
         </div>
@@ -413,6 +413,31 @@ const findingColor = (f) => {
   return "#444";
 };
 
+const isNegativeFinding = (f) => /BUT|worst|CONTRACTING|SECOND WORST|cutting|lost|dropped|fell|plummeted|collapsing|decline|collapsed|down\b/i.test(f);
+
+const getHighlightPills = (city) => {
+  const pills = [];
+  const unemp = parseFloat(city.unemployment);
+  if (unemp < 4) pills.push({ text: `(${city.unemployment})`, sub: "Low Unemployment", type: "good" });
+  else if (unemp > 4.5) pills.push({ text: `(${city.unemployment})`, sub: "High Unemployment", type: "bad" });
+
+  if (city.techTrend.includes("biotech") || city.techTrend.includes("Growing")) {
+    pills.push({ text: city.techTrend.split(";")[0], sub: "Tech Trend", type: "good", icon: "⚗" });
+  } else if (city.techTrend.includes("Shrinking") || city.techTrend.includes("Past") || city.techTrend.includes("contracting")) {
+    pills.push({ text: city.techTrend.split(";")[0], sub: "Tech Trend", type: "bad", icon: "⚠" });
+  }
+
+  if (city.totalTech) pills.push({ text: `${city.totalTech} Tech Jobs`, sub: "Total Openings", type: "neutral" });
+
+  const negFinding = city.findings.find(f => isNegativeFinding(f));
+  if (negFinding) {
+    const short = negFinding.length > 50 ? negFinding.slice(0, 50) + "..." : negFinding;
+    pills.push({ text: short, sub: "", type: "bad", icon: "⚠" });
+  }
+
+  return pills.slice(0, 4);
+};
+
 export default function App() {
   const [selected, setSelected] = useState(() => topRatedCity.name);
   const [sortBy, setSortBy] = useState("score");
@@ -425,6 +450,7 @@ export default function App() {
   });
 
   const [openCards, setOpenCards] = useState(new Set(["Employment & Economy", "Tech Ecosystem", "Cost & Compensation", "Market Dynamics & Outlook"]));
+  const [findingsOpen, setFindingsOpen] = useState(false);
 
   const toggleCard = (title) => {
     const next = new Set(openCards);
@@ -531,7 +557,7 @@ export default function App() {
                   }} />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{
-                      fontSize: 11, color: isSel ? "#e5e7eb" : "#9ca3af", fontWeight: isSel ? 600 : 400,
+                      fontSize: 12, color: isSel ? "#e5e7eb" : "#9ca3af", fontWeight: isSel ? 600 : 400,
                       whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"
                     }}>{c.name}</div>
                   </div>
@@ -551,7 +577,7 @@ export default function App() {
             {/* City header */}
             <div style={{ marginBottom: 16, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <h2 style={{ margin: 0, fontSize: 18, color: "#e5e7eb", fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>{city.name}</h2>
+                <h2 style={{ margin: 0, fontSize: 20, color: "#e5e7eb", fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>{city.name}</h2>
                 <div style={{ width: 1, height: 20, background: "#333" }} />
                 <span style={{
                   padding: "2px 10px", fontSize: 9, fontWeight: 600, borderRadius: 3,
@@ -569,33 +595,57 @@ export default function App() {
               ))}
             </div>
 
-            {/* Key Findings */}
-            <div style={{ marginTop: 16, padding: 14, background: "#0f0f0f", borderRadius: 6, border: "1px solid #1f1f1f" }}>
-              <div style={{ color: "#4b5563", fontSize: 9, fontWeight: 600, letterSpacing: 1.5, marginBottom: 8, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" }}>Key Findings</div>
-              {city.findings.map((f, i) => (
-                <div key={i} style={{
-                  padding: "4px 0", fontSize: 10, color: "#9ca3af", lineHeight: 1.5,
-                  borderBottom: i < city.findings.length - 1 ? "1px solid #1a1a1a" : "none",
-                  fontFamily: "'JetBrains Mono', monospace"
-                }}>
-                  <span style={{ color: findingColor(f), marginRight: 6 }}>▸</span>
-                  {f}
-                </div>
-              ))}
+            {/* Key Finding Highlights */}
+            <div style={{ marginTop: 16 }}>
+              <div style={{ color: "#4b5563", fontSize: 10, fontWeight: 600, letterSpacing: 1.5, marginBottom: 10, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" }}>Key Finding Highlights</div>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                {getHighlightPills(city).map((pill, i) => {
+                  const isGood = pill.type === "good";
+                  const isBad = pill.type === "bad";
+                  return (
+                    <div key={i} style={{
+                      flex: "1 1 0", minWidth: 120, padding: "10px 12px", borderRadius: 6,
+                      background: isBad ? "#1a0a0a" : isGood ? "#0a1a0a" : "#111",
+                      border: `1px solid ${isBad ? "#3a1515" : isGood ? "#153a15" : "#1f1f1f"}`,
+                      display: "flex", alignItems: "flex-start", gap: 8
+                    }}>
+                      {pill.icon && <span style={{ fontSize: 14, opacity: 0.7, flexShrink: 0, marginTop: 1 }}>{pill.icon}</span>}
+                      <div style={{ minWidth: 0 }}>
+                        <div style={{
+                          fontSize: 12, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace",
+                          color: isBad ? "#ef4444" : isGood ? "#4ade80" : "#d1d5db",
+                          whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"
+                        }}>{pill.text}</div>
+                        {pill.sub && <div style={{ fontSize: 10, color: "#4b5563", marginTop: 2 }}>{pill.sub}</div>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Score Summary Footer */}
-            <div style={{
-              marginTop: 16, padding: "12px 14px", background: "#111", borderRadius: 6,
-              border: "1px solid #1f1f1f", display: "flex", alignItems: "center", justifyContent: "space-between"
-            }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                <span style={{ color: "#4b5563", fontSize: 9, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1 }}>FIT SCORE</span>
-                <span style={{ fontSize: 20, fontWeight: 700, color: scoreColor(city.score), fontFamily: "'JetBrains Mono', monospace" }}>{city.score}/10</span>
+            {/* Full Key Finding Details (collapsible) */}
+            <div style={{ marginTop: 12, background: "#0f0f0f", borderRadius: 6, border: "1px solid #1f1f1f", overflow: "hidden" }}>
+              <div onClick={() => setFindingsOpen(!findingsOpen)} style={{
+                padding: "10px 14px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between"
+              }}>
+                <span style={{ color: "#d1d5db", fontSize: 11, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, textTransform: "uppercase" }}>Full Key Finding Details</span>
+                <span style={{ color: "#4b5563", fontSize: 14, transform: findingsOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>⌄</span>
               </div>
-              <div style={{ fontSize: 10, color: "#4b5563", fontFamily: "'JetBrains Mono', monospace" }}>
-                {cities.length} MARKETS · DATA AS OF APRIL 2026
-              </div>
+              {findingsOpen && (
+                <div style={{ padding: "0 14px 12px" }}>
+                  {city.findings.map((f, i) => (
+                    <div key={i} style={{
+                      padding: "5px 0", fontSize: 11, color: "#9ca3af", lineHeight: 1.6,
+                      borderBottom: i < city.findings.length - 1 ? "1px solid #1a1a1a" : "none",
+                      fontFamily: "'JetBrains Mono', monospace"
+                    }}>
+                      <span style={{ color: findingColor(f), marginRight: 6 }}>▸</span>
+                      {f}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
