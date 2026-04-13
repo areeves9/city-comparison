@@ -313,72 +313,99 @@ const topRatedCity = [...cities].sort((a, b) => b.score - a.score)[0];
 
 const ScoreBar = ({ score }) => (
   <div style={{ display: "flex", gap: 2, alignItems: "center" }}>
+    <span style={{ color: "#4b5563", fontSize: 10, fontFamily: "'JetBrains Mono', monospace", marginRight: 6 }}>Score</span>
     {Array.from({ length: 10 }, (_, i) => (
       <div key={i} style={{
-        width: 12, height: 18, borderRadius: 2,
-        background: i < score ? scoreColor(score) : "#161616",
-        border: `1px solid ${i < score ? scoreColor(score) + "66" : "#222"}`,
+        width: 10, height: 16, borderRadius: 2,
+        background: i < score ? scoreColor(score) : "#1a1a1a",
+        border: `1px solid ${i < score ? scoreColor(score) + "55" : "#222"}`,
         opacity: i < score ? 1 : 0.3
       }} />
     ))}
-    <span style={{ marginLeft: 8, fontSize: 16, fontWeight: 700, color: scoreColor(score), fontFamily: "'JetBrains Mono', monospace" }}>{score}/10</span>
-  </div>
-);
-
-const MetricRow = ({ label, value, highlight }) => (
-  <div style={{
-    display: "flex", justifyContent: "space-between", alignItems: "flex-start",
-    padding: "5px 0", borderBottom: "1px solid #1a1a1a"
-  }}>
-    <span style={{ color: "#555", fontSize: 10, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase", letterSpacing: 0.3, flex: "0 0 42%" }}>{label}</span>
-    <span style={{
-      color: highlight === "bad" ? "#ef4444" : highlight === "good" ? "#4ade80" : highlight === "warn" ? "#f59e0b" : "#9ca3af",
-      fontSize: 10, fontWeight: highlight ? 600 : 400, textAlign: "right", flex: "0 0 56%",
-      fontFamily: "'JetBrains Mono', monospace"
-    }}>{value}</span>
+    <span style={{ marginLeft: 6, fontSize: 13, fontWeight: 700, color: scoreColor(score), fontFamily: "'JetBrains Mono', monospace" }}>{score}/10</span>
   </div>
 );
 
 const getSections = (city) => [
   {
     title: "Employment & Economy",
-    metrics: [
-      { label: "Unemployment", value: city.unemployment, highlight: parseFloat(city.unemployment) > 4.5 ? "bad" : "good" },
-      { label: "Job Growth YoY", value: city.jobGrowth, highlight: city.jobGrowth.startsWith("-") ? "bad" : "good" },
-      { label: "Jobs Changed", value: city.jobsChanged, highlight: city.jobsChanged.startsWith("-") ? "bad" : "good" },
-      { label: "Office Vacancy", value: city.officeVacancy }
+    icon: "📊",
+    highlights: [
+      { value: city.unemployment, label: "Unemployment" },
+      { value: city.jobGrowth, label: "Job Growth YOY" },
+      { value: city.jobsChanged, label: "Jobs Changed" }
+    ],
+    details: [
+      { label: "Office Vacancy", value: city.officeVacancy },
+      { label: "Applicants/Job", value: city.applicantsPerJob }
     ]
   },
   {
     title: "Tech Ecosystem",
-    metrics: [
-      { label: "SW Eng Openings", value: city.swOpenings },
-      { label: "Applicants/Job", value: city.applicantsPerJob, highlight: parseInt(city.applicantsPerJob) > 50 ? "bad" : parseInt(city.applicantsPerJob) < 40 ? "good" : "warn" },
-      { label: "Total Tech Jobs", value: city.totalTech },
+    icon: "⚙",
+    highlights: [
+      { value: city.swOpenings, label: "SW Eng Openings" },
+      { value: city.totalTech, label: "Total Tech Jobs" },
+      { value: city.majorEmployers.split(",").slice(0, 2).join(", ") + "...", label: "Major Employers" }
+    ],
+    details: [
       { label: "Tech % of Economy", value: city.techPct },
-      { label: "Major Employers", value: city.majorEmployers },
-      { label: "Tech Trend", value: city.techTrend, highlight: city.techTrend.includes("Shrinking") || city.techTrend.includes("Past") ? "bad" : city.techTrend.includes("Growing") ? "good" : "warn" }
+      { label: "Tech Trend", value: city.techTrend }
     ]
   },
   {
     title: "Cost & Compensation",
-    metrics: [
-      { label: "Avg Tech Salary", value: city.avgTechSalary },
-      { label: "State Income Tax", value: city.stateTax, highlight: city.stateTax === "0%" ? "good" : parseFloat(city.stateTax) > 5 ? "bad" : "warn" },
-      { label: "COL Index", value: city.colIndex },
+    icon: "💲",
+    highlights: [
+      { value: city.avgTechSalary, label: "Avg Tech Salary" },
+      { value: city.stateTax, label: "State Income Tax" },
+      { value: city.colIndex, label: "COL Index" }
+    ],
+    details: [
       { label: "1BR Rent", value: city.rent1br },
-      { label: "Salary/COL Ratio", value: city.salaryCol, highlight: city.salaryCol.includes("Poor") ? "bad" : city.salaryCol.includes("Best") || city.salaryCol.includes("Good") ? "good" : "warn" }
+      { label: "Salary/COL Ratio", value: city.salaryCol }
     ]
   },
   {
     title: "Market Dynamics & Outlook",
-    metrics: [
-      { label: "Capital Investment", value: city.capitalRank },
-      { label: "Population Trend", value: city.popTrend, highlight: city.popTrend.includes("Outmigration") || city.popTrend.includes("outflow") || city.popTrend.includes("Losing") ? "bad" : city.popTrend.includes("Stagnant") || city.popTrend.includes("Slowing") ? "warn" : "good" },
-      { label: "Biggest Risk", value: city.biggestRisk }
+    icon: "📈",
+    highlights: [
+      { value: city.capitalRank, label: "Capital Investment" },
+      { value: city.popTrend.split(";")[0], label: "Population Trend" },
+      { value: city.biggestRisk.split(";")[0], label: "Biggest Risk" }
+    ],
+    details: [
+      { label: "Office Vacancy", value: city.officeVacancy },
+      { label: "Full Risk", value: city.biggestRisk }
     ]
   }
 ];
+
+const DataCard = ({ section, sc, isOpen, onToggle }) => (
+  <div style={{ background: "#111", borderRadius: 6, border: "1px solid #1f1f1f", overflow: "hidden" }}>
+    <div onClick={onToggle} style={{
+      padding: "10px 14px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between"
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <span style={{ fontSize: 11, opacity: 0.5 }}>{section.icon}</span>
+        <span style={{ color: "#d1d5db", fontSize: 11, fontWeight: 600 }}>{section.title}</span>
+      </div>
+      <span style={{ color: "#4b5563", fontSize: 14, transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>⌄</span>
+    </div>
+    {isOpen && (
+      <div style={{ padding: "0 14px 12px" }}>
+        <div style={{ display: "flex", gap: 16 }}>
+          {section.highlights.map((h, i) => (
+            <div key={i} style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 13, fontWeight: 600, color: "#e5e7eb", fontFamily: "'JetBrains Mono', monospace", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{h.value}</div>
+              <div style={{ fontSize: 9, color: "#4b5563", marginTop: 2, fontFamily: "'JetBrains Mono', monospace" }}>{h.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+);
 
 const findingColor = (f) => {
   if (f.includes("BUT") || f.includes("worst") || f.includes("CONTRACTING") || f.includes("SECOND WORST") || f.includes("cutting") || f.includes("lost") || f.includes("dropped") || f.includes("fell") || f.includes("plummeted") || f.includes("collapsing") || f.includes("decline") || f.includes("collapsed")) return "#ef4444";
@@ -396,6 +423,14 @@ export default function App() {
     if (sortBy === "name") return a.name.localeCompare(b.name);
     return 0;
   });
+
+  const [openCards, setOpenCards] = useState(new Set(["Employment & Economy", "Tech Ecosystem", "Cost & Compensation", "Market Dynamics & Outlook"]));
+
+  const toggleCard = (title) => {
+    const next = new Set(openCards);
+    next.has(title) ? next.delete(title) : next.add(title);
+    setOpenCards(next);
+  };
 
   const city = cities.find(c => c.name === selected) || cities[0];
   const sc = statusColor(city.status);
@@ -514,11 +549,12 @@ export default function App() {
         <div style={{ flex: 1, overflowY: "auto", background: "#0c0c0c" }}>
           <div style={{ padding: "20px 24px" }}>
             {/* City header */}
-            <div style={{ marginBottom: 16 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-                <h2 style={{ margin: 0, fontSize: 18, color: "#e5e7eb", fontWeight: 600 }}>{city.name}</h2>
+            <div style={{ marginBottom: 16, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <h2 style={{ margin: 0, fontSize: 18, color: "#e5e7eb", fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>{city.name}</h2>
+                <div style={{ width: 1, height: 20, background: "#333" }} />
                 <span style={{
-                  padding: "1px 8px", fontSize: 9, fontWeight: 600, borderRadius: 3,
+                  padding: "2px 10px", fontSize: 9, fontWeight: 600, borderRadius: 3,
                   background: sc.bg, color: sc.text, border: `1px solid ${sc.border}`,
                   fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5, textTransform: "uppercase"
                 }}>{city.status}</span>
@@ -526,22 +562,10 @@ export default function App() {
               <ScoreBar score={city.score} />
             </div>
 
-            {/* 2x2 Metric Cards */}
+            {/* 2x2 Data Cards */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
               {sections.map((section) => (
-                <div key={section.title} style={{
-                  background: "#111", borderRadius: 6, padding: "12px 14px",
-                  border: "1px solid #1f1f1f"
-                }}>
-                  <div style={{
-                    color: sc.text, fontSize: 9, fontWeight: 600, letterSpacing: 1,
-                    marginBottom: 8, fontFamily: "'JetBrains Mono', monospace",
-                    textTransform: "uppercase"
-                  }}>{section.title}</div>
-                  {section.metrics.map((m, i) => (
-                    <MetricRow key={i} label={m.label} value={m.value} highlight={m.highlight} />
-                  ))}
-                </div>
+                <DataCard key={section.title} section={section} sc={sc} isOpen={openCards.has(section.title)} onToggle={() => toggleCard(section.title)} />
               ))}
             </div>
 
