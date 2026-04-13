@@ -406,19 +406,62 @@ export default function App() {
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
       {/* Header */}
-      <div style={{ borderBottom: "1px solid #1f1f1f", padding: "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", background: "#0c0c0c" }}>
-        <div>
-          <h1 style={{ color: "#e5e7eb", fontSize: 16, margin: 0, fontWeight: 600, letterSpacing: -0.3 }}>Job Market Intelligence</h1>
-          <p style={{ color: "#4b5563", fontSize: 10, margin: "2px 0 0", fontFamily: "'JetBrains Mono', monospace" }}>US TECH MARKETS · APRIL 2026 · BLS, INDEED, LINKEDIN, COLLIERS</p>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontSize: 10, color: "#4b5563", fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5 }}>TOP RATED</span>
-          <span style={{ fontSize: 12, fontWeight: 600, color: scoreColor(topRatedCity.score) }}>{topRatedCity.name.split(",")[0]}</span>
-          <div style={{ background: "#111", borderRadius: 4, padding: "2px 8px", border: "1px solid #222" }}>
-            <span style={{ fontSize: 14, fontWeight: 700, color: scoreColor(topRatedCity.score), fontFamily: "'JetBrains Mono', monospace" }}>{topRatedCity.score}</span>
+      {(() => {
+        const growing = cities.filter(c => c.status === "GROWING").length;
+        const contracting = cities.filter(c => c.status === "CONTRACTING").length;
+        const stagnant = cities.filter(c => c.status === "STAGNANT").length;
+        const statStyle = { textAlign: "center", padding: "0 20px" };
+        const statNum = (color, size = 22) => ({ fontSize: size, fontWeight: 700, color, fontFamily: "'JetBrains Mono', monospace", lineHeight: 1 });
+        const statLabel = { fontSize: 9, color: "#4b5563", letterSpacing: 1.5, marginTop: 2, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" };
+        const divider = { width: 1, height: 36, background: "#1f1f1f", flexShrink: 0 };
+        return (
+          <div style={{ borderBottom: "1px solid #1f1f1f", padding: "16px 24px", display: "flex", alignItems: "center", background: "#0c0c0c" }}>
+            <div style={{ marginRight: "auto" }}>
+              <h1 style={{ color: "#e5e7eb", fontSize: 18, margin: 0, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>Job Market Intelligence</h1>
+              <p style={{ color: "#4b5563", fontSize: 10, margin: "3px 0 0", fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5 }}>US TECH MARKET COMPARISON · APRIL 2026</p>
+            </div>
+            <div style={statStyle}>
+              <div style={statNum("#e5e7eb")}>{cities.length}</div>
+              <div style={statLabel}>Cities Tracked</div>
+            </div>
+            <div style={divider} />
+            <div style={statStyle}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
+                <span style={{ color: "#4ade80", fontSize: 12 }}>↗</span>
+                <span style={statNum("#4ade80")}>{growing}</span>
+                <span style={{ color: "#4ade80", fontSize: 12 }}>↗</span>
+              </div>
+              <div style={statLabel}>Growing</div>
+            </div>
+            <div style={divider} />
+            <div style={statStyle}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
+                <span style={{ color: "#ef4444", fontSize: 12 }}>↘</span>
+                <span style={statNum("#ef4444")}>{contracting}</span>
+                <span style={{ color: "#ef4444", fontSize: 12 }}>↘</span>
+              </div>
+              <div style={statLabel}>Contracting</div>
+            </div>
+            <div style={divider} />
+            <div style={statStyle}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
+                <span style={{ color: "#f59e0b", fontSize: 12 }}>—</span>
+                <span style={statNum("#f59e0b")}>{stagnant}</span>
+                <span style={{ color: "#f59e0b", fontSize: 12 }}>—</span>
+              </div>
+              <div style={statLabel}>Stagnant</div>
+            </div>
+            <div style={divider} />
+            <div style={{ ...statStyle, display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#f59e0b", fontSize: 16 }}>☆</span>
+              <div>
+                <div style={{ fontSize: 14, fontWeight: 600, color: scoreColor(topRatedCity.score) }}>{topRatedCity.name.split(",")[0]}</div>
+                <div style={{ ...statLabel, textAlign: "left" }}>Top Rated</div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        );
+      })()}
 
       <div style={{ display: "flex", height: "calc(100vh - 52px)" }}>
         {/* Sidebar */}
