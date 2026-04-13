@@ -381,7 +381,7 @@ export default function App() {
 
         <div style={{
           display: "grid",
-          gridTemplateColumns: `repeat(${Math.min(cities.length, 6)}, 1fr)`,
+          gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
           gap: 8,
           marginBottom: 24, padding: 14, background: "#0a0a0a", borderRadius: 6, border: "1px solid #1a1a1a"
         }}>
