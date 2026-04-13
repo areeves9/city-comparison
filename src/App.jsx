@@ -526,45 +526,47 @@ export default function App() {
 
       <div style={{ display: "flex", height: "calc(100vh - 52px)" }}>
         {/* Sidebar */}
-        <div style={{ width: 200, background: "#0f0f0f", borderRight: "1px solid #1f1f1f", overflowY: "auto", flexShrink: 0, display: "flex", flexDirection: "column" }}>
-          <div style={{ padding: "12px 12px 8px" }}>
-            <div style={{ display: "flex", gap: 4 }}>
-              {[["score", "Score"], ["unemployment", "Unemp."], ["name", "A-Z"]].map(([key, label]) => (
-                <button key={key} onClick={() => setSortBy(key)} style={{
-                  background: sortBy === key ? "#1a1a1a" : "transparent",
-                  border: `1px solid ${sortBy === key ? "#333" : "#1a1a1a"}`,
-                  color: sortBy === key ? "#d1d5db" : "#4b5563",
-                  padding: "3px 7px", borderRadius: 3, cursor: "pointer",
-                  fontSize: 9, fontFamily: "'JetBrains Mono', monospace"
-                }}>{label}</button>
-              ))}
-            </div>
+        <div style={{ width: 240, background: "#0f0f0f", borderRight: "1px solid #1f1f1f", overflowY: "auto", flexShrink: 0, display: "flex", flexDirection: "column" }}>
+          <div style={{ padding: "10px 14px 6px", display: "flex", justifyContent: "flex-end" }}>
+            <span style={{ color: "#4b5563", fontSize: 14, cursor: "pointer" }} title="Filter">▽</span>
           </div>
 
           <div style={{ flex: 1, overflowY: "auto" }}>
-            {sorted.map(c => {
+            {sorted.map((c, idx) => {
               const csc = statusColor(c.status);
               const isSel = selected === c.name;
+              const rank = idx + 1;
+              const statusIcon = c.status === "GROWING" ? { symbol: "G", color: "#4ade80" }
+                : c.status === "CONTRACTING" ? { symbol: "C", color: "#ef4444" }
+                : { symbol: "↗", color: "#f59e0b" };
               return (
                 <div key={c.name} onClick={() => setSelected(c.name)} style={{
-                  padding: "8px 12px", cursor: "pointer", display: "flex", alignItems: "center", gap: 8,
+                  padding: "10px 14px", cursor: "pointer", display: "flex", alignItems: "center", gap: 0,
                   background: isSel ? "#161616" : "transparent",
-                  borderLeft: isSel ? `2px solid ${csc.text}` : "2px solid transparent"
+                  border: isSel ? `1px solid #2a2a2a` : "1px solid transparent",
+                  borderRadius: isSel ? 6 : 0,
+                  margin: isSel ? "2px 6px" : "0 6px"
                 }}>
-                  <div style={{
-                    width: 8, height: 8, borderRadius: "50%", flexShrink: 0,
-                    background: csc.text, opacity: isSel ? 1 : 0.6
-                  }} />
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{
-                      fontSize: 12, color: isSel ? "#e5e7eb" : "#9ca3af", fontWeight: isSel ? 600 : 400,
+                  <span style={{
+                    fontSize: 13, color: "#4b5563", fontFamily: "'JetBrains Mono', monospace",
+                    width: 20, flexShrink: 0, textAlign: "center"
+                  }}>{rank}</span>
+                  <div style={{ width: 1, height: 18, background: "#2a2a2a", margin: "0 10px", flexShrink: 0 }} />
+                  <div style={{ flex: 1, minWidth: 0, display: "flex", alignItems: "center", gap: 4 }}>
+                    {rank === 1 && <span style={{ color: "#f59e0b", fontSize: 12 }}>☆</span>}
+                    <span style={{
+                      fontSize: 13, color: isSel ? "#e5e7eb" : "#9ca3af", fontWeight: isSel ? 600 : 400,
                       whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"
-                    }}>{c.name}</div>
+                    }}>{c.name}</span>
                   </div>
-                  <div style={{
-                    fontSize: 11, fontWeight: 600, color: scoreColor(c.score),
+                  <span style={{
+                    fontSize: 11, fontWeight: 700, color: statusIcon.color,
+                    fontFamily: "'JetBrains Mono', monospace", flexShrink: 0, marginRight: 4
+                  }}>{statusIcon.symbol}</span>
+                  <span style={{
+                    fontSize: 12, fontWeight: 500, color: "#9ca3af",
                     fontFamily: "'JetBrains Mono', monospace", flexShrink: 0
-                  }}>{c.score}</div>
+                  }}>{c.score}/10</span>
                 </div>
               );
             })}
