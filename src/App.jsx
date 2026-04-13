@@ -35,25 +35,25 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS Oregon Area Employment Statistics",
-        "Oregon Employment Dept — Monthly Labor Force Data",
-        "Colliers Portland Office Report Q4 2025",
-        "ULI/PwC Emerging Trends in Real Estate 2025 (#80 of 81)"
+        { label: "BLS Oregon Area Employment Statistics", url: "https://www.bls.gov/regions/west/oregon.htm" },
+        { label: "Oregon Employment Dept — Monthly Labor Force Data", url: "https://www.qualityinfo.org/" },
+        { label: "Colliers Portland Office Report Q4 2025", url: "https://www.colliers.com/en/research/portland" },
+        { label: "ULI/PwC Emerging Trends in Real Estate 2025 (#80 of 81)", url: "https://americas.uli.org/emerging-trends-in-real-estate-2025/" }
       ],
       techSalaries: [
-        "Glassdoor — Software Engineer Salaries, Portland OR",
-        "Indeed — Software Engineer Salary Portland",
-        "LinkedIn Job Postings — Portland Metro Area"
+        { label: "Glassdoor — Software Engineer Salaries, Portland OR", url: "https://www.glassdoor.com/Salaries/portland-software-engineer-salary-SRCH_IL.0,8_IM700_KO9,26.htm" },
+        { label: "Indeed — Software Engineer Salary Portland", url: "https://www.indeed.com/career/software-engineer/salaries/Portland--OR" },
+        { label: "LinkedIn Job Postings — Portland Metro Area", url: "https://www.linkedin.com/jobs/software-engineer-jobs-portland-or/" }
       ],
       costLiving: [
-        "Zumper Portland Rent Research 2025",
-        "BestPlaces — Portland OR Cost of Living (C2ER)",
-        "Oregon Dept. of Revenue — Tax Rates & Surcharges"
+        { label: "Zumper Portland Rent Research 2025", url: "https://www.zumper.com/rent-research/portland-or" },
+        { label: "BestPlaces — Portland OR Cost of Living (C2ER)", url: "https://www.bestplaces.net/cost_of_living/city/oregon/portland" },
+        { label: "Oregon Dept. of Revenue — Tax Rates & Surcharges", url: "https://www.oregon.gov/dor/programs/individuals/Pages/PIT.aspx" }
       ],
       populationInvestment: [
-        "IRS SOI Migration Data — Oregon Inflow/Outflow",
-        "Census Bureau — Portland Metro Population Estimates",
-        "Oregon Office of Economic Analysis — 2025 Forecast"
+        { label: "IRS SOI Migration Data — Oregon Inflow/Outflow", url: "https://www.irs.gov/statistics/soi-tax-stats-migration-data" },
+        { label: "Census Bureau — Portland Metro Population Estimates", url: "https://www.census.gov/quickfacts/portlandcityoregon" },
+        { label: "Oregon Office of Economic Analysis — 2025 Forecast", url: "https://www.oregon.gov/das/oea/pages/index.aspx" }
       ]
     }
   },
@@ -90,25 +90,25 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS Austin-Round Rock-Georgetown MSA Employment Statistics",
-        "Texas Workforce Commission — Austin Area Labor Market",
-        "Colliers Austin Office Market Report 2025",
-        "Austin Chamber of Commerce — Economic Indicators 2025"
+        { label: "BLS Austin-Round Rock-Georgetown MSA Employment Statistics", url: "https://www.bls.gov/regions/southwest/news-release/areaemployment_austin.htm" },
+        { label: "Texas Workforce Commission — Austin Area Labor Market", url: "https://www.twc.texas.gov/news/local-area-unemployment-statistics" },
+        { label: "Colliers Austin Office Market Report 2025", url: "https://www.colliers.com/en/research/austin" },
+        { label: "Austin Chamber of Commerce — Economic Indicators 2025", url: "https://www.austinchamber.com/economic-development/austin-profile/economy" }
       ],
       techSalaries: [
-        "Glassdoor — Software Engineer Salaries Austin TX",
-        "Indeed — Software Engineer Salary Austin TX",
-        "CompTIA — State of the Tech Workforce 2025"
+        { label: "Glassdoor — Software Engineer Salaries Austin TX", url: "https://www.glassdoor.com/Salaries/austin-software-engineer-salary-SRCH_IL.0,6_IM60_KO7,24.htm" },
+        { label: "Indeed — Software Engineer Salary Austin TX", url: "https://www.indeed.com/career/software-engineer/salaries/Austin--TX" },
+        { label: "CompTIA — State of the Tech Workforce 2025", url: "https://www.comptia.org/content/research/cybersecurity-supply-demand-heat-map" }
       ],
       costLiving: [
-        "Zumper Austin Rent Research 2025",
-        "BestPlaces — Austin TX Cost of Living (C2ER)",
-        "Zillow — Austin Rental Market Overview"
+        { label: "Zumper Austin Rent Research 2025", url: "https://www.zumper.com/rent-research/austin-tx" },
+        { label: "BestPlaces — Austin TX Cost of Living (C2ER)", url: "https://www.bestplaces.net/cost_of_living/city/texas/austin" },
+        { label: "Zillow — Austin Rental Market Overview", url: "https://www.zillow.com/rental-manager/market-trends/austin-tx/" }
       ],
       populationInvestment: [
-        "ULI/PwC Emerging Trends in Real Estate 2025 (Top 10)",
-        "Census Bureau — Austin Metro Population Estimates",
-        "Texas Demographic Center — Migration Analysis 2025"
+        { label: "ULI/PwC Emerging Trends in Real Estate 2025 (Top 10)", url: "https://americas.uli.org/emerging-trends-in-real-estate-2025/" },
+        { label: "Census Bureau — Austin Metro Population Estimates", url: "https://www.census.gov/quickfacts/austincitytexas" },
+        { label: "Texas Demographic Center — Migration Analysis 2025", url: "https://demographics.texas.gov/" }
       ]
     }
   },
@@ -146,25 +146,25 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS Raleigh-Durham-Chapel Hill MSA Employment Statistics",
-        "NC Commerce Dept — Labor Market Statistics",
-        "Colliers Raleigh-Durham Office Report 2025",
-        "Research Triangle Regional Partnership — 2025 Report"
+        { label: "BLS Raleigh-Durham-Chapel Hill MSA Employment Statistics", url: "https://www.bls.gov/regions/southeast/news-release/areaemployment_raleigh.htm" },
+        { label: "NC Commerce Dept — Labor Market Statistics", url: "https://www.nccommerce.com/research-publications/labor-market-info" },
+        { label: "Colliers Raleigh-Durham Office Report 2025", url: "https://www.colliers.com/en/research/raleigh-durham" },
+        { label: "Research Triangle Regional Partnership — 2025 Report", url: "https://www.researchtriangle.org/" }
       ],
       techSalaries: [
-        "Glassdoor — Software Engineer Salaries Raleigh NC",
-        "Indeed — Software Engineer Salary Raleigh-Durham",
-        "CompTIA — Tech Town Index 2025"
+        { label: "Glassdoor — Software Engineer Salaries Raleigh NC", url: "https://www.glassdoor.com/Salaries/raleigh-software-engineer-salary-SRCH_IL.0,7_IM734_KO8,25.htm" },
+        { label: "Indeed — Software Engineer Salary Raleigh-Durham", url: "https://www.indeed.com/career/software-engineer/salaries/Raleigh--NC" },
+        { label: "CompTIA — Tech Town Index 2025", url: "https://www.comptia.org/content/research/best-cities-for-tech-jobs" }
       ],
       costLiving: [
-        "C2ER Cost of Living Index — Raleigh-Durham (95.4)",
-        "Zumper Raleigh Rent Research 2025",
-        "Zillow — Raleigh-Durham Rental Market Overview"
+        { label: "C2ER Cost of Living Index — Raleigh-Durham (95.4)", url: "https://www.coli.org/" },
+        { label: "Zumper Raleigh Rent Research 2025", url: "https://www.zumper.com/rent-research/raleigh-nc" },
+        { label: "Zillow — Raleigh-Durham Rental Market Overview", url: "https://www.zillow.com/rental-manager/market-trends/raleigh-nc/" }
       ],
       populationInvestment: [
-        "ULI/PwC Emerging Trends 2025 (Top 15)",
-        "Census Bureau — Raleigh Metro Population Estimates",
-        "Milken Institute 2025 Best-Performing Cities"
+        { label: "ULI/PwC Emerging Trends 2025 (Top 15)", url: "https://americas.uli.org/emerging-trends-in-real-estate-2025/" },
+        { label: "Census Bureau — Raleigh Metro Population Estimates", url: "https://www.census.gov/quickfacts/fact/table/raleighcitynorthcarolina" },
+        { label: "Milken Institute 2025 Best-Performing Cities", url: "https://milkeninstitute.org/content-hub/research-and-reports/research-and-data-tools/2025-best-performing-cities-mapping-economic-growth-across-us" }
       ]
     }
   },
@@ -201,25 +201,25 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS Seattle-Tacoma-Bellevue MSA Employment Statistics",
-        "Washington State ESD — Labor Market Information",
-        "Colliers Seattle Office Report 2025",
-        "JLL Seattle Market Dynamics Q4 2025"
+        { label: "BLS Seattle-Tacoma-Bellevue MSA Employment Statistics", url: "https://www.bls.gov/regions/west/news-release/areaemployment_seattle.htm" },
+        { label: "Washington State ESD — Labor Market Information", url: "https://esd.wa.gov/labormarketinfo" },
+        { label: "Colliers Seattle Office Report 2025", url: "https://www.colliers.com/en/research/seattle" },
+        { label: "JLL Seattle Market Dynamics Q4 2025", url: "https://www.jll.com/en-us/insights/market-dynamics/seattle-office" }
       ],
       techSalaries: [
-        "Glassdoor — Software Engineer Salaries Seattle WA",
-        "Pragmatic Engineer — State of the Tech Market 2025",
-        "Levels.fyi — Seattle Total Compensation Data"
+        { label: "Glassdoor — Software Engineer Salaries Seattle WA", url: "https://www.glassdoor.com/Salaries/seattle-software-engineer-salary-SRCH_IL.0,7_IM781_KO8,25.htm" },
+        { label: "Pragmatic Engineer — State of the Tech Market 2025", url: "https://newsletter.pragmaticengineer.com/p/state-of-the-tech-market-in-2025" },
+        { label: "Levels.fyi — Seattle Total Compensation Data", url: "https://www.levels.fyi/t/software-engineer/locations/seattle-area" }
       ],
       costLiving: [
-        "Zumper Seattle Rent Research 2025",
-        "BestPlaces — Seattle WA Cost of Living (C2ER: 142)",
-        "C2ER COLI — Seattle Metro"
+        { label: "Zumper Seattle Rent Research 2025", url: "https://www.zumper.com/rent-research/seattle-wa" },
+        { label: "BestPlaces — Seattle WA Cost of Living (C2ER: 142)", url: "https://www.bestplaces.net/cost_of_living/city/washington/seattle" },
+        { label: "C2ER COLI — Seattle Metro", url: "https://www.coli.org/" }
       ],
       populationInvestment: [
-        "ULI/PwC Emerging Trends in Real Estate 2025",
-        "King County — Population & Demographics Division",
-        "Washington State OFM — Population Estimates 2025"
+        { label: "ULI/PwC Emerging Trends in Real Estate 2025", url: "https://americas.uli.org/emerging-trends-in-real-estate-2025/" },
+        { label: "King County — Population & Demographics Division", url: "https://kingcounty.gov/en/dept/records-licensing/recordings/data-and-stats/demographics" },
+        { label: "Washington State OFM — Population Estimates 2025", url: "https://ofm.wa.gov/washington-data-research/population-demographics" }
       ]
     }
   },
@@ -255,25 +255,25 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS Dallas-Fort Worth-Arlington MSA Employment Statistics",
-        "Texas Workforce Commission — DFW Area Labor Market",
-        "Colliers DFW Office Market Report 2025",
-        "DFW Chamber of Commerce — Economic Reports"
+        { label: "BLS Dallas-Fort Worth-Arlington MSA Employment Statistics", url: "https://www.bls.gov/regions/southwest/news-release/areaemployment_dallas.htm" },
+        { label: "Texas Workforce Commission — DFW Area Labor Market", url: "https://www.twc.texas.gov/news/local-area-unemployment-statistics" },
+        { label: "Colliers DFW Office Market Report 2025", url: "https://www.colliers.com/en/research/dallas-fort-worth" },
+        { label: "DFW Chamber of Commerce — Economic Reports", url: "https://dfwchamber.org/" }
       ],
       techSalaries: [
-        "Glassdoor — Software Engineer Salaries Dallas TX",
-        "Indeed — Software Engineer Salary Dallas-Fort Worth",
-        "Robert Half Technology Salary Guide 2026"
+        { label: "Glassdoor — Software Engineer Salaries Dallas TX", url: "https://www.glassdoor.com/Salaries/dallas-software-engineer-salary-SRCH_IL.0,6_IM218_KO7,24.htm" },
+        { label: "Indeed — Software Engineer Salary Dallas-Fort Worth", url: "https://www.indeed.com/career/software-engineer/salaries/Dallas--TX" },
+        { label: "Robert Half Technology Salary Guide 2026", url: "https://www.roberthalf.com/us/en/insights/salary-guide/technology" }
       ],
       costLiving: [
-        "Zumper Dallas Rent Research 2025",
-        "BestPlaces — Dallas TX Cost of Living (C2ER: 97)",
-        "Zillow — Dallas-Fort Worth Rental Market"
+        { label: "Zumper Dallas Rent Research 2025", url: "https://www.zumper.com/rent-research/dallas-tx" },
+        { label: "BestPlaces — Dallas TX Cost of Living (C2ER: 97)", url: "https://www.bestplaces.net/cost_of_living/city/texas/dallas" },
+        { label: "Zillow — Dallas-Fort Worth Rental Market", url: "https://www.zillow.com/rental-manager/market-trends/dallas-tx/" }
       ],
       populationInvestment: [
-        "ULI/PwC Emerging Trends in Real Estate 2025 (Top 10)",
-        "Census Bureau — Dallas-Fort Worth Population Estimates",
-        "North Texas Commission — Economic Impact Reports"
+        { label: "ULI/PwC Emerging Trends in Real Estate 2025 (Top 10)", url: "https://americas.uli.org/emerging-trends-in-real-estate-2025/" },
+        { label: "Census Bureau — Dallas-Fort Worth Population Estimates", url: "https://www.census.gov/quickfacts/dallascitytexas" },
+        { label: "North Texas Commission — Economic Impact Reports", url: "https://northtexascommission.com/" }
       ]
     }
   },
@@ -311,25 +311,25 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS San Francisco-Oakland-Hayward MSA Employment Statistics",
-        "CA EDD — Bay Area Labor Market Info 2025-2026",
-        "CBRE San Francisco Office Figures Q4 2025",
-        "Axios SF — Tech Layoff Tracker 2025-2026"
+        { label: "BLS San Francisco-Oakland-Hayward MSA Employment Statistics", url: "https://www.bls.gov/regions/west/news-release/areaemployment_sanfrancisco.htm" },
+        { label: "CA EDD — Bay Area Labor Market Info 2025-2026", url: "https://www.labormarketinfo.edd.ca.gov/" },
+        { label: "CBRE San Francisco Office Figures Q4 2025", url: "https://www.cbre.com/insights/figures/san-francisco-office-figures-q4-2025" },
+        { label: "Axios SF — Tech Layoff Tracker 2025-2026", url: "https://www.axios.com/local/san-francisco" }
       ],
       techSalaries: [
-        "Glassdoor — Software Engineer Salaries San Francisco",
-        "Levels.fyi — Bay Area Total Compensation Data",
-        "Indeed — Software Engineer Salary San Francisco CA"
+        { label: "Glassdoor — Software Engineer Salaries San Francisco", url: "https://www.glassdoor.com/Salaries/san-francisco-software-engineer-salary-SRCH_IL.0,13_IM759_KO14,31.htm" },
+        { label: "Levels.fyi — Bay Area Total Compensation Data", url: "https://www.levels.fyi/t/software-engineer/locations/san-francisco-bay-area" },
+        { label: "Indeed — Software Engineer Salary San Francisco CA", url: "https://www.indeed.com/career/software-engineer/salaries/San-Francisco--CA" }
       ],
       costLiving: [
-        "Zumper Q1 2026 — San Francisco Rent Report (+18.4% YoY)",
-        "BestPlaces — San Francisco CA Cost of Living (C2ER: 189)",
-        "Zillow — SF Bay Area Rental Market Overview"
+        { label: "Zumper Q1 2026 — San Francisco Rent Report (+18.4% YoY)", url: "https://www.zumper.com/rent-research/san-francisco-ca" },
+        { label: "BestPlaces — San Francisco CA Cost of Living (C2ER: 189)", url: "https://www.bestplaces.net/cost_of_living/city/california/san_francisco" },
+        { label: "Zillow — SF Bay Area Rental Market Overview", url: "https://www.zillow.com/rental-manager/market-trends/san-francisco-ca/" }
       ],
       populationInvestment: [
-        "ULI/PwC Emerging Trends 2025 (#1 AI/Tech Talent Concentration)",
-        "SF Planning Dept — Population Estimates 2025",
-        "NVCA MoneyTree Report — Bay Area VC Funding 2025"
+        { label: "ULI/PwC Emerging Trends 2025 (#1 AI/Tech Talent Concentration)", url: "https://americas.uli.org/emerging-trends-in-real-estate-2025/" },
+        { label: "SF Planning Dept — Population Estimates 2025", url: "https://sfplanning.org/resource/population-projections" },
+        { label: "NVCA MoneyTree Report — Bay Area VC Funding 2025", url: "https://nvca.org/research/" }
       ]
     }
   },
@@ -367,25 +367,25 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS Los Angeles-Long Beach-Anaheim MSA Employment Statistics",
-        "CA EDD — LA County Labor Market Statistics",
-        "CBRE Los Angeles Office Market Q3 2025",
-        "Los Angeles County — Economic Development Office"
+        { label: "BLS Los Angeles-Long Beach-Anaheim MSA Employment Statistics", url: "https://www.bls.gov/regions/west/news-release/areaemployment_losangeles.htm" },
+        { label: "CA EDD — LA County Labor Market Statistics", url: "https://www.labormarketinfo.edd.ca.gov/" },
+        { label: "CBRE Los Angeles Office Market Q3 2025", url: "https://www.cbre.com/insights/figures/los-angeles-office-figures-q3-2025" },
+        { label: "Los Angeles County — Economic Development Office", url: "https://lacountyworks.org/" }
       ],
       techSalaries: [
-        "Glassdoor — Software Engineer Salaries Los Angeles CA",
-        "Indeed — Software Engineer Salary Los Angeles",
-        "Hired — State of Software Engineers Report 2025"
+        { label: "Glassdoor — Software Engineer Salaries Los Angeles CA", url: "https://www.glassdoor.com/Salaries/los-angeles-software-engineer-salary-SRCH_IL.0,11_IM508_KO12,29.htm" },
+        { label: "Indeed — Software Engineer Salary Los Angeles", url: "https://www.indeed.com/career/software-engineer/salaries/Los-Angeles--CA" },
+        { label: "Hired — State of Software Engineers Report 2025", url: "https://hired.com/state-of-software-engineers" }
       ],
       costLiving: [
-        "Zumper Los Angeles Rent Research 2025",
-        "BestPlaces — Los Angeles CA Cost of Living (C2ER: 166)",
-        "Apartments.com — LA Rental Market Trends"
+        { label: "Zumper Los Angeles Rent Research 2025", url: "https://www.zumper.com/rent-research/los-angeles-ca" },
+        { label: "BestPlaces — Los Angeles CA Cost of Living (C2ER: 166)", url: "https://www.bestplaces.net/cost_of_living/city/california/los_angeles" },
+        { label: "Apartments.com — LA Rental Market Trends", url: "https://www.apartments.com/los-angeles-ca/" }
       ],
       populationInvestment: [
-        "ULI/PwC Emerging Trends 2025 (Top 4 VC Deployment)",
-        "LA County Dept. of Regional Planning — Population Data",
-        "NVCA — Los Angeles VC Funding Data 2025"
+        { label: "ULI/PwC Emerging Trends 2025 (Top 4 VC Deployment)", url: "https://americas.uli.org/emerging-trends-in-real-estate-2025/" },
+        { label: "LA County Dept. of Regional Planning — Population Data", url: "https://planning.lacounty.gov/census" },
+        { label: "NVCA — Los Angeles VC Funding Data 2025", url: "https://nvca.org/research/" }
       ]
     }
   },
@@ -423,25 +423,25 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS San Diego-Chula Vista-Carlsbad MSA Employment Statistics",
-        "CA EDD — San Diego County Labor Market Info",
-        "CBRE San Diego Office Figures Q3 2025",
-        "San Diego Regional EDC — Economic Outlook 2025"
+        { label: "BLS San Diego-Chula Vista-Carlsbad MSA Employment Statistics", url: "https://www.bls.gov/regions/west/news-release/areaemployment_sandiego.htm" },
+        { label: "CA EDD — San Diego County Labor Market Info", url: "https://www.labormarketinfo.edd.ca.gov/" },
+        { label: "CBRE San Diego Office Figures Q3 2025", url: "https://www.cbre.com/insights/figures/san-diego-office-figures-q3-2025" },
+        { label: "San Diego Regional EDC — Economic Outlook 2025", url: "https://www.sandiegobusiness.org/research/" }
       ],
       techSalaries: [
-        "Glassdoor — Software Engineer Salaries San Diego CA",
-        "Indeed — Software Engineer Salary San Diego",
-        "Motion Recruitment — San Diego Salary Guide 2026"
+        { label: "Glassdoor — Software Engineer Salaries San Diego CA", url: "https://www.glassdoor.com/Salaries/san-diego-software-engineer-salary-SRCH_IL.0,9_IM758_KO10,27.htm" },
+        { label: "Indeed — Software Engineer Salary San Diego", url: "https://www.indeed.com/career/software-engineer/salaries/San-Diego--CA" },
+        { label: "Motion Recruitment — San Diego Salary Guide 2026", url: "https://www.motionrecruitment.com/salary-guides" }
       ],
       costLiving: [
-        "Zumper San Diego Rent Research 2025 (−5.6% YoY)",
-        "BestPlaces — San Diego CA Cost of Living (C2ER: 145)",
-        "Zillow — San Diego Rental Market Overview"
+        { label: "Zumper San Diego Rent Research 2025 (−5.6% YoY)", url: "https://www.zumper.com/rent-research/san-diego-ca" },
+        { label: "BestPlaces — San Diego CA Cost of Living (C2ER: 145)", url: "https://www.bestplaces.net/cost_of_living/city/california/san_diego" },
+        { label: "Zillow — San Diego Rental Market Overview", url: "https://www.zillow.com/rental-manager/market-trends/san-diego-ca/" }
       ],
       populationInvestment: [
-        "Colliers — Greater San Diego Life Sciences Report 2025",
-        "Census Bureau — San Diego Population Estimates",
-        "Qualcomm FY2025 Annual Report; Shield AI $2B Funding Round"
+        { label: "Colliers — Greater San Diego Life Sciences Report 2025", url: "https://www.colliers.com/en/research/san-diego" },
+        { label: "Census Bureau — San Diego Population Estimates", url: "https://www.census.gov/quickfacts/sandiegocitycalifornia" },
+        { label: "Qualcomm FY2025 Annual Report; Shield AI $2B Funding Round", url: "https://investor.qualcomm.com/financial-information/annual-reports" }
       ]
     }
   },
@@ -482,25 +482,25 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS Boston Area Employment, June 2025",
-        "Boston.gov Spring 2025 Labor Market Report",
-        "MassBio 2025 Industry Snapshot — Rare Job Decline",
-        "Colliers Greater Boston Office Report Q4 2025"
+        { label: "BLS Boston Area Employment, June 2025", url: "https://www.bls.gov/regions/northeast/news-release/areaemployment_boston.htm" },
+        { label: "Boston.gov Spring 2025 Labor Market Report", url: "https://www.boston.gov/news/spring-2025-boston-labor-market-report" },
+        { label: "MassBio 2025 Industry Snapshot — Rare Job Decline", url: "https://www.massbio.org/news/recent-news/industry-snapshot-massachusetts-biopharma-sees-rare-job-decline/" },
+        { label: "Colliers Greater Boston Office Report Q4 2025", url: "https://www.colliers.com/en/research/boston/greater-boston-office-report-2025-q4" }
       ],
       techSalaries: [
-        "Glassdoor — Boston Software Engineer Salaries (Dec 2025, 25,571 submissions)",
-        "Indeed — Software Engineer Salary Boston MA",
-        "Salem News / BLS — Post-Pandemic Innovation Sector Job Data"
+        { label: "Glassdoor — Boston Software Engineer Salaries (Dec 2025, 25,571 submissions)", url: "https://www.glassdoor.com/Salaries/boston-software-engineer-salary-SRCH_IL.0,6_IM109_KO7,24.htm" },
+        { label: "Indeed — Software Engineer Salary Boston MA", url: "https://www.indeed.com/career/software-engineer/salaries/Boston--MA" },
+        { label: "Salem News / BLS — Post-Pandemic Innovation Sector Job Data", url: "https://www.salemnews.com/news/state_news/post-pandemic-data-shows-anemic-job-growth-in-massachusetts/article_0a0628a5-c8d1-5cfc-9f8d-3647f2808e38.html" }
       ],
       costLiving: [
-        "Zumper Boston Rent Research 2025-2026",
-        "Salary.com / C2ER — Boston Cost of Living Index (~146-153)",
-        "Massachusetts Dept. of Revenue — Income Tax & Millionaires Surtax"
+        { label: "Zumper Boston Rent Research 2025-2026", url: "https://www.zumper.com/rent-research/boston-ma" },
+        { label: "Salary.com / C2ER — Boston Cost of Living Index (~146-153)", url: "https://www.salary.com/research/cost-of-living/boston-ma" },
+        { label: "Massachusetts Dept. of Revenue — Income Tax & Millionaires Surtax", url: "https://www.mass.gov/info-details/massachusetts-4-surtax-on-taxable-income" }
       ],
       populationInvestment: [
-        "ULI/PwC Emerging Trends in Real Estate 2025 (#8 overall)",
-        "Boston.com — Population Growth Data March 2026",
-        "Axios Boston — Lab Space Vacancy Amid NIH Cuts, May 2025"
+        { label: "ULI/PwC Emerging Trends in Real Estate 2025 (#8 overall)", url: "https://americas.uli.org/emerging-trends-in-real-estate-2025/" },
+        { label: "Boston.com — Population Growth Data March 2026", url: "https://www.boston.com/news/local-news/2026/03/29/2025-marked-boston-areas-slowest-year-of-post-pandemic-population-growth-data-shows/" },
+        { label: "Axios Boston — Lab Space Vacancy Amid NIH Cuts, May 2025", url: "https://www.axios.com/local/boston/2025/05/28/development-news-lab-space-sits-vacant-amid-nih-funding-cuts" }
       ]
     }
   },
@@ -541,27 +541,27 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS New York Area Employment, May 2025",
-        "NYC Comptroller — Annual State of the City's Economy 2025",
-        "NY DOL — Labor Statistics NYC Region",
-        "Colliers Manhattan Office Report Q4 2025 (13.9% availability)"
+        { label: "BLS New York Area Employment, May 2025", url: "https://www.bls.gov/regions/northeast/news-release/areaemployment_newyork.htm" },
+        { label: "NYC Comptroller — Annual State of the City's Economy 2025", url: "https://comptroller.nyc.gov/reports/annual-state-of-the-citys-economy-and-finances-2025/" },
+        { label: "NY DOL — Labor Statistics NYC Region", url: "https://dol.ny.gov/labor-statistics-new-york-city-region" },
+        { label: "Colliers Manhattan Office Report Q4 2025 (13.9% availability)", url: "https://www.colliers.com/en/research/new-york/nyc-q4-2025-manhattan-office-report" }
       ],
       techSalaries: [
-        "Glassdoor — NYC Software Engineer Salaries 2025",
-        "Indeed — Software Engineer Salary New York NY",
-        "ResumeTarget — NYC Job Market 2026 (62.2 applicants/job)",
-        "Levels.fyi — NYC Total Compensation Data"
+        { label: "Glassdoor — NYC Software Engineer Salaries 2025", url: "https://www.glassdoor.com/Salaries/new-york-city-software-engineer-salary-SRCH_IL.0,13_IM615_KO14,31.htm" },
+        { label: "Indeed — Software Engineer Salary New York NY", url: "https://www.indeed.com/career/software-engineer/salaries/New-York--NY" },
+        { label: "ResumeTarget — NYC Job Market 2026 (62.2 applicants/job)", url: "https://www.resumetarget.com/job-market/new-york/new-york-city/" },
+        { label: "Levels.fyi — NYC Total Compensation Data", url: "https://www.levels.fyi/t/software-engineer/locations/new-york-city-area" }
       ],
       costLiving: [
-        "Zumper — NYC Rent Research 2026 ($4,500/mo median)",
-        "NY Tax.gov — 2025 Income Tax Tables",
-        "NerdWallet — New York State Income Tax Rates 2026"
+        { label: "Zumper — NYC Rent Research 2026 ($4,500/mo median)", url: "https://www.zumper.com/rent-research/new-york-ny" },
+        { label: "NY Tax.gov — 2025 Income Tax Tables", url: "https://www.tax.ny.gov/pit/file/tax-tables/2025.htm" },
+        { label: "NerdWallet — New York State Income Tax Rates 2026", url: "https://www.nerdwallet.com/taxes/learn/new-york-state-tax" }
       ],
       populationInvestment: [
-        "ULI/PwC Emerging Trends 2025 (Manhattan #11; Midtown #1 globally, EY/ULI)",
-        "NYC DCP — Population Estimates May 2025",
-        "NYCEDC — NYC AI Advantage 2025 Report",
-        "NYC Comptroller — Taking Trump's Tariffs Seriously (fiscal risk modeling)"
+        { label: "ULI/PwC Emerging Trends 2025 (Manhattan #11; Midtown #1 globally, EY/ULI)", url: "https://americas.uli.org/emerging-trends-in-real-estate-2025/" },
+        { label: "NYC DCP — Population Estimates May 2025", url: "https://www.nyc.gov/assets/planning/downloads/pdf/our-work/reports/new-york-city-population-estimates-and-trends_may-2025.pdf" },
+        { label: "NYCEDC — NYC AI Advantage 2025 Report", url: "https://edc.nyc/sites/default/files/2025-01/NYCEDC-NYC-AI-Advantage-2025-Report.pdf" },
+        { label: "NYC Comptroller — Taking Trump's Tariffs Seriously (fiscal risk modeling)", url: "https://comptroller.nyc.gov/reports/taking-trumps-tariffs-seriously-the-fiscal-and-economic-impact-for-nyc/" }
       ]
     }
   },
@@ -602,25 +602,25 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS Philadelphia Area Employment, March 2025",
-        "Center City District — Philadelphia Employment Report 2025",
-        "Economy League of Greater Philadelphia — 2024 Update",
-        "Colliers Philadelphia Regional Office Report Q1 2025"
+        { label: "BLS Philadelphia Area Employment, March 2025", url: "https://www.bls.gov/regions/mid-atlantic/news-release/areaemployment_philadelphia.htm" },
+        { label: "Center City District — Philadelphia Employment Report 2025", url: "https://centercityphila.org/research-reports/philadelphia-employment-report-2025" },
+        { label: "Economy League of Greater Philadelphia — 2024 Update", url: "https://www.economyleague.org/resources/philadelphia-employment-and-job-growth-2024-update" },
+        { label: "Colliers Philadelphia Regional Office Report Q1 2025", url: "https://www.colliers.com/en/research/philadelphia/2025-q1-philadelphia-regional-office-report" }
       ],
       techSalaries: [
-        "Glassdoor — Philadelphia Software Engineer Salaries",
-        "Indeed — Software Engineer Salary Philadelphia PA",
-        "BLS Occupational Employment & Wages — Philadelphia MSA, May 2024"
+        { label: "Glassdoor — Philadelphia Software Engineer Salaries", url: "https://www.glassdoor.com/Salaries/philadelphia-software-engineer-salary-SRCH_IL.0,12_IC1152672_KO13,30.htm" },
+        { label: "Indeed — Software Engineer Salary Philadelphia PA", url: "https://www.indeed.com/career/software-engineer/salaries/Philadelphia--PA" },
+        { label: "BLS Occupational Employment & Wages — Philadelphia MSA, May 2024", url: "https://www.bls.gov/regions/mid-atlantic/news-release/occupationalemploymentandwages_philadelphia.htm" }
       ],
       costLiving: [
-        "BestPlaces — Philadelphia PA Cost of Living (C2ER: ~104)",
-        "Zumper — Philadelphia Rent Research 2025 ($1,557/mo median)",
-        "City of Philadelphia — Wage Tax Rates (3.74% residents, July 2025)"
+        { label: "BestPlaces — Philadelphia PA Cost of Living (C2ER: ~104)", url: "https://www.bestplaces.net/cost_of_living/city/pennsylvania/philadelphia" },
+        { label: "Zumper — Philadelphia Rent Research 2025 ($1,557/mo median)", url: "https://www.zumper.com/rent-research/philadelphia-pa" },
+        { label: "City of Philadelphia — Wage Tax Rates (3.74% residents, July 2025)", url: "https://www.phila.gov/services/payments-assistance-taxes/taxes/business-taxes/business-taxes-by-type/wage-tax-employers/" }
       ],
       populationInvestment: [
-        "Colliers — Greater Philadelphia Life Sciences Report 2025 (#4 US)",
-        "ULI/PwC Emerging Trends in Real Estate 2026",
-        "BioBuzz — Venture Capital Gap Pushes Philadelphia Down Rankings, Aug 2025"
+        { label: "Colliers — Greater Philadelphia Life Sciences Report 2025 (#4 US)", url: "https://pci.upenn.edu/greater-philadelphia-maintains-4-u-s-life-sciences-market-rank-in-colliers-2025-report/" },
+        { label: "ULI/PwC Emerging Trends in Real Estate 2026", url: "https://americas.uli.org/pwc-uli-report-reveals-2026-real-state-trends/" },
+        { label: "BioBuzz — Venture Capital Gap Pushes Philadelphia Down Rankings, Aug 2025", url: "https://biobuzz.io/2025/08/20/venture-capital-gap-pushes-philadelphia-down-in-biopharma-rankings/" }
       ]
     }
   },
@@ -661,25 +661,25 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS Pittsburgh Economy at a Glance",
-        "PA DLI — Pittsburgh MSA Employment Press Release, Sep 2025",
-        "Allegheny Institute — Pittsburgh Employment Indicators (Long-Term & Post-Pandemic)",
-        "JLL Pittsburgh Office Market Dynamics Q4 2025"
+        { label: "BLS Pittsburgh Economy at a Glance", url: "https://www.bls.gov/eag/eag.pa_pittsburgh_msa.htm" },
+        { label: "PA DLI — Pittsburgh MSA Employment Press Release, Sep 2025", url: "https://www.pa.gov/content/dam/copapwp-pagov/en/dli/documents/cwia/products/press-releases/pghmesa_pr.pdf" },
+        { label: "Allegheny Institute — Pittsburgh Employment Indicators (Long-Term & Post-Pandemic)", url: "https://www.alleghenyinstitute.org/pittsburgh-employment-indicators-long-term-and-post-pandemic/" },
+        { label: "JLL Pittsburgh Office Market Dynamics Q4 2025", url: "https://www.jll.com/en-us/insights/market-dynamics/pittsburgh-office" }
       ],
       techSalaries: [
-        "Glassdoor — Pittsburgh Software Engineer Salaries",
-        "Technical.ly — 5 Stats to Explain Pittsburgh's Tech Economy",
-        "Built In Pittsburgh — Software Engineer Salaries"
+        { label: "Glassdoor — Pittsburgh Software Engineer Salaries", url: "https://www.glassdoor.com/Salaries/pittsburgh-pa-software-engineer-salary-SRCH_IL.0,13_IM684_KO14,31.htm" },
+        { label: "Technical.ly — 5 Stats to Explain Pittsburgh's Tech Economy", url: "https://technical.ly/professional-development/pittsburgh-tech-economy-dashboard-jobs-stats/" },
+        { label: "Built In Pittsburgh — Software Engineer Salaries", url: "https://www.builtinpittsburgh.com/salaries" }
       ],
       costLiving: [
-        "BestPlaces — Pittsburgh PA Cost of Living (C2ER: 91.8)",
-        "Zumper — Pittsburgh Rent Research March 2026 ($1,375/mo)",
-        "PA DCED — Local Earned Income Tax Rates (Pittsburgh: 3.0% city EIT)"
+        { label: "BestPlaces — Pittsburgh PA Cost of Living (C2ER: 91.8)", url: "https://www.bestplaces.net/cost_of_living/city/pa/pittsburgh" },
+        { label: "Zumper — Pittsburgh Rent Research March 2026 ($1,375/mo)", url: "https://www.zumper.com/rent-research/pittsburgh-pa" },
+        { label: "PA DCED — Local Earned Income Tax Rates (Pittsburgh: 3.0% city EIT)", url: "https://www.pa.gov/agencies/revenue/resources/tax-rates" }
       ],
       populationInvestment: [
-        "Milken Institute 2025 Best-Performing Cities (#145 of 403 metros)",
-        "WESA — Pittsburgh Population & Immigration Slows, March 2026",
-        "Axios Pittsburgh — Metro Population Decline, March 2026"
+        { label: "Milken Institute 2025 Best-Performing Cities (#145 of 403 metros)", url: "https://milkeninstitute.org/content-hub/research-and-reports/research-and-data-tools/2025-best-performing-cities-mapping-economic-growth-across-us" },
+        { label: "WESA — Pittsburgh Population & Immigration Slows, March 2026", url: "https://www.wesa.fm/identity-community/2026-03-30/pittsburgh-population-immigration-slows-2025" },
+        { label: "Axios Pittsburgh — Metro Population Decline, March 2026", url: "https://www.axios.com/local/pittsburgh/2026/03/26/pittsburgh-metro-population-decline-2025" }
       ]
     }
   },
@@ -720,26 +720,26 @@ const cities = [
     ],
     sources: {
       employment: [
-        "IDES — Chicago Metro Employment, December 2025 (18 consecutive months YoY growth)",
-        "BLS Chicago-Naperville-Schaumburg Metro Division Statistics",
-        "CBRE Chicago Downtown Office Figures Q4 2025 (26.6%)",
-        "Crain's Chicago Business — Office Vacancy 15th Consecutive Record, Q1 2026"
+        { label: "IDES — Chicago Metro Employment, December 2025 (18 consecutive months YoY growth)", url: "https://ides.illinois.gov/newsroom/2025/dec/chicago-metro-ends-2025-with-record-number-of-december-jobs--yea.html" },
+        { label: "BLS Chicago-Naperville-Schaumburg Metro Division Statistics", url: "https://www.bls.gov/regions/midwest/il_chicago_msa.htm" },
+        { label: "CBRE Chicago Downtown Office Figures Q4 2025 (26.6%)", url: "https://www.cbre.com/insights/figures/chicago-downtown-office-figures-q4-2025" },
+        { label: "Crain's Chicago Business — Office Vacancy 15th Consecutive Record, Q1 2026", url: "https://www.chicagobusiness.com/commercial-real-estate/downtown-office-vacancy-ended-2025-another-record-high/" }
       ],
       techSalaries: [
-        "Glassdoor — Chicago Software Engineer Salaries",
-        "Built In Chicago — Software Engineer Salary Data",
-        "World Business Chicago — Tech Workforce Report 2024 ($39.3B output)"
+        { label: "Glassdoor — Chicago Software Engineer Salaries", url: "https://www.glassdoor.com/Salaries/chicago-software-engineer-salary-SRCH_IL.0,7_IM167_KO8,25.htm" },
+        { label: "Built In Chicago — Software Engineer Salary Data", url: "https://www.builtinchicago.org/salaries/dev-engineer/software-engineer/chicago" },
+        { label: "World Business Chicago — Tech Workforce Report 2024 ($39.3B output)", url: "https://worldbusinesschicago.com/allnews/chicagos-tech-workforce-growth-top-employers-and-the-education-pipeline-fueling-the-regions-digital-economy/" }
       ],
       costLiving: [
-        "BestPlaces — Chicago IL Cost of Living (C2ER: 105.7)",
-        "Zumper — Chicago Rent Research April 2026 ($2,010/mo)",
-        "Tax Foundation — Illinois Tax Burden; LevyIO Chicago Property Tax Analysis"
+        { label: "BestPlaces — Chicago IL Cost of Living (C2ER: 105.7)", url: "https://www.bestplaces.net/cost_of_living/city/illinois/chicago" },
+        { label: "Zumper — Chicago Rent Research April 2026 ($2,010/mo)", url: "https://www.zumper.com/rent-research/chicago-il" },
+        { label: "Tax Foundation — Illinois Tax Burden; LevyIO Chicago Property Tax Analysis", url: "https://taxfoundation.org/location/illinois/" }
       ],
       populationInvestment: [
-        "ULI/PwC Emerging Trends in Real Estate 2025",
-        "CMAP — Stagnant International Immigration Slows Chicago Region Growth",
-        "WTTW — Chicago $1.15B Budget Shortfall 2026",
-        "Civic Federation — FY2025 Chicago Budget Structural Imbalance Analysis"
+        { label: "ULI/PwC Emerging Trends in Real Estate 2025", url: "https://americas.uli.org/emerging-trends-in-real-estate-2025/" },
+        { label: "CMAP — Stagnant International Immigration Slows Chicago Region Growth", url: "https://cmap.illinois.gov/news-updates/stagnant-international-immigration-slows-population-growth-in-the-chicago-region/" },
+        { label: "WTTW — Chicago $1.15B Budget Shortfall 2026", url: "https://news.wttw.com/2025/08/29/chicago-faces-115b-budget-shortfall-2026-146m-gap-2025-johnson" },
+        { label: "Civic Federation — FY2025 Chicago Budget Structural Imbalance Analysis", url: "https://civicfed.org/blog/chicagos-fy2025-proposed-budget-exacerbates-structural-imbalance/" }
       ]
     }
   },
@@ -780,25 +780,25 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS Metropolitan Area Employment Summary, December 2025 (+1.6pp YoY spike)",
-        "MN DEED — State of Metro Labor Market, June 2025",
-        "Colliers Twin Cities Office Report Q3 2025 (30.8% Minneapolis; 39.5% St. Paul)",
-        "MPR News — Medtronic Layoffs Coon Rapids / Target Layoffs, 2025"
+        { label: "BLS Metropolitan Area Employment Summary, December 2025 (+1.6pp YoY spike)", url: "https://www.bls.gov/news.release/metro.nr0.htm" },
+        { label: "MN DEED — State of Metro Labor Market, June 2025", url: "https://mn.gov/deed/newscenter/publications/trends/june-2025/metro.jsp" },
+        { label: "Colliers Twin Cities Office Report Q3 2025 (30.8% Minneapolis; 39.5% St. Paul)", url: "https://rejournals.com/no-end-to-the-high-vacancy-rates-in-twin-cities-office-market/" },
+        { label: "MPR News — Medtronic Layoffs Coon Rapids / Target Layoffs, 2025", url: "https://www.mprnews.org/story/2025/10/28/layoffs-at-target-could-be-an-early-warning-sign-for-the-economy" }
       ],
       techSalaries: [
-        "Glassdoor — Minneapolis Software Engineer Salaries",
-        "Built In Minneapolis — Software Engineer Salary Data",
-        "MN Chamber of Commerce — Tech Sector Chapter 2030 (12.4% of workforce)"
+        { label: "Glassdoor — Minneapolis Software Engineer Salaries", url: "https://www.glassdoor.com/Salaries/minneapolis-software-engineer-salary-SRCH_IL.0,11_IM567_KO12,29.htm" },
+        { label: "Built In Minneapolis — Software Engineer Salary Data", url: "https://builtin.com/salaries/us/minneapolis%E2%80%93saint-paul-mn/software-engineer" },
+        { label: "MN Chamber of Commerce — Tech Sector Chapter 2030 (12.4% of workforce)", url: "https://www.mnchamber.com/minnesota-chamber-foundation/minnesota-2030-industry-chapter-tech-sector" }
       ],
       costLiving: [
-        "BestPlaces — Minneapolis MN Cost of Living (C2ER: 107.2)",
-        "Zumper — Minneapolis Rent Research 2025 ($1,330/mo median)",
-        "MN Dept. of Revenue — 2025 Income Tax Brackets (9.85% top rate)"
+        { label: "BestPlaces — Minneapolis MN Cost of Living (C2ER: 107.2)", url: "https://www.bestplaces.net/cost_of_living/city/minnesota/minneapolis" },
+        { label: "Zumper — Minneapolis Rent Research 2025 ($1,330/mo median)", url: "https://www.zumper.com/rent-research/minneapolis-mn" },
+        { label: "MN Dept. of Revenue — 2025 Income Tax Brackets (9.85% top rate)", url: "https://www.revenue.state.mn.us/minnesota-income-tax-rates-and-brackets" }
       ],
       populationInvestment: [
-        "ULI/PwC Emerging Trends in Real Estate 2026 (downgraded to bottom half)",
-        "MN Patch / Census Bureau — Population & Migration Data 2025",
-        "Star Tribune — Boston Scientific Maple Grove $309M Campus Expansion"
+        { label: "ULI/PwC Emerging Trends in Real Estate 2026 (downgraded to bottom half)", url: "https://americas.uli.org/pwc-uli-report-reveals-2026-real-state-trends/" },
+        { label: "MN Patch / Census Bureau — Population & Migration Data 2025", url: "https://patch.com/minnesota/minneapolis/good-news-people-moving-minnesota-larger-population-challenges-loom" },
+        { label: "Star Tribune — Boston Scientific Maple Grove $309M Campus Expansion", url: "https://www.startribune.com/boston-scientific-minnetonka-office-for-sale-list-maple-grove-expansion-commercial-real-estate/601369796" }
       ]
     }
   },
@@ -836,25 +836,25 @@ const cities = [
     ],
     sources: {
       employment: [
-        "BLS Sacramento-Roseville-Folsom MSA Employment Statistics",
-        "CA EDD — Sacramento Area Labor Market Statistics",
-        "Colliers Sacramento Office Market Report Q1 2025",
-        "SACOG — Greater Sacramento Economic Outlook 2025"
+        { label: "BLS Sacramento-Roseville-Folsom MSA Employment Statistics", url: "https://www.bls.gov/regions/west/news-release/areaemployment_sacramento.htm" },
+        { label: "CA EDD — Sacramento Area Labor Market Statistics", url: "https://www.labormarketinfo.edd.ca.gov/" },
+        { label: "Colliers Sacramento Office Market Report Q1 2025", url: "https://www.colliers.com/en/research/sacramento" },
+        { label: "SACOG — Greater Sacramento Economic Outlook 2025", url: "https://www.sacog.org/" }
       ],
       techSalaries: [
-        "Glassdoor — Software Engineer Salaries Sacramento CA",
-        "Indeed — Software Engineer Salary Sacramento",
-        "LinkedIn Job Postings — Sacramento Metro Area"
+        { label: "Glassdoor — Software Engineer Salaries Sacramento CA", url: "https://www.glassdoor.com/Salaries/sacramento-software-engineer-salary-SRCH_IL.0,10_IM747_KO11,28.htm" },
+        { label: "Indeed — Software Engineer Salary Sacramento", url: "https://www.indeed.com/career/software-engineer/salaries/Sacramento--CA" },
+        { label: "LinkedIn Job Postings — Sacramento Metro Area", url: "https://www.linkedin.com/jobs/software-engineer-jobs-sacramento-ca/" }
       ],
       costLiving: [
-        "Zumper Sacramento Rent Research 2025",
-        "BestPlaces — Sacramento CA Cost of Living (C2ER: 124)",
-        "Zillow — Sacramento Rental Market Overview"
+        { label: "Zumper Sacramento Rent Research 2025", url: "https://www.zumper.com/rent-research/sacramento-ca" },
+        { label: "BestPlaces — Sacramento CA Cost of Living (C2ER: 124)", url: "https://www.bestplaces.net/cost_of_living/city/california/sacramento" },
+        { label: "Zillow — Sacramento Rental Market Overview", url: "https://www.zillow.com/rental-manager/market-trends/sacramento-ca/" }
       ],
       populationInvestment: [
-        "Bosch Press Release — Sacramento Semiconductor Facility Investment",
-        "Census Bureau — Sacramento Population Estimates 2025",
-        "Intel / HPE Restructuring Announcements 2025-2026"
+        { label: "Bosch Press Release — Sacramento Semiconductor Facility Investment", url: "https://www.bosch.com/news-and-stories/" },
+        { label: "Census Bureau — Sacramento Population Estimates 2025", url: "https://www.census.gov/quickfacts/sacramentocitycalifornia" },
+        { label: "Intel / HPE Restructuring Announcements 2025-2026", url: "https://investor.intc.com/news-releases/news-release-details/intel-reports-fourth-quarter-and-full-year-2024-financial-results" }
       ]
     }
   }
@@ -1256,7 +1256,12 @@ export default function App() {
                             lineHeight: 1.7, marginBottom: 3, display: "flex", gap: 5, alignItems: "flex-start"
                           }}>
                             <span style={{ color: "#374151", flexShrink: 0, marginTop: 1 }}>▸</span>
-                            <span>{src}</span>
+                            <span>
+                              {src.label || src}
+                              {src.url && (
+                                <> <a href={src.url} target="_blank" rel="noopener noreferrer" style={{ color: "#4b5563", fontSize: 9, textDecoration: "none", fontFamily: "'JetBrains Mono', monospace" }}>(source)</a></>
+                              )}
+                            </span>
                           </div>
                         ))}
                       </div>
