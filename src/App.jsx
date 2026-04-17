@@ -878,7 +878,7 @@ const topRatedCity = [...cities].sort((a, b) => b.score - a.score)[0];
 
 const ScoreBar = ({ score }) => (
   <div style={{ display: "flex", gap: 2, alignItems: "center" }}>
-    <span style={{ color: "#9ca3af", fontSize: 10, fontFamily: "'JetBrains Mono', monospace", marginRight: 6 }}>Score</span>
+    <span style={{ color: "#9ca3af", fontSize: 12, fontFamily: "'JetBrains Mono', monospace", marginRight: 6 }}>Score</span>
     {Array.from({ length: 10 }, (_, i) => (
       <div key={i} style={{
         width: 10, height: 16, borderRadius: 2,
@@ -899,10 +899,6 @@ const getSections = (city) => [
       { value: city.unemployment, label: "Unemployment" },
       { value: city.jobGrowth, label: "Job Growth YOY" },
       { value: city.jobsChanged, label: "Jobs Changed" }
-    ],
-    details: [
-      { label: "Office Vacancy", value: city.officeVacancy },
-      { label: "Applicants/Job", value: city.applicantsPerJob }
     ]
   },
   {
@@ -912,10 +908,6 @@ const getSections = (city) => [
       { value: city.swOpenings, label: "SW Eng Openings" },
       { value: city.totalTech, label: "Total Tech Jobs" },
       { value: city.majorEmployers.split(",").slice(0, 2).join(", ") + "...", label: "Major Employers" }
-    ],
-    details: [
-      { label: "Tech % of Economy", value: city.techPct },
-      { label: "Tech Trend", value: city.techTrend }
     ]
   },
   {
@@ -925,10 +917,6 @@ const getSections = (city) => [
       { value: city.avgTechSalary, label: "Avg Tech Salary" },
       { value: city.stateTax, label: "State Income Tax" },
       { value: city.colIndex, label: "COL Index" }
-    ],
-    details: [
-      { label: "1BR Rent", value: city.rent1br },
-      { label: "Salary/COL Ratio", value: city.salaryCol }
     ]
   },
   {
@@ -938,15 +926,11 @@ const getSections = (city) => [
       { value: city.capitalRank, label: "Capital Investment" },
       { value: city.popTrend.split(";")[0], label: "Population Trend" },
       { value: city.biggestRisk.split(";")[0], label: "Biggest Risk" }
-    ],
-    details: [
-      { label: "Office Vacancy", value: city.officeVacancy },
-      { label: "Full Risk", value: city.biggestRisk }
     ]
   }
 ];
 
-const DataCard = ({ section, sc, isOpen, onToggle }) => (
+const DataCard = ({ section, isOpen, onToggle }) => (
   <div style={{ background: "#1e1e1e", borderRadius: 6, border: "1px solid #2a2a2a", overflow: "hidden" }}>
     <div onClick={onToggle} style={{
       padding: "12px 14px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -1150,7 +1134,6 @@ export default function App() {
 
           <div className="app-sidebar-list" style={{ flex: 1, overflowY: "auto" }}>
             {sorted.map((c, idx) => {
-              const csc = statusColor(c.status);
               const isSel = selected === c.name;
               const rank = idx + 1;
               const statusIcon = c.status === "GROWING" ? { symbol: "G", color: "#4ade80" }
@@ -1194,7 +1177,7 @@ export default function App() {
         <div className="app-detail" style={{ flex: 1, overflowY: "auto", background: "#1a1a1a" }}>
           <div style={{ padding: "20px 24px" }}>
             {/* City header */}
-            <div style={{ marginBottom: 16, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ marginBottom: 16, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                 <h2 style={{ margin: 0, fontSize: 20, color: "#e5e7eb", fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>{city.name}</h2>
                 <div style={{ width: 1, height: 20, background: "#333" }} />
@@ -1210,7 +1193,7 @@ export default function App() {
             {/* 2x2 Data Cards */}
             <div className="data-card-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
               {sections.map((section) => (
-                <DataCard key={section.title} section={section} sc={sc} isOpen={openCards.has(section.title)} onToggle={() => toggleCard(section.title)} />
+                <DataCard key={section.title} section={section} isOpen={openCards.has(section.title)} onToggle={() => toggleCard(section.title)} />
               ))}
             </div>
 
