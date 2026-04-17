@@ -1038,6 +1038,18 @@ export default function App() {
   return (
     <div style={{ background: "#1a1a1a", minHeight: "100vh", fontFamily: "'Inter', -apple-system, sans-serif", color: "#e5e7eb" }}>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <style>{`
+        @media (max-width: 768px) {
+          .app-header { flex-wrap: wrap; gap: 8px; padding: 12px 16px !important; }
+          .app-header-stats { display: flex; flex-wrap: wrap; gap: 0; }
+          .app-body { flex-direction: column !important; height: auto !important; }
+          .app-sidebar { width: 100% !important; height: auto !important; border-right: none !important; border-bottom: 1px solid #2a2a2a; flex-shrink: unset !important; }
+          .app-sidebar-list { max-height: 240px; overflow-y: auto; }
+          .app-detail { height: auto !important; }
+          .data-card-grid { grid-template-columns: 1fr !important; }
+          .bib-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important; }
+        }
+      `}</style>
 
       {/* Header */}
       {(() => {
@@ -1049,7 +1061,7 @@ export default function App() {
         const statLabel = { fontSize: 11, color: "#9ca3af", letterSpacing: 1.5, marginTop: 2, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" };
         const divider = { width: 1, height: 36, background: "#1f1f1f", flexShrink: 0 };
         return (
-          <div style={{ borderBottom: "1px solid #2a2a2a", padding: "16px 24px", display: "flex", alignItems: "center", background: "#1a1a1a" }}>
+          <div className="app-header" style={{ borderBottom: "1px solid #2a2a2a", padding: "16px 24px", display: "flex", alignItems: "center", background: "#1a1a1a" }}>
             <div style={{ marginRight: "auto" }}>
               <h1 style={{ color: "#e5e7eb", fontSize: 18, margin: 0, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>Job Market Intelligence</h1>
               <p style={{ color: "#9ca3af", fontSize: 12, margin: "3px 0 0", fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5 }}>US TECH MARKET COMPARISON · APRIL 2026</p>
@@ -1097,9 +1109,9 @@ export default function App() {
         );
       })()}
 
-      <div style={{ display: "flex", height: "calc(100vh - 52px)" }}>
+      <div className="app-body" style={{ display: "flex", height: "calc(100vh - 52px)" }}>
         {/* Sidebar */}
-        <div style={{ width: 300, background: "rgb(26, 26, 26)", borderRight: "1px solid #2a2a2a", overflowY: "auto", flexShrink: 0, display: "flex", flexDirection: "column" }}>
+        <div className="app-sidebar" style={{ width: 300, background: "rgb(26, 26, 26)", borderRight: "1px solid #2a2a2a", overflowY: "auto", flexShrink: 0, display: "flex", flexDirection: "column" }}>
           <div style={{ padding: "10px 14px 6px", display: "flex", justifyContent: "flex-end", position: "relative" }}>
             <span
               onClick={() => setSortMenuOpen(o => !o)}
@@ -1131,7 +1143,7 @@ export default function App() {
             )}
           </div>
 
-          <div style={{ flex: 1, overflowY: "auto" }}>
+          <div className="app-sidebar-list" style={{ flex: 1, overflowY: "auto" }}>
             {sorted.map((c, idx) => {
               const csc = statusColor(c.status);
               const isSel = selected === c.name;
@@ -1174,7 +1186,7 @@ export default function App() {
         </div>
 
         {/* Detail Panel */}
-        <div style={{ flex: 1, overflowY: "auto", background: "#1a1a1a" }}>
+        <div className="app-detail" style={{ flex: 1, overflowY: "auto", background: "#1a1a1a" }}>
           <div style={{ padding: "20px 24px" }}>
             {/* City header */}
             <div style={{ marginBottom: 16, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -1191,7 +1203,7 @@ export default function App() {
             </div>
 
             {/* 2x2 Data Cards */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div className="data-card-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
               {sections.map((section) => (
                 <DataCard key={section.title} section={section} sc={sc} isOpen={openCards.has(section.title)} onToggle={() => toggleCard(section.title)} />
               ))}
@@ -1266,7 +1278,7 @@ export default function App() {
               </div>
               {bibOpen && (
                 <div style={{ padding: "14px" }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 20, marginBottom: 12 }}>
+                  <div className="bib-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 20, marginBottom: 12 }}>
                     {[
                       { key: "employment", label: "Employment & Office Market Data" },
                       { key: "techSalaries", label: "Tech Ecosystem & Salaries" },
