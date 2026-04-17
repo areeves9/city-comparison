@@ -1040,8 +1040,11 @@ export default function App() {
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
       <style>{`
         @media (max-width: 768px) {
-          .app-header { flex-wrap: wrap; gap: 8px; padding: 12px 16px !important; }
-          .app-header-stats { display: flex; flex-wrap: wrap; gap: 0; }
+          .app-header { flex-wrap: wrap; gap: 0; padding: 12px 16px !important; }
+          .app-header-stats { display: flex !important; flex-wrap: nowrap; width: 100%; border-top: 1px solid #2a2a2a; margin-top: 10px; padding-top: 10px; }
+          .app-header-stats .stat-item { flex: 1 1 0; padding: 0 !important; text-align: center; }
+          .app-header-stats .stat-item:last-child { justify-content: center; }
+          .app-header-stats .stat-divider { display: none; }
           .app-body { flex-direction: column !important; height: auto !important; }
           .app-sidebar { width: 100% !important; height: auto !important; border-right: none !important; border-bottom: 1px solid #2a2a2a; flex-shrink: unset !important; }
           .app-sidebar-list { max-height: 240px; overflow-y: auto; }
@@ -1066,12 +1069,13 @@ export default function App() {
               <h1 style={{ color: "#e5e7eb", fontSize: 18, margin: 0, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>Job Market Intelligence</h1>
               <p style={{ color: "#9ca3af", fontSize: 12, margin: "3px 0 0", fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5 }}>US TECH MARKET COMPARISON · APRIL 2026</p>
             </div>
-            <div style={statStyle}>
+            <div className="app-header-stats" style={{ display: "contents" }}>
+            <div className="stat-item" style={statStyle}>
               <div style={statNum("#e5e7eb")}>{cities.length}</div>
               <div style={statLabel}>Cities Tracked</div>
             </div>
-            <div style={divider} />
-            <div style={statStyle}>
+            <div className="stat-divider" style={divider} />
+            <div className="stat-item" style={statStyle}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
                 <span style={{ color: "#4ade80", fontSize: 12 }}>↗</span>
                 <span style={statNum("#4ade80")}>{growing}</span>
@@ -1079,8 +1083,8 @@ export default function App() {
               </div>
               <div style={statLabel}>Growing</div>
             </div>
-            <div style={divider} />
-            <div style={statStyle}>
+            <div className="stat-divider" style={divider} />
+            <div className="stat-item" style={statStyle}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
                 <span style={{ color: "#ef4444", fontSize: 12 }}>↘</span>
                 <span style={statNum("#ef4444")}>{contracting}</span>
@@ -1088,8 +1092,8 @@ export default function App() {
               </div>
               <div style={statLabel}>Contracting</div>
             </div>
-            <div style={divider} />
-            <div style={statStyle}>
+            <div className="stat-divider" style={divider} />
+            <div className="stat-item" style={statStyle}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
                 <span style={{ color: "#f59e0b", fontSize: 12 }}>—</span>
                 <span style={statNum("#f59e0b")}>{stagnant}</span>
@@ -1097,14 +1101,15 @@ export default function App() {
               </div>
               <div style={statLabel}>Stagnant</div>
             </div>
-            <div style={divider} />
-            <div style={{ ...statStyle, display: "flex", alignItems: "center", gap: 6 }}>
+            <div className="stat-divider" style={divider} />
+            <div className="stat-item" style={{ ...statStyle, display: "flex", alignItems: "center", gap: 6 }}>
               <Star size={16} style={{ color: "#f59e0b" }} />
               <div>
                 <div style={{ fontSize: 14, fontWeight: 600, color: scoreColor(topRatedCity.score) }}>{topRatedCity.name.split(",")[0]}</div>
                 <div style={{ ...statLabel, textAlign: "left" }}>Top Rated</div>
               </div>
             </div>
+            </div>{/* end app-header-stats */}
           </div>
         );
       })()}
