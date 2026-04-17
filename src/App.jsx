@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { BarChart2, Cpu, DollarSign, TrendingUp, FlaskConical, AlertTriangle, Star, Check, ChevronDown, ArrowUpDown } from "lucide-react";
 
 const cities = [
   {
@@ -893,7 +894,7 @@ const ScoreBar = ({ score }) => (
 const getSections = (city) => [
   {
     title: "Employment & Economy",
-    icon: "📊",
+    icon: BarChart2,
     highlights: [
       { value: city.unemployment, label: "Unemployment" },
       { value: city.jobGrowth, label: "Job Growth YOY" },
@@ -906,7 +907,7 @@ const getSections = (city) => [
   },
   {
     title: "Tech Ecosystem",
-    icon: "⚙",
+    icon: Cpu,
     highlights: [
       { value: city.swOpenings, label: "SW Eng Openings" },
       { value: city.totalTech, label: "Total Tech Jobs" },
@@ -919,7 +920,7 @@ const getSections = (city) => [
   },
   {
     title: "Cost & Compensation",
-    icon: "💲",
+    icon: DollarSign,
     highlights: [
       { value: city.avgTechSalary, label: "Avg Tech Salary" },
       { value: city.stateTax, label: "State Income Tax" },
@@ -932,7 +933,7 @@ const getSections = (city) => [
   },
   {
     title: "Market Dynamics & Outlook",
-    icon: "📈",
+    icon: TrendingUp,
     highlights: [
       { value: city.capitalRank, label: "Capital Investment" },
       { value: city.popTrend.split(";")[0], label: "Population Trend" },
@@ -952,10 +953,10 @@ const DataCard = ({ section, sc, isOpen, onToggle }) => (
       borderBottom: isOpen ? "1px solid #1f1f1f" : "none"
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <span style={{ fontSize: 13, opacity: 0.5 }}>{section.icon}</span>
+        <section.icon size={14} style={{ opacity: 0.5, flexShrink: 0 }} />
         <span style={{ color: "#e5e7eb", fontSize: 14, fontWeight: 600 }}>{section.title}</span>
       </div>
-      <span style={{ color: "#9ca3af", fontSize: 16, transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>⌄</span>
+      <ChevronDown size={14} style={{ color: "#9ca3af", transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s", flexShrink: 0 }} />
     </div>
     {isOpen && (
       <div style={{ padding: "12px 14px" }}>
@@ -987,9 +988,9 @@ const getHighlightPills = (city) => {
   else if (unemp > 4.5) pills.push({ text: `(${city.unemployment})`, sub: "High Unemployment", type: "bad" });
 
   if (city.techTrend.includes("biotech") || city.techTrend.includes("Growing")) {
-    pills.push({ text: city.techTrend.split(";")[0], sub: "Tech Trend", type: "good", icon: "⚗" });
+    pills.push({ text: city.techTrend.split(";")[0], sub: "Tech Trend", type: "good", icon: FlaskConical });
   } else if (city.techTrend.includes("Shrinking") || city.techTrend.includes("Past") || city.techTrend.includes("contracting")) {
-    pills.push({ text: city.techTrend.split(";")[0], sub: "Tech Trend", type: "bad", icon: "⚠" });
+    pills.push({ text: city.techTrend.split(";")[0], sub: "Tech Trend", type: "bad", icon: AlertTriangle });
   }
 
   if (city.totalTech) pills.push({ text: `${city.totalTech} Tech Jobs`, sub: "Total Openings", type: "neutral" });
@@ -997,7 +998,7 @@ const getHighlightPills = (city) => {
   const negFinding = city.findings.find(f => isNegativeFinding(f));
   if (negFinding) {
     const short = negFinding.length > 50 ? negFinding.slice(0, 50) + "..." : negFinding;
-    pills.push({ text: short, sub: "", type: "bad", icon: "⚠" });
+    pills.push({ text: short, sub: "", type: "bad", icon: AlertTriangle });
   }
 
   return pills.slice(0, 4);
@@ -1086,7 +1087,7 @@ export default function App() {
             </div>
             <div style={divider} />
             <div style={{ ...statStyle, display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#f59e0b", fontSize: 16 }}>☆</span>
+              <Star size={16} style={{ color: "#f59e0b" }} />
               <div>
                 <div style={{ fontSize: 14, fontWeight: 600, color: scoreColor(topRatedCity.score) }}>{topRatedCity.name.split(",")[0]}</div>
                 <div style={{ ...statLabel, textAlign: "left" }}>Top Rated</div>
@@ -1102,9 +1103,9 @@ export default function App() {
           <div style={{ padding: "10px 14px 6px", display: "flex", justifyContent: "flex-end", position: "relative" }}>
             <span
               onClick={() => setSortMenuOpen(o => !o)}
-              style={{ color: sortMenuOpen ? "#e5e7eb" : "#9ca3af", fontSize: 14, cursor: "pointer", userSelect: "none" }}
+              style={{ color: sortMenuOpen ? "#e5e7eb" : "#9ca3af", cursor: "pointer", userSelect: "none", display: "flex" }}
               title="Sort"
-            >▽</span>
+            ><ArrowUpDown size={14} /></span>
             {sortMenuOpen && (
               <div style={{
                 position: "absolute", top: 30, right: 14, zIndex: 10,
@@ -1122,7 +1123,7 @@ export default function App() {
                     background: sortBy === opt.key ? "#252525" : "transparent",
                     cursor: "pointer", display: "flex", alignItems: "center", gap: 8
                   }}>
-                    <span style={{ color: sortBy === opt.key ? "#4ade80" : "transparent", fontSize: 9 }}>✓</span>
+                    <Check size={10} style={{ color: sortBy === opt.key ? "#4ade80" : "transparent" }} />
                     {opt.label}
                   </div>
                 ))}
@@ -1152,7 +1153,7 @@ export default function App() {
                   }}>{rank}</span>
                   <div style={{ width: 1, height: 18, background: "#2a2a2a", margin: "0 10px", flexShrink: 0 }} />
                   <div style={{ flex: 1, minWidth: 0, display: "flex", alignItems: "center", gap: 4 }}>
-                    {rank === 1 && <span style={{ color: "#f59e0b", fontSize: 12 }}>☆</span>}
+                    {rank === 1 && <Star size={12} style={{ color: "#f59e0b", flexShrink: 0 }} />}
                     <span style={{
                       fontSize: 13, color: isSel ? "#e5e7eb" : "#9ca3af", fontWeight: isSel ? 600 : 400,
                       whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"
@@ -1210,7 +1211,7 @@ export default function App() {
                       border: `1px solid ${isBad ? "#3a1515" : isGood ? "#153a15" : "#1f1f1f"}`,
                       display: "flex", alignItems: "flex-start", gap: 8
                     }}>
-                      {pill.icon && <span style={{ fontSize: 14, opacity: 0.7, flexShrink: 0, marginTop: 1 }}>{pill.icon}</span>}
+                      {pill.icon && <pill.icon size={14} style={{ opacity: 0.7, flexShrink: 0, marginTop: 1 }} />}
                       <div style={{ minWidth: 0 }}>
                         <div style={{
                           fontSize: 12, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace",
