@@ -1232,7 +1232,7 @@ export default function App() {
                 padding: "10px 14px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between"
               }}>
                 <span style={{ color: "#d1d5db", fontSize: 11, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, textTransform: "uppercase" }}>Full Key Finding Details</span>
-                <span style={{ color: "#9ca3af", fontSize: 14, transform: findingsOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>⌄</span>
+                <ChevronDown size={14} style={{ color: "#9ca3af", transform: findingsOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s", flexShrink: 0 }} />
               </div>
               {findingsOpen && (
                 <div style={{ padding: "0 14px 12px" }}>
@@ -1262,7 +1262,7 @@ export default function App() {
                     {city.name.split(",")[0]}-Specific Data Sources &amp; Bibliography
                   </span>
                 </div>
-                <span style={{ color: "#9ca3af", fontSize: 14, transform: bibOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>⌄</span>
+                <ChevronDown size={14} style={{ color: "#9ca3af", transform: bibOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s", flexShrink: 0 }} />
               </div>
               {bibOpen && (
                 <div style={{ padding: "14px" }}>
