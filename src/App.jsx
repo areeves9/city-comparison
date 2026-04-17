@@ -964,7 +964,7 @@ const DataCard = ({ section, sc, isOpen, onToggle }) => (
           {section.highlights.map((h, i) => (
             <div key={i} style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 14, fontWeight: 600, color: "#e5e7eb", fontFamily: "'JetBrains Mono', monospace", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{h.value}</div>
-              <div style={{ fontSize: 10, color: "#9ca3af", marginTop: 2, fontFamily: "'JetBrains Mono', monospace" }}>{h.label}</div>
+              <div style={{ fontSize: 12, color: "#9ca3af", marginTop: 2, fontFamily: "'JetBrains Mono', monospace" }}>{h.label}</div>
             </div>
           ))}
         </div>
@@ -1046,13 +1046,13 @@ export default function App() {
         const stagnant = cities.filter(c => c.status === "STAGNANT").length;
         const statStyle = { textAlign: "center", padding: "0 20px" };
         const statNum = (color, size = 22) => ({ fontSize: size, fontWeight: 700, color, fontFamily: "'JetBrains Mono', monospace", lineHeight: 1 });
-        const statLabel = { fontSize: 9, color: "#9ca3af", letterSpacing: 1.5, marginTop: 2, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" };
+        const statLabel = { fontSize: 11, color: "#9ca3af", letterSpacing: 1.5, marginTop: 2, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" };
         const divider = { width: 1, height: 36, background: "#1f1f1f", flexShrink: 0 };
         return (
           <div style={{ borderBottom: "1px solid #2a2a2a", padding: "16px 24px", display: "flex", alignItems: "center", background: "#1a1a1a" }}>
             <div style={{ marginRight: "auto" }}>
               <h1 style={{ color: "#e5e7eb", fontSize: 18, margin: 0, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>Job Market Intelligence</h1>
-              <p style={{ color: "#9ca3af", fontSize: 10, margin: "3px 0 0", fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5 }}>US TECH MARKET COMPARISON · APRIL 2026</p>
+              <p style={{ color: "#9ca3af", fontSize: 12, margin: "3px 0 0", fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5 }}>US TECH MARKET COMPARISON · APRIL 2026</p>
             </div>
             <div style={statStyle}>
               <div style={statNum("#e5e7eb")}>{cities.length}</div>
@@ -1118,7 +1118,7 @@ export default function App() {
                   { key: "name", label: "Sort by Name" }
                 ].map(opt => (
                   <div key={opt.key} onClick={() => { setSortBy(opt.key); setSortMenuOpen(false); }} style={{
-                    padding: "8px 12px", fontSize: 11, fontFamily: "'JetBrains Mono', monospace",
+                    padding: "8px 12px", fontSize: 12, fontFamily: "'JetBrains Mono', monospace",
                     color: sortBy === opt.key ? "#e5e7eb" : "#9ca3af",
                     background: sortBy === opt.key ? "#252525" : "transparent",
                     cursor: "pointer", display: "flex", alignItems: "center", gap: 8
@@ -1182,7 +1182,7 @@ export default function App() {
                 <h2 style={{ margin: 0, fontSize: 20, color: "#e5e7eb", fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>{city.name}</h2>
                 <div style={{ width: 1, height: 20, background: "#333" }} />
                 <span style={{
-                  padding: "2px 10px", fontSize: 9, fontWeight: 600, borderRadius: 3,
+                  padding: "2px 10px", fontSize: 11, fontWeight: 600, borderRadius: 3,
                   background: sc.bg, color: sc.text, border: `1px solid ${sc.border}`,
                   fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5, textTransform: "uppercase"
                 }}>{city.status}</span>
@@ -1199,7 +1199,7 @@ export default function App() {
 
             {/* Key Finding Highlights */}
             <div style={{ marginTop: 16 }}>
-              <div style={{ color: "#9ca3af", fontSize: 10, fontWeight: 600, letterSpacing: 1.5, marginBottom: 10, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" }}>Key Finding Highlights</div>
+              <div style={{ color: "#9ca3af", fontSize: 12, fontWeight: 600, letterSpacing: 1.5, marginBottom: 10, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" }}>Key Finding Highlights</div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {getHighlightPills(city).map((pill, i) => {
                   const isGood = pill.type === "good";
@@ -1218,7 +1218,7 @@ export default function App() {
                           color: isBad ? "#ef4444" : isGood ? "#4ade80" : "#d1d5db",
                           whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"
                         }}>{pill.text}</div>
-                        {pill.sub && <div style={{ fontSize: 10, color: "#9ca3af", marginTop: 2 }}>{pill.sub}</div>}
+                        {pill.sub && <div style={{ fontSize: 12, color: "#9ca3af", marginTop: 2 }}>{pill.sub}</div>}
                       </div>
                     </div>
                   );
@@ -1231,14 +1231,14 @@ export default function App() {
               <div onClick={() => setFindingsOpen(!findingsOpen)} style={{
                 padding: "10px 14px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between"
               }}>
-                <span style={{ color: "#d1d5db", fontSize: 11, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, textTransform: "uppercase" }}>Full Key Finding Details</span>
+                <span style={{ color: "#d1d5db", fontSize: 12, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, textTransform: "uppercase" }}>Full Key Finding Details</span>
                 <ChevronDown size={14} style={{ color: "#9ca3af", transform: findingsOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s", flexShrink: 0 }} />
               </div>
               {findingsOpen && (
                 <div style={{ padding: "0 14px 12px" }}>
                   {city.findings.map((f, i) => (
                     <div key={i} style={{
-                      padding: "5px 0", fontSize: 11, color: "#c4cdd6", lineHeight: 1.6,
+                      padding: "5px 0", fontSize: 12, color: "#c4cdd6", lineHeight: 1.6,
                       borderBottom: i < city.findings.length - 1 ? "1px solid #2a2a2a" : "none",
                       fontFamily: "'JetBrains Mono', monospace"
                     }}>
@@ -1258,7 +1258,7 @@ export default function App() {
               }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                   <span style={{ fontSize: 11, opacity: 0.4, fontFamily: "'JetBrains Mono', monospace" }}>▦</span>
-                  <span style={{ color: "#d1d5db", fontSize: 11, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, textTransform: "uppercase" }}>
+                  <span style={{ color: "#d1d5db", fontSize: 12, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, textTransform: "uppercase" }}>
                     {city.name.split(",")[0]}-Specific Data Sources &amp; Bibliography
                   </span>
                 </div>
@@ -1275,20 +1275,20 @@ export default function App() {
                     ].map(({ key, label }) => (
                       <div key={key}>
                         <div style={{
-                          fontSize: 9, color: "#9ca3af", fontWeight: 600, letterSpacing: 1.5,
+                          fontSize: 11, color: "#9ca3af", fontWeight: 600, letterSpacing: 1.5,
                           textTransform: "uppercase", fontFamily: "'JetBrains Mono', monospace", marginBottom: 8,
                           borderBottom: "1px solid #252525", paddingBottom: 4
                         }}>{label}</div>
                         {(city.sources?.[key] || []).map((src, i) => (
                           <div key={i} style={{
-                            fontSize: 10, color: "#9ca3af", fontFamily: "'JetBrains Mono', monospace",
+                            fontSize: 12, color: "#9ca3af", fontFamily: "'JetBrains Mono', monospace",
                             lineHeight: 1.7, marginBottom: 3, display: "flex", gap: 5, alignItems: "flex-start"
                           }}>
                             <span style={{ color: "#9ca3af", flexShrink: 0, marginTop: 1 }}>▸</span>
                             <span>
                               {src.label || src}
                               {src.url && (
-                                <> <a href={src.url} target="_blank" rel="noopener noreferrer" style={{ color: "#60a5fa", fontSize: 9, textDecoration: "none", fontFamily: "'JetBrains Mono', monospace" }}>(source)</a></>
+                                <> <a href={src.url} target="_blank" rel="noopener noreferrer" style={{ color: "#60a5fa", fontSize: 11, textDecoration: "none", fontFamily: "'JetBrains Mono', monospace" }}>(source)</a></>
                               )}
                             </span>
                           </div>
@@ -1301,10 +1301,10 @@ export default function App() {
                     border: "1px solid #252525"
                   }}>
                     <div style={{
-                      fontSize: 9, color: "#9ca3af", fontWeight: 600, letterSpacing: 1.5,
+                      fontSize: 11, color: "#9ca3af", fontWeight: 600, letterSpacing: 1.5,
                       textTransform: "uppercase", fontFamily: "'JetBrains Mono', monospace", marginBottom: 4
                     }}>Methodology Appendix</div>
-                    <div style={{ fontSize: 10, color: "#9ca3af", fontFamily: "'JetBrains Mono', monospace", lineHeight: 1.7 }}>
+                    <div style={{ fontSize: 12, color: "#9ca3af", fontFamily: "'JetBrains Mono', monospace", lineHeight: 1.7 }}>
                       Each city is scored 1–10 across employment health, tech ecosystem, compensation vs. cost-of-living, structural indicators, and profile fit for an AI infrastructure + analytical chemistry / biotech background. Data sourced from 2025–2026 publications; figures older than 2024 are flagged inline within findings. Where sources conflict, ranges are reported and discrepancies noted.
                     </div>
                   </div>
