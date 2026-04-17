@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { BarChart2, Cpu, DollarSign, TrendingUp, FlaskConical, AlertTriangle, Star, Check, ChevronDown, ArrowUpDown } from "lucide-react";
 
 const cities = [
   {
@@ -877,7 +878,7 @@ const topRatedCity = [...cities].sort((a, b) => b.score - a.score)[0];
 
 const ScoreBar = ({ score }) => (
   <div style={{ display: "flex", gap: 2, alignItems: "center" }}>
-    <span style={{ color: "#9ca3af", fontSize: 10, fontFamily: "'JetBrains Mono', monospace", marginRight: 6 }}>Score</span>
+    <span style={{ color: "#9ca3af", fontSize: 12, fontFamily: "'JetBrains Mono', monospace", marginRight: 6 }}>Score</span>
     {Array.from({ length: 10 }, (_, i) => (
       <div key={i} style={{
         width: 10, height: 16, borderRadius: 2,
@@ -893,69 +894,53 @@ const ScoreBar = ({ score }) => (
 const getSections = (city) => [
   {
     title: "Employment & Economy",
-    icon: "📊",
+    icon: BarChart2,
     highlights: [
       { value: city.unemployment, label: "Unemployment" },
       { value: city.jobGrowth, label: "Job Growth YOY" },
       { value: city.jobsChanged, label: "Jobs Changed" }
-    ],
-    details: [
-      { label: "Office Vacancy", value: city.officeVacancy },
-      { label: "Applicants/Job", value: city.applicantsPerJob }
     ]
   },
   {
     title: "Tech Ecosystem",
-    icon: "⚙",
+    icon: Cpu,
     highlights: [
       { value: city.swOpenings, label: "SW Eng Openings" },
       { value: city.totalTech, label: "Total Tech Jobs" },
       { value: city.majorEmployers.split(",").slice(0, 2).join(", ") + "...", label: "Major Employers" }
-    ],
-    details: [
-      { label: "Tech % of Economy", value: city.techPct },
-      { label: "Tech Trend", value: city.techTrend }
     ]
   },
   {
     title: "Cost & Compensation",
-    icon: "💲",
+    icon: DollarSign,
     highlights: [
       { value: city.avgTechSalary, label: "Avg Tech Salary" },
       { value: city.stateTax, label: "State Income Tax" },
       { value: city.colIndex, label: "COL Index" }
-    ],
-    details: [
-      { label: "1BR Rent", value: city.rent1br },
-      { label: "Salary/COL Ratio", value: city.salaryCol }
     ]
   },
   {
     title: "Market Dynamics & Outlook",
-    icon: "📈",
+    icon: TrendingUp,
     highlights: [
       { value: city.capitalRank, label: "Capital Investment" },
       { value: city.popTrend.split(";")[0], label: "Population Trend" },
       { value: city.biggestRisk.split(";")[0], label: "Biggest Risk" }
-    ],
-    details: [
-      { label: "Office Vacancy", value: city.officeVacancy },
-      { label: "Full Risk", value: city.biggestRisk }
     ]
   }
 ];
 
-const DataCard = ({ section, sc, isOpen, onToggle }) => (
+const DataCard = ({ section, isOpen, onToggle }) => (
   <div style={{ background: "#1e1e1e", borderRadius: 6, border: "1px solid #2a2a2a", overflow: "hidden" }}>
     <div onClick={onToggle} style={{
       padding: "12px 14px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between",
       borderBottom: isOpen ? "1px solid #1f1f1f" : "none"
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <span style={{ fontSize: 13, opacity: 0.5 }}>{section.icon}</span>
+        <section.icon size={14} style={{ opacity: 0.5, flexShrink: 0 }} />
         <span style={{ color: "#e5e7eb", fontSize: 14, fontWeight: 600 }}>{section.title}</span>
       </div>
-      <span style={{ color: "#9ca3af", fontSize: 16, transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>⌄</span>
+      <ChevronDown size={14} style={{ color: "#9ca3af", transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s", flexShrink: 0 }} />
     </div>
     {isOpen && (
       <div style={{ padding: "12px 14px" }}>
@@ -963,7 +948,7 @@ const DataCard = ({ section, sc, isOpen, onToggle }) => (
           {section.highlights.map((h, i) => (
             <div key={i} style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 14, fontWeight: 600, color: "#e5e7eb", fontFamily: "'JetBrains Mono', monospace", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{h.value}</div>
-              <div style={{ fontSize: 10, color: "#9ca3af", marginTop: 2, fontFamily: "'JetBrains Mono', monospace" }}>{h.label}</div>
+              <div style={{ fontSize: 12, color: "#9ca3af", marginTop: 2, fontFamily: "'JetBrains Mono', monospace" }}>{h.label}</div>
             </div>
           ))}
         </div>
@@ -975,7 +960,7 @@ const DataCard = ({ section, sc, isOpen, onToggle }) => (
 const findingColor = (f) => {
   if (f.includes("BUT") || f.includes("worst") || f.includes("CONTRACTING") || f.includes("SECOND WORST") || f.includes("cutting") || f.includes("lost") || f.includes("dropped") || f.includes("fell") || f.includes("plummeted") || f.includes("collapsing") || f.includes("decline") || f.includes("collapsed")) return "#ef4444";
   if (f.includes("STRONG") || f.includes("Best") || f.includes("lowest") || f.includes("No state income tax") || f.includes("Healthy") || f.includes("investing")) return "#4ade80";
-  return "#6b7280";
+  return "#9ca3af";
 };
 
 const isNegativeFinding = (f) => /BUT|worst|CONTRACTING|SECOND WORST|cutting|lost|dropped|fell|plummeted|collapsing|decline|collapsed|down\b/i.test(f);
@@ -987,9 +972,9 @@ const getHighlightPills = (city) => {
   else if (unemp > 4.5) pills.push({ text: `(${city.unemployment})`, sub: "High Unemployment", type: "bad" });
 
   if (city.techTrend.includes("biotech") || city.techTrend.includes("Growing")) {
-    pills.push({ text: city.techTrend.split(";")[0], sub: "Tech Trend", type: "good", icon: "⚗" });
+    pills.push({ text: city.techTrend.split(";")[0], sub: "Tech Trend", type: "good", icon: FlaskConical });
   } else if (city.techTrend.includes("Shrinking") || city.techTrend.includes("Past") || city.techTrend.includes("contracting")) {
-    pills.push({ text: city.techTrend.split(";")[0], sub: "Tech Trend", type: "bad", icon: "⚠" });
+    pills.push({ text: city.techTrend.split(";")[0], sub: "Tech Trend", type: "bad", icon: AlertTriangle });
   }
 
   if (city.totalTech) pills.push({ text: `${city.totalTech} Tech Jobs`, sub: "Total Openings", type: "neutral" });
@@ -997,7 +982,7 @@ const getHighlightPills = (city) => {
   const negFinding = city.findings.find(f => isNegativeFinding(f));
   if (negFinding) {
     const short = negFinding.length > 50 ? negFinding.slice(0, 50) + "..." : negFinding;
-    pills.push({ text: short, sub: "", type: "bad", icon: "⚠" });
+    pills.push({ text: short, sub: "", type: "bad", icon: AlertTriangle });
   }
 
   return pills.slice(0, 4);
@@ -1037,6 +1022,21 @@ export default function App() {
   return (
     <div style={{ background: "#1a1a1a", minHeight: "100vh", fontFamily: "'Inter', -apple-system, sans-serif", color: "#e5e7eb" }}>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <style>{`
+        @media (max-width: 768px) {
+          .app-header { flex-wrap: wrap; gap: 0; padding: 12px 16px !important; }
+          .app-header-stats { display: flex !important; flex-wrap: nowrap; width: 100%; border-top: 1px solid #2a2a2a; margin-top: 10px; padding-top: 10px; }
+          .app-header-stats .stat-item { flex: 1 1 0; padding: 0 !important; text-align: center; }
+          .app-header-stats .stat-item:last-child { justify-content: center; }
+          .app-header-stats .stat-divider { display: none; }
+          .app-body { flex-direction: column !important; height: auto !important; }
+          .app-sidebar { width: 100% !important; height: auto !important; border-right: none !important; border-bottom: 1px solid #2a2a2a; flex-shrink: unset !important; }
+          .app-sidebar-list { max-height: 240px; overflow-y: auto; }
+          .app-detail { height: auto !important; }
+          .data-card-grid { grid-template-columns: 1fr !important; }
+          .bib-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important; }
+        }
+      `}</style>
 
       {/* Header */}
       {(() => {
@@ -1045,20 +1045,21 @@ export default function App() {
         const stagnant = cities.filter(c => c.status === "STAGNANT").length;
         const statStyle = { textAlign: "center", padding: "0 20px" };
         const statNum = (color, size = 22) => ({ fontSize: size, fontWeight: 700, color, fontFamily: "'JetBrains Mono', monospace", lineHeight: 1 });
-        const statLabel = { fontSize: 9, color: "#9ca3af", letterSpacing: 1.5, marginTop: 2, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" };
+        const statLabel = { fontSize: 11, color: "#9ca3af", letterSpacing: 1.5, marginTop: 2, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" };
         const divider = { width: 1, height: 36, background: "#1f1f1f", flexShrink: 0 };
         return (
-          <div style={{ borderBottom: "1px solid #2a2a2a", padding: "16px 24px", display: "flex", alignItems: "center", background: "#1a1a1a" }}>
+          <div className="app-header" style={{ borderBottom: "1px solid #2a2a2a", padding: "16px 24px", display: "flex", alignItems: "center", background: "#1a1a1a" }}>
             <div style={{ marginRight: "auto" }}>
               <h1 style={{ color: "#e5e7eb", fontSize: 18, margin: 0, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>Job Market Intelligence</h1>
-              <p style={{ color: "#9ca3af", fontSize: 10, margin: "3px 0 0", fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5 }}>US TECH MARKET COMPARISON · APRIL 2026</p>
+              <p style={{ color: "#9ca3af", fontSize: 12, margin: "3px 0 0", fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5 }}>US TECH MARKET COMPARISON · APRIL 2026</p>
             </div>
-            <div style={statStyle}>
+            <div className="app-header-stats" style={{ display: "contents" }}>
+            <div className="stat-item" style={statStyle}>
               <div style={statNum("#e5e7eb")}>{cities.length}</div>
               <div style={statLabel}>Cities Tracked</div>
             </div>
-            <div style={divider} />
-            <div style={statStyle}>
+            <div className="stat-divider" style={divider} />
+            <div className="stat-item" style={statStyle}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
                 <span style={{ color: "#4ade80", fontSize: 12 }}>↗</span>
                 <span style={statNum("#4ade80")}>{growing}</span>
@@ -1066,8 +1067,8 @@ export default function App() {
               </div>
               <div style={statLabel}>Growing</div>
             </div>
-            <div style={divider} />
-            <div style={statStyle}>
+            <div className="stat-divider" style={divider} />
+            <div className="stat-item" style={statStyle}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
                 <span style={{ color: "#ef4444", fontSize: 12 }}>↘</span>
                 <span style={statNum("#ef4444")}>{contracting}</span>
@@ -1075,8 +1076,8 @@ export default function App() {
               </div>
               <div style={statLabel}>Contracting</div>
             </div>
-            <div style={divider} />
-            <div style={statStyle}>
+            <div className="stat-divider" style={divider} />
+            <div className="stat-item" style={statStyle}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
                 <span style={{ color: "#f59e0b", fontSize: 12 }}>—</span>
                 <span style={statNum("#f59e0b")}>{stagnant}</span>
@@ -1084,27 +1085,28 @@ export default function App() {
               </div>
               <div style={statLabel}>Stagnant</div>
             </div>
-            <div style={divider} />
-            <div style={{ ...statStyle, display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#f59e0b", fontSize: 16 }}>☆</span>
+            <div className="stat-divider" style={divider} />
+            <div className="stat-item" style={{ ...statStyle, display: "flex", alignItems: "center", gap: 6 }}>
+              <Star size={16} style={{ color: "#f59e0b" }} />
               <div>
                 <div style={{ fontSize: 14, fontWeight: 600, color: scoreColor(topRatedCity.score) }}>{topRatedCity.name.split(",")[0]}</div>
                 <div style={{ ...statLabel, textAlign: "left" }}>Top Rated</div>
               </div>
             </div>
+            </div>{/* end app-header-stats */}
           </div>
         );
       })()}
 
-      <div style={{ display: "flex", height: "calc(100vh - 52px)" }}>
+      <div className="app-body" style={{ display: "flex", height: "calc(100vh - 52px)" }}>
         {/* Sidebar */}
-        <div style={{ width: 300, background: "rgb(26, 26, 26)", borderRight: "1px solid #2a2a2a", overflowY: "auto", flexShrink: 0, display: "flex", flexDirection: "column" }}>
+        <div className="app-sidebar" style={{ width: 300, background: "rgb(26, 26, 26)", borderRight: "1px solid #2a2a2a", overflowY: "auto", flexShrink: 0, display: "flex", flexDirection: "column" }}>
           <div style={{ padding: "10px 14px 6px", display: "flex", justifyContent: "flex-end", position: "relative" }}>
             <span
               onClick={() => setSortMenuOpen(o => !o)}
-              style={{ color: sortMenuOpen ? "#e5e7eb" : "#9ca3af", fontSize: 14, cursor: "pointer", userSelect: "none" }}
+              style={{ color: sortMenuOpen ? "#e5e7eb" : "#9ca3af", cursor: "pointer", userSelect: "none", display: "flex", padding: "6px", margin: "-6px" }}
               title="Sort"
-            >▽</span>
+            ><ArrowUpDown size={14} /></span>
             {sortMenuOpen && (
               <div style={{
                 position: "absolute", top: 30, right: 14, zIndex: 10,
@@ -1117,12 +1119,12 @@ export default function App() {
                   { key: "name", label: "Sort by Name" }
                 ].map(opt => (
                   <div key={opt.key} onClick={() => { setSortBy(opt.key); setSortMenuOpen(false); }} style={{
-                    padding: "8px 12px", fontSize: 11, fontFamily: "'JetBrains Mono', monospace",
+                    padding: "8px 12px", fontSize: 12, fontFamily: "'JetBrains Mono', monospace",
                     color: sortBy === opt.key ? "#e5e7eb" : "#9ca3af",
                     background: sortBy === opt.key ? "#252525" : "transparent",
                     cursor: "pointer", display: "flex", alignItems: "center", gap: 8
                   }}>
-                    <span style={{ color: sortBy === opt.key ? "#4ade80" : "transparent", fontSize: 9 }}>✓</span>
+                    <Check size={10} style={{ color: sortBy === opt.key ? "#4ade80" : "transparent" }} />
                     {opt.label}
                   </div>
                 ))}
@@ -1130,9 +1132,8 @@ export default function App() {
             )}
           </div>
 
-          <div style={{ flex: 1, overflowY: "auto" }}>
+          <div className="app-sidebar-list" style={{ flex: 1, overflowY: "auto" }}>
             {sorted.map((c, idx) => {
-              const csc = statusColor(c.status);
               const isSel = selected === c.name;
               const rank = idx + 1;
               const statusIcon = c.status === "GROWING" ? { symbol: "G", color: "#4ade80" }
@@ -1140,7 +1141,7 @@ export default function App() {
                 : { symbol: "↗", color: "#f59e0b" };
               return (
                 <div key={c.name} onClick={() => setSelected(c.name)} style={{
-                  padding: "10px 14px", cursor: "pointer", display: "flex", alignItems: "center", gap: 0,
+                  padding: "12px 14px", cursor: "pointer", display: "flex", alignItems: "center", gap: 0,
                   background: isSel ? "#161616" : "transparent",
                   border: isSel ? `1px solid #2a2a2a` : "1px solid transparent",
                   borderRadius: isSel ? 6 : 0,
@@ -1152,7 +1153,7 @@ export default function App() {
                   }}>{rank}</span>
                   <div style={{ width: 1, height: 18, background: "#2a2a2a", margin: "0 10px", flexShrink: 0 }} />
                   <div style={{ flex: 1, minWidth: 0, display: "flex", alignItems: "center", gap: 4 }}>
-                    {rank === 1 && <span style={{ color: "#f59e0b", fontSize: 12 }}>☆</span>}
+                    {rank === 1 && <Star size={12} style={{ color: "#f59e0b", flexShrink: 0 }} />}
                     <span style={{
                       fontSize: 13, color: isSel ? "#e5e7eb" : "#9ca3af", fontWeight: isSel ? 600 : 400,
                       whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"
@@ -1173,15 +1174,15 @@ export default function App() {
         </div>
 
         {/* Detail Panel */}
-        <div style={{ flex: 1, overflowY: "auto", background: "#1a1a1a" }}>
+        <div className="app-detail" style={{ flex: 1, overflowY: "auto", background: "#1a1a1a" }}>
           <div style={{ padding: "20px 24px" }}>
             {/* City header */}
-            <div style={{ marginBottom: 16, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ marginBottom: 16, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                 <h2 style={{ margin: 0, fontSize: 20, color: "#e5e7eb", fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>{city.name}</h2>
                 <div style={{ width: 1, height: 20, background: "#333" }} />
                 <span style={{
-                  padding: "2px 10px", fontSize: 9, fontWeight: 600, borderRadius: 3,
+                  padding: "2px 10px", fontSize: 11, fontWeight: 600, borderRadius: 3,
                   background: sc.bg, color: sc.text, border: `1px solid ${sc.border}`,
                   fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5, textTransform: "uppercase"
                 }}>{city.status}</span>
@@ -1190,15 +1191,15 @@ export default function App() {
             </div>
 
             {/* 2x2 Data Cards */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div className="data-card-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
               {sections.map((section) => (
-                <DataCard key={section.title} section={section} sc={sc} isOpen={openCards.has(section.title)} onToggle={() => toggleCard(section.title)} />
+                <DataCard key={section.title} section={section} isOpen={openCards.has(section.title)} onToggle={() => toggleCard(section.title)} />
               ))}
             </div>
 
             {/* Key Finding Highlights */}
             <div style={{ marginTop: 16 }}>
-              <div style={{ color: "#9ca3af", fontSize: 10, fontWeight: 600, letterSpacing: 1.5, marginBottom: 10, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" }}>Key Finding Highlights</div>
+              <div style={{ color: "#9ca3af", fontSize: 12, fontWeight: 600, letterSpacing: 1.5, marginBottom: 10, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" }}>Key Finding Highlights</div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {getHighlightPills(city).map((pill, i) => {
                   const isGood = pill.type === "good";
@@ -1210,14 +1211,14 @@ export default function App() {
                       border: `1px solid ${isBad ? "#3a1515" : isGood ? "#153a15" : "#1f1f1f"}`,
                       display: "flex", alignItems: "flex-start", gap: 8
                     }}>
-                      {pill.icon && <span style={{ fontSize: 14, opacity: 0.7, flexShrink: 0, marginTop: 1 }}>{pill.icon}</span>}
+                      {pill.icon && <pill.icon size={14} style={{ opacity: 0.7, flexShrink: 0, marginTop: 1 }} />}
                       <div style={{ minWidth: 0 }}>
                         <div style={{
                           fontSize: 12, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace",
                           color: isBad ? "#ef4444" : isGood ? "#4ade80" : "#d1d5db",
                           whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"
                         }}>{pill.text}</div>
-                        {pill.sub && <div style={{ fontSize: 10, color: "#9ca3af", marginTop: 2 }}>{pill.sub}</div>}
+                        {pill.sub && <div style={{ fontSize: 12, color: "#9ca3af", marginTop: 2 }}>{pill.sub}</div>}
                       </div>
                     </div>
                   );
@@ -1230,14 +1231,14 @@ export default function App() {
               <div onClick={() => setFindingsOpen(!findingsOpen)} style={{
                 padding: "10px 14px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between"
               }}>
-                <span style={{ color: "#d1d5db", fontSize: 11, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, textTransform: "uppercase" }}>Full Key Finding Details</span>
-                <span style={{ color: "#9ca3af", fontSize: 14, transform: findingsOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>⌄</span>
+                <span style={{ color: "#d1d5db", fontSize: 12, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, textTransform: "uppercase" }}>Full Key Finding Details</span>
+                <ChevronDown size={14} style={{ color: "#9ca3af", transform: findingsOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s", flexShrink: 0 }} />
               </div>
               {findingsOpen && (
                 <div style={{ padding: "0 14px 12px" }}>
                   {city.findings.map((f, i) => (
                     <div key={i} style={{
-                      padding: "5px 0", fontSize: 11, color: "#c4cdd6", lineHeight: 1.6,
+                      padding: "5px 0", fontSize: 12, color: "#c4cdd6", lineHeight: 1.6,
                       borderBottom: i < city.findings.length - 1 ? "1px solid #2a2a2a" : "none",
                       fontFamily: "'JetBrains Mono', monospace"
                     }}>
@@ -1257,15 +1258,15 @@ export default function App() {
               }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                   <span style={{ fontSize: 11, opacity: 0.4, fontFamily: "'JetBrains Mono', monospace" }}>▦</span>
-                  <span style={{ color: "#d1d5db", fontSize: 11, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, textTransform: "uppercase" }}>
+                  <span style={{ color: "#d1d5db", fontSize: 12, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, textTransform: "uppercase" }}>
                     {city.name.split(",")[0]}-Specific Data Sources &amp; Bibliography
                   </span>
                 </div>
-                <span style={{ color: "#9ca3af", fontSize: 14, transform: bibOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>⌄</span>
+                <ChevronDown size={14} style={{ color: "#9ca3af", transform: bibOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s", flexShrink: 0 }} />
               </div>
               {bibOpen && (
                 <div style={{ padding: "14px" }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 20, marginBottom: 12 }}>
+                  <div className="bib-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 20, marginBottom: 12 }}>
                     {[
                       { key: "employment", label: "Employment & Office Market Data" },
                       { key: "techSalaries", label: "Tech Ecosystem & Salaries" },
@@ -1274,20 +1275,20 @@ export default function App() {
                     ].map(({ key, label }) => (
                       <div key={key}>
                         <div style={{
-                          fontSize: 9, color: "#9ca3af", fontWeight: 600, letterSpacing: 1.5,
+                          fontSize: 11, color: "#9ca3af", fontWeight: 600, letterSpacing: 1.5,
                           textTransform: "uppercase", fontFamily: "'JetBrains Mono', monospace", marginBottom: 8,
                           borderBottom: "1px solid #252525", paddingBottom: 4
                         }}>{label}</div>
                         {(city.sources?.[key] || []).map((src, i) => (
                           <div key={i} style={{
-                            fontSize: 10, color: "#9ca3af", fontFamily: "'JetBrains Mono', monospace",
+                            fontSize: 12, color: "#9ca3af", fontFamily: "'JetBrains Mono', monospace",
                             lineHeight: 1.7, marginBottom: 3, display: "flex", gap: 5, alignItems: "flex-start"
                           }}>
                             <span style={{ color: "#9ca3af", flexShrink: 0, marginTop: 1 }}>▸</span>
                             <span>
                               {src.label || src}
                               {src.url && (
-                                <> <a href={src.url} target="_blank" rel="noopener noreferrer" style={{ color: "#60a5fa", fontSize: 9, textDecoration: "none", fontFamily: "'JetBrains Mono', monospace" }}>(source)</a></>
+                                <> <a href={src.url} target="_blank" rel="noopener noreferrer" style={{ color: "#60a5fa", fontSize: 11, textDecoration: "none", fontFamily: "'JetBrains Mono', monospace" }}>(source)</a></>
                               )}
                             </span>
                           </div>
@@ -1300,10 +1301,10 @@ export default function App() {
                     border: "1px solid #252525"
                   }}>
                     <div style={{
-                      fontSize: 9, color: "#9ca3af", fontWeight: 600, letterSpacing: 1.5,
+                      fontSize: 11, color: "#9ca3af", fontWeight: 600, letterSpacing: 1.5,
                       textTransform: "uppercase", fontFamily: "'JetBrains Mono', monospace", marginBottom: 4
                     }}>Methodology Appendix</div>
-                    <div style={{ fontSize: 10, color: "#9ca3af", fontFamily: "'JetBrains Mono', monospace", lineHeight: 1.7 }}>
+                    <div style={{ fontSize: 12, color: "#9ca3af", fontFamily: "'JetBrains Mono', monospace", lineHeight: 1.7 }}>
                       Each city is scored 1–10 across employment health, tech ecosystem, compensation vs. cost-of-living, structural indicators, and profile fit for an AI infrastructure + analytical chemistry / biotech background. Data sourced from 2025–2026 publications; figures older than 2024 are flagged inline within findings. Where sources conflict, ranges are reported and discrepancies noted.
                     </div>
                   </div>
