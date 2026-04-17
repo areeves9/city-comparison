@@ -1115,7 +1115,7 @@ export default function App() {
           <div style={{ padding: "10px 14px 6px", display: "flex", justifyContent: "flex-end", position: "relative" }}>
             <span
               onClick={() => setSortMenuOpen(o => !o)}
-              style={{ color: sortMenuOpen ? "#e5e7eb" : "#9ca3af", cursor: "pointer", userSelect: "none", display: "flex" }}
+              style={{ color: sortMenuOpen ? "#e5e7eb" : "#9ca3af", cursor: "pointer", userSelect: "none", display: "flex", padding: "6px", margin: "-6px" }}
               title="Sort"
             ><ArrowUpDown size={14} /></span>
             {sortMenuOpen && (
@@ -1153,7 +1153,7 @@ export default function App() {
                 : { symbol: "↗", color: "#f59e0b" };
               return (
                 <div key={c.name} onClick={() => setSelected(c.name)} style={{
-                  padding: "10px 14px", cursor: "pointer", display: "flex", alignItems: "center", gap: 0,
+                  padding: "12px 14px", cursor: "pointer", display: "flex", alignItems: "center", gap: 0,
                   background: isSel ? "#161616" : "transparent",
                   border: isSel ? `1px solid #2a2a2a` : "1px solid transparent",
                   borderRadius: isSel ? 6 : 0,
