@@ -862,6 +862,62 @@ const cities = [
         { label: "Intel / HPE Restructuring Announcements 2025-2026", url: "https://investor.intc.com/news-releases/news-release-details/intel-reports-fourth-quarter-and-full-year-2024-financial-results" }
       ]
     }
+  },
+  {
+    name: "Phoenix, AZ",
+    score: 6,
+    status: "STAGNANT",
+    unemployment: "4.4% (MSA, March 2026 — up 0.5 pp YoY)",
+    jobGrowth: "-0.2%",
+    jobsChanged: "Lost ~4,200 net nonfarm jobs YoY in March 2026; Information sector -0.7%",
+    swOpenings: "~500-700 unique local",
+    applicantsPerJob: "~40-60 est.",
+    totalTech: "102,540 tech workers (CBRE 2025)",
+    techPct: "~4.1% of metro workforce (below US avg 5.8%)",
+    majorEmployers: "TSMC (hiring — fab/process/EE, 128+ openings), Intel/Chandler (cutting — 25,000+ company-wide), Amazon (cutting), Microsoft (cutting), PayPal (cutting — -20% workforce), American Express (stable hiring), USAA (stable), Axon (hiring), Carvana (active)",
+    techTrend: "Semiconductor manufacturing is the dominant engine; generalist SaaS/web SWE hiring flat-to-contracting as Amazon/Microsoft/PayPal cut",
+    avgTechSalary: "$115-174K; avg $141K (5% below national average)",
+    stateTax: "2.5% flat (lowest in cohort)",
+    colIndex: "~108",
+    rent1br: "$1,150 (down 6% YoY — massive multifamily oversupply)",
+    salaryCol: "Favorable — 2.5% flat tax + falling rents; net take-home competitive with Austin despite lower nominal salary",
+    officeVacancy: "14.5% direct (Colliers Q1 2026); ~20% total with sublease; 2nd consecutive quarter of positive absorption",
+    popTrend: "MSA +1.19% YoY; Maricopa County net domestic migration turned slightly negative in 2023-24; growth now driven by international immigration and natural increase",
+    capitalRank: "Tier 2-3 VC market; ~$1.2B raised in 2024; #20 CBRE Scoring Tech Talent; #14 CompTIA",
+    biggestRisk: "Semiconductor concentration risk; Intel restructuring; water/climate constraints on fab expansion; thin generalist SWE market outside semis/fintech",
+    findings: [
+      "Phoenix MSA lost ~4,200 net nonfarm jobs YoY in March 2026 — unemployment up to 4.4%, contradicting popular 'Silicon Desert' boom narratives",
+      "TSMC's $165B campus commitment is the real story: fab 1 producing 4nm chips, 3nm volume production starts H2 2027; largest US semiconductor build-out",
+      "Intel Chandler (Ocotillo) mid-restructuring — 25,000+ company-wide layoffs; TSMC absorbing displaced process/fab engineers but NOT software talent",
+      "Average SWE salary $141K (Glassdoor, April 2026) — 5% below national average; lower than Austin despite comparable COL after tax",
+      "1BR rent $1,150 — down 6% YoY due to massive multifamily oversupply; combined with 2.5% flat state tax, net take-home is genuinely competitive",
+      "Generalist SWE market is thin: ~500-700 unique local openings per Lightcast; 'Silicon Desert' branding overstates SaaS/web SWE liquidity",
+      "Office direct vacancy fell to 14.5% in Q1 2026 — second consecutive quarter of positive absorption; healthier than most Sun Belt peers",
+      "Maricopa County net domestic migration turned negative in 2023-24; Phoenix population growth now primarily international immigration, not pandemic-era domestic inflow"
+    ],
+    sources: {
+      employment: [
+        { label: "BLS Phoenix-Mesa-Scottsdale MSA Employment Statistics", url: "https://www.bls.gov/regions/southwest/news-release/areaemployment_phoenix.htm" },
+        { label: "Arizona's Economy — Phoenix MSA May 2026 Summary", url: "https://www.azeconomy.org/2026/05/economy/phoenix-msa-may-2026-summary/" },
+        { label: "AZ Office of Economic Opportunity — Employment Report 2026", url: "https://oeo.az.gov/news/employment-report" },
+        { label: "Colliers Phoenix Office Market Q1 2026 — Direct Vacancy Drops", url: "https://www.colliers.com/en/news/phoenix/phoenix-office-market-direct-vacancy-drops" }
+      ],
+      techSalaries: [
+        { label: "Glassdoor — Software Engineer Salaries Phoenix AZ (April 2026, n=8,747)", url: "https://www.glassdoor.com/Salaries/phoenix-az-software-engineer-salary-SRCH_IL.0,10_IM678_KO11,28.htm" },
+        { label: "CornerStone TTS — Phoenix Tech Salary Trends 2026", url: "https://www.cornerstonetechtalent.com/2026/02/18/phoenix-tech-salary-trends-hiring-costs-2026/" },
+        { label: "CBRE Scoring Tech Talent — Phoenix #20 North American Tech Markets", url: "https://www.cbre.com/press-releases/phoenix-ranks-among-the-top-20-north-american-tech-markets-in-cbre-annual-scoring-tech-talent-report" }
+      ],
+      costLiving: [
+        { label: "Zumper Phoenix Rent Research May 2026 ($1,150, -6% YoY)", url: "https://www.zumper.com/rent-research/phoenix-az" },
+        { label: "BestPlaces — Phoenix AZ Cost of Living (C2ER: ~108)", url: "https://www.bestplaces.net/cost_of_living/city/arizona/phoenix" },
+        { label: "Tax Foundation — Arizona Flat Income Tax 2.5%", url: "https://taxfoundation.org/location/arizona/" }
+      ],
+      populationInvestment: [
+        { label: "USAFacts — Maricopa County Population & Migration (Census)", url: "https://usafacts.org/answers/is-the-population-growing-or-shrinking/county/maricopa-county-az/" },
+        { label: "TSMC Arizona — $165B GigaFab Expansion", url: "https://en.wikipedia.org/wiki/TSMC_Arizona" },
+        { label: "Kore1 — Intel Layoffs 2026 (Chandler WARN notices)", url: "https://www.kore1.com/intel-layoffs-2026/" }
+      ]
+    }
   }
 ];
 
